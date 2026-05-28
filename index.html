@@ -101,7 +101,7 @@
     border-radius: 2px;
   }
   nav.site-nav .btn-mini:hover { background: var(--rust); color: var(--bone); }
-  @media (max-width: 720px) { nav.site-nav a:not(.btn-mini) { display: none; } }
+  @media (max-width: 860px) { nav.site-nav a:not(.btn-mini) { display: none; } }
 
   /* ---------- Hero ---------- */
   .hero { padding-top: clamp(56px, 8vw, 96px); padding-bottom: clamp(56px, 8vw, 96px); }
@@ -143,9 +143,20 @@
   .btn .arrow { transition: transform 120ms ease; }
   .btn:hover .arrow { transform: translateX(3px); }
 
+  .hero-tertiary {
+    margin-top: 18px;
+    font-family: var(--serif); font-style: italic; font-size: 15px;
+    color: var(--navy-80);
+  }
+  .hero-tertiary a {
+    color: var(--navy); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 3px;
+  }
+  .hero-tertiary a:hover { color: var(--rust); }
+
   .hero-meta {
     margin-top: 56px;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
     border-top: 1px solid var(--rule); padding-top: 28px;
   }
   .hero-meta dt {
@@ -155,7 +166,29 @@
   .hero-meta dd {
     margin: 0; font-family: var(--serif); font-weight: 600; font-size: 19px; color: var(--navy);
   }
-  @media (max-width: 640px) { .hero-meta { grid-template-columns: 1fr; } }
+  @media (max-width: 820px) { .hero-meta { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .hero-meta { grid-template-columns: 1fr; } }
+
+  /* ---------- Field Kit gate strip (post-hero) ---------- */
+  .fieldkit-gate {
+    background: var(--bone-deep);
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .fieldkit-gate .wrap {
+    display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center;
+  }
+  @media (max-width: 760px) { .fieldkit-gate .wrap { grid-template-columns: 1fr; gap: 18px; } }
+  .fieldkit-gate .fk-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--rust); margin-bottom: 6px;
+  }
+  .fieldkit-gate .fk-line {
+    font-family: var(--serif); font-size: 18px; line-height: 1.45; color: var(--navy);
+    margin: 0; max-width: 70ch;
+  }
+  .fieldkit-gate .btn-ghost { padding: 12px 20px; font-size: 14px; white-space: nowrap; }
 
   /* ---------- Section heads ---------- */
   .section-eyebrow {
@@ -228,6 +261,62 @@
     color: var(--rust-soft); margin-bottom: 4px;
   }
 
+  /* ---------- Pricing module ---------- */
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 40px; align-items: stretch;
+  }
+  @media (max-width: 820px) { .pricing-grid { grid-template-columns: 1fr; } }
+  .price-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 32px 28px;
+    border-radius: 3px;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .price-card.featured {
+    background: var(--navy); color: var(--bone);
+    border-color: var(--navy);
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px -20px rgba(15,30,61,0.4);
+  }
+  @media (max-width: 820px) {
+    .price-card.featured { transform: none; }
+  }
+  .price-card .price-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--navy-60); margin-bottom: 12px;
+  }
+  .price-card.featured .price-label { color: var(--rust-soft); }
+  .price-card .price-num {
+    font-family: var(--serif); font-weight: 700; font-size: 38px; line-height: 1;
+    color: var(--navy); letter-spacing: -0.5px; margin-bottom: 8px;
+  }
+  .price-card.featured .price-num { color: var(--bone); }
+  .price-card .price-name {
+    font-family: var(--serif); font-weight: 600; font-size: 19px;
+    color: var(--navy); margin-bottom: 14px;
+  }
+  .price-card.featured .price-name { color: var(--bone); }
+  .price-card .price-body {
+    font-size: 14px; line-height: 1.55; color: var(--navy-80); margin: 0;
+  }
+  .price-card.featured .price-body { color: rgba(245, 241, 235, 0.82); }
+  .price-card .price-tag {
+    position: absolute; top: -12px; left: 28px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--bone);
+    background: var(--rust); padding: 4px 10px; border-radius: 2px;
+  }
+  .pricing-closing {
+    margin-top: 36px;
+    font-family: var(--serif); font-style: italic;
+    font-size: 17px; color: var(--navy-80); max-width: 60ch;
+  }
+  .pricing-closing a { color: var(--navy); }
+  .pricing-closing a:hover { color: var(--rust); }
+
   /* ---------- SEAM stages ---------- */
   .seam-stages {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
@@ -278,6 +367,46 @@
     font-family: var(--mono); color: var(--navy-60); font-size: 18px;
   }
 
+  /* ---------- Capacity strip ---------- */
+  .capacity {
+    padding: clamp(40px, 6vw, 64px) 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--bone-deep);
+  }
+  .capacity .cap-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.8px;
+    text-transform: uppercase; color: var(--rust); margin-bottom: 10px;
+  }
+  .capacity .cap-statement {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(24px, 3.2vw, 34px); line-height: 1.15;
+    color: var(--navy); margin: 0 0 18px; max-width: 24ch;
+  }
+  .capacity .cap-body {
+    font-size: 15px; line-height: 1.6; color: var(--navy-80);
+    max-width: 80ch; margin: 0 0 22px;
+  }
+  .capacity .cap-status {
+    display: flex; flex-wrap: wrap; gap: 22px; align-items: center;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--navy-80);
+    margin-bottom: 18px;
+  }
+  .capacity .cap-status .pill {
+    padding: 6px 10px; border: 1px solid var(--rule-strong); border-radius: 2px;
+    background: var(--paper); color: var(--navy);
+  }
+  .capacity .cap-status .pill.booked { background: var(--navy); color: var(--bone); border-color: var(--navy); }
+  .capacity .cap-status .pill.open { color: var(--rust); border-color: var(--rust); background: var(--bone); }
+  .capacity a.cap-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--sans); font-weight: 600; font-size: 14px;
+    color: var(--navy); text-decoration: none;
+    border-bottom: 1px solid var(--rust); padding-bottom: 2px;
+  }
+  .capacity a.cap-cta:hover { color: var(--rust); }
+
   /* ---------- About strip ---------- */
   .about {
     background: var(--paper); border-radius: 3px;
@@ -295,6 +424,12 @@
   .about-meta { font-family: var(--mono); font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--navy-60); margin-top: 18px; }
   .about-body p { font-size: 16px; line-height: 1.65; color: var(--navy-80); }
   .about-body p:first-child { font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--navy); }
+  .about-body .capacity-note {
+    margin-top: 18px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--rust);
+    border-top: 1px solid var(--rule); padding-top: 18px;
+  }
 
   /* ---------- Intake form ---------- */
   .contact {
@@ -434,10 +569,12 @@
     <nav class="site-nav" aria-label="Primary">
       <a href="#pattern">The pattern</a>
       <a href="#audit">The audit</a>
+      <a href="/toolkit/">The toolkit</a>
+      <a href="#pricing">Pricing</a>
       <a href="#method">SEAMline</a>
+      <a href="#fieldkit">Field Kit</a>
       <a href="#about">About</a>
-<a href="#newsletter">The dispatch</a>
-<a href="#contact" class="btn-mini">Start the audit</a>
+      <a href="#contact" class="btn-mini">Start the audit</a>
     </nav>
   </div>
 </header>
@@ -446,7 +583,7 @@
 <a id="top"></a>
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow">The Seam Audit · Two weeks · Fixed scope · Fixed price</div>
+    <div class="eyebrow">The Seam Audit · Two weeks · Fixed scope · USD 15,000</div>
     <h1 class="hero-title">
       Profitability is a system. <span class="accent">Nobody owns the system.</span>
     </h1>
@@ -461,6 +598,9 @@
         Request the audit <span class="arrow" aria-hidden="true">↓</span>
       </a>
     </div>
+    <p class="hero-tertiary">
+      Not ready to talk? <a href="#fieldkit">Read the operator-side Field Kit first →</a>
+    </p>
     <dl class="hero-meta">
       <div>
         <dt>Duration</dt>
@@ -471,12 +611,46 @@
         <dd>Fixed · defensible · written</dd>
       </div>
       <div>
+        <dt>Price</dt>
+        <dd>USD 15,000 · fixed</dd>
+      </div>
+      <div>
         <dt>Deliverable</dt>
         <dd>Seam diagnostic + architecture brief</dd>
       </div>
     </dl>
   </div>
 </section>
+
+<!-- ============ FIELD KIT GATE STRIP ============ -->
+<aside class="fieldkit-gate" aria-label="Field Kit lead-capture gate">
+  <div class="wrap">
+    <div>
+      <div class="fk-eyebrow">Not ready to scope an audit?</div>
+      <p class="fk-line">
+        Start with the operator-side Field Kit. Thirty minutes. Ten questions. Your chain, your evidence, your decision on whether the audit earns its cost.
+      </p>
+    </div>
+    <a class="btn btn-ghost" href="#fieldkit">
+      Get the Field Kit (free) <span class="arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</aside>
+
+<!-- ============ TOOLKIT GATE STRIP ============ -->
+<aside class="fieldkit-gate" style="background: var(--paper);" aria-label="Fracture Diagnostic Toolkit gate">
+  <div class="wrap">
+    <div>
+      <div class="fk-eyebrow">Past the Field Kit but $15K isn&rsquo;t this quarter?</div>
+      <p class="fk-line">
+        The Fracture Diagnostic Toolkit is the middle rung. Self-service. $349. A 39-page workbook, a 9-tab scoring engine, and a 72-cell benchmark — the full cube walk for an internal operator to run on their own chain.
+      </p>
+    </div>
+    <a class="btn btn-ghost" href="/toolkit/">
+      See the toolkit ($349) <span class="arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</aside>
 
 <!-- ============ THE PATTERN ============ -->
 <section id="pattern">
@@ -525,13 +699,16 @@
         <p style="margin-bottom: 16px;">
           We map the chain. Every party. Every flow. Every contractual handoff. Not the org chart — the chain.
         </p>
-        <p>
+        <p style="margin-bottom: 16px;">
           We expose the fractures through a 6-phase × 4-party × 3-fracture lens, each fracture tied to a specific seam, each backed by evidence the operators on both sides will recognize. Then we brief the architecture that would close the gap.
+        </p>
+        <p style="font-family: var(--serif); font-style: italic; color: var(--navy); font-size: 17px;">
+          Two weeks. Fifteen thousand dollars. Fixed scope. The diagnostic is defensible by end of week one; the architecture brief is in your hands by end of week two.
         </p>
       </div>
 
       <div class="anatomy-card" aria-label="Seam Audit deliverables">
-        <div class="label">Deliverables · Week 2</div>
+        <div class="label">Deliverables · Week 2 · USD 15,000</div>
         <h3>What you walk away with.</h3>
         <ul>
           <li>
@@ -553,6 +730,52 @@
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-eyebrow">The investment</div>
+    <h2>Fifteen thousand dollars. Two weeks. Fixed scope.</h2>
+    <p class="lead">
+      The Seam Audit is a single SKU at a single price. It is not a custom proposal cycle, and the price is not a starting point. It is the price.
+    </p>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-label">Narrow scope</div>
+        <div class="price-num">$7,500</div>
+        <div class="price-name">Single-party scoping audit</div>
+        <p class="price-body">
+          For a counterparty inside your chain who wants the diagnostic applied to their slice alone. Same method, narrower scope.
+        </p>
+      </div>
+
+      <div class="price-card featured">
+        <span class="price-tag">Standard</span>
+        <div class="price-label">The Seam Audit</div>
+        <div class="price-num">$15,000</div>
+        <div class="price-name">Two weeks · two parties · one full seam</div>
+        <p class="price-body">
+          Defensible diagnostic plus architecture brief. The reason this page exists.
+        </p>
+      </div>
+
+      <div class="price-card">
+        <div class="price-label">Multi-seam</div>
+        <div class="price-num">$25,000</div>
+        <div class="price-name">Multi-seam or multi-BU audit</div>
+        <p class="price-body">
+          For carriers, OEMs, or PE portfolios with more than one material seam to diagnose in the same engagement.
+        </p>
+      </div>
+    </div>
+
+    <p class="pricing-closing">
+      If $15,000 feels expensive, the Field Kit will tell you whether the audit is the right next move. <a href="#fieldkit">Read it first →</a><br />
+      Or step laterally to the <a href="/toolkit/">$349 Fracture Diagnostic Toolkit</a> — the self-service version of the diagnostic, run by your own operator.
+    </p>
   </div>
 </section>
 
@@ -589,7 +812,7 @@
     </div>
 
     <p style="margin-top: 48px; font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--navy-80); max-width: 60ch;">
-      The methodology is <strong style="font-style: normal;">SEAMline</strong>. The practice that delivers it is <strong style="font-style: normal;">FABRIC</strong> — Frame, Audit, Build, Roadmap, Implement, Compound. Built to FABRIC is the standard every deliverable passes before it leaves my hands.
+      The methodology is <strong style="font-style: normal;">SEAMline</strong>. The practice that delivers it is <strong style="font-style: normal;">FABRIC</strong> — Frame, Audit, Build, Roadmap, Implement, Compound. Built to FABRIC is the standard every deliverable passes before it leaves my hands. The Audit closes inside <em>Expose</em>. If the architecture is right and you choose to build it, that is a separate engagement on the <em>Architect</em> and <em>Mobilize</em> side of the line.
     </p>
   </div>
 </section>
@@ -625,6 +848,108 @@
   </div>
 </section>
 
+<!-- ============ CAPACITY ============ -->
+<aside class="capacity" aria-label="Capacity and waitlist">
+  <div class="wrap">
+    <div class="cap-eyebrow">Capacity · 2026</div>
+    <h2 class="cap-statement">Three Seam Audits per month. No exceptions.</h2>
+    <p class="cap-body">
+      The audit is a fixed-time engagement and the diagnostic depth doesn&rsquo;t compress. If the month you need is booked, the waitlist preserves slot order by date of request. Tell me the trigger date you need to be moving by and I&rsquo;ll confirm where you fall.
+    </p>
+    <div class="cap-status" aria-label="Current monthly capacity status">
+      <span class="pill open">June 2026 · Open</span>
+      <span class="pill open">July 2026 · Open</span>
+      <span class="pill open">August 2026 · Open</span>
+    </div>
+    <a class="cap-cta" href="#contact">Request a slot or join the waitlist <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</aside>
+
+<!-- ============ FIELD KIT (anchor + capture) ============ -->
+<section id="fieldkit" style="background: var(--paper);">
+  <div class="wrap">
+    <div class="section-eyebrow">The Field Kit · Free · Operator-side</div>
+    <h2>A toolkit for the operator who already suspects where the chain is leaking.</h2>
+    <p class="lead">
+      Five sections. Thirty minutes. The questions you can ask of your own chain, the vocabulary to describe what you see, and the trigger conditions that tell you when a formal Seam Audit will earn its cost.
+    </p>
+
+    <div class="anatomy">
+      <div>
+        <h3>What&rsquo;s in it.</h3>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="padding: 14px 0; border-top: 1px solid var(--rule);">
+            <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rust); display: block; margin-bottom: 4px;">V.1 — Ten-Question Self-Diagnostic</span>
+            Run on your own chain in thirty minutes. Scoring threshold for when a formal Seam Audit warrants the cost.
+          </li>
+          <li style="padding: 14px 0; border-top: 1px solid var(--rule);">
+            <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rust); display: block; margin-bottom: 4px;">V.2 — The Seam Vocabulary</span>
+            A short glossary so operators on either side of a seam can describe what they see in the same language.
+          </li>
+          <li style="padding: 14px 0; border-top: 1px solid var(--rule);">
+            <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rust); display: block; margin-bottom: 4px;">V.3 — When to Call</span>
+            Six trigger conditions at which a Seam Audit reliably earns its cost.
+          </li>
+          <li style="padding: 14px 0; border-top: 1px solid var(--rule);">
+            <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rust); display: block; margin-bottom: 4px;">V.4 — What &ldquo;Good&rdquo; Looks Like</span>
+            How to evaluate a Seam Audit, an architecture engagement, or your own self-led seam work at each SEAMline stage.
+          </li>
+          <li style="padding: 14px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+            <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rust); display: block; margin-bottom: 4px;">V.5 — One-Page Audit Summary Template</span>
+            The artifact that travels most usefully across the client organization. Adaptable to your context.
+          </li>
+        </ul>
+      </div>
+
+      <form class="intake" id="fkForm" novalidate>
+        <div class="form-title">Send me the Field Kit.</div>
+        <div class="form-sub">Four fields · Two minutes · Unsubscribe in one click</div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="fk-name">Name <span class="req">*</span></label>
+            <input id="fk-name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="fk-email">Work email <span class="req">*</span></label>
+            <input id="fk-email" name="email" type="email" autocomplete="email" required />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="fk-company">Company <span class="req">*</span></label>
+            <input id="fk-company" name="company" type="text" autocomplete="organization" required />
+          </div>
+          <div class="field">
+            <label for="fk-role">Role / title <span class="req">*</span></label>
+            <input id="fk-role" name="role" type="text" autocomplete="organization-title" required />
+          </div>
+        </div>
+
+        <div class="field" style="display:flex; gap:10px; align-items:flex-start;">
+          <input id="fk-consent" name="consent" type="checkbox" required style="width:auto; margin-top:5px;" />
+          <label for="fk-consent" style="text-transform:none; letter-spacing:0; font-family: var(--sans); font-size: 13px; color: var(--navy-80); line-height: 1.5;">
+            Send me the Field Kit and a five-email follow-up over the next two weeks. Unsubscribe in one click anytime. <span class="req">*</span>
+          </label>
+        </div>
+
+        <!-- Honeypot (anti-bot, hidden) -->
+        <div style="position:absolute; left:-9999px;" aria-hidden="true">
+          <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn btn-primary">
+            Send me the Field Kit <span class="arrow" aria-hidden="true">→</span>
+          </button>
+          <span class="privacy">We never share your email.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ============ ABOUT ============ -->
 <section id="about">
   <div class="wrap">
@@ -650,23 +975,14 @@
         <p>
           The Sage-Operator posture is deliberate: the architecture is the Sage half, the operators carry the diagnosis. Without the operators, the architecture is fiction. Without the architecture, the operators are stuck. The work is bringing them together.
         </p>
+        <div class="capacity-note">
+          Currently accepting three Seam Audits per month. Waitlist available for fourth-and-later requests.
+        </div>
       </div>
     </div>
   </div>
 </section>
-<!-- ============ NEWSLETTER ============ -->
-<section id="newsletter" style="background: var(--bone-deep);">
-  <div class="wrap">
-    <div class="section-eyebrow">The dispatch · The Seam</div>
-    <h2>Before the audit, the dispatches.</h2>
-    <p class="lead">
-      The Seam is the weekly dispatch — short essays on where multi-party value chains actually leak, and what the seam looks like up close. Follow the work before you scope it.
-    </p>
-    <div style="margin-top: 32px; max-width: 520px;">
-      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="45cbdff1-e6de-4852-8caa-e9d13a13bc9c"></script>
-    </div>
-  </div>
-</section>
+
 <!-- ============ CONTACT ============ -->
 <section id="contact" style="border-top: none; padding: 0;">
   <div class="wrap">
@@ -769,7 +1085,7 @@
 <footer class="site">
   <div class="wrap foot-inner">
     <div class="foot-tag">
-     Find the seam. <span class="sep">·</span> Hold the line. <span class="sep">|</span> Built to FABRIC. <span class="sep">|</span> <a href="#newsletter" style="text-decoration: none; color: inherit;">Read The Seam →</a>
+      Find the seam. <span class="sep">·</span> Hold the line. <span class="sep">|</span> Built to FABRIC.
     </div>
     <div class="foot-legal">
       © 2026 Singh PowerUp Coach LLC · Florida<br />
@@ -779,7 +1095,7 @@
 </footer>
 
 <script>
-  // Intake form → mailto fallback (no backend wired yet)
+  // Seam Audit intake → mailto fallback (replace with Formspree endpoint pre-launch)
   (function () {
     var form = document.getElementById('intakeForm');
     if (!form) return;
@@ -797,7 +1113,6 @@
         pref:     document.getElementById('f-pref').value
       };
 
-      // Light validation
       var missing = [];
       if (!data.name)    missing.push('Name');
       if (!data.role)    missing.push('Role');
@@ -829,6 +1144,88 @@
         + '&body=' + encodeURIComponent(body);
 
       window.location.href = mailto;
+    });
+  })();
+
+  // Field Kit capture — instant PDF download + mailto lead capture (v1)
+  // Replace mailto block with beehiiv form endpoint when account is wired.
+  (function () {
+    var form = document.getElementById('fkForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Honeypot
+      var honey = form.querySelector('input[name="website"]');
+      if (honey && honey.value) { return; }
+
+      var data = {
+        name:    document.getElementById('fk-name').value.trim(),
+        email:   document.getElementById('fk-email').value.trim(),
+        company: document.getElementById('fk-company').value.trim(),
+        role:    document.getElementById('fk-role').value.trim(),
+        consent: document.getElementById('fk-consent').checked
+      };
+
+      var missing = [];
+      if (!data.name)    missing.push('Name');
+      if (!data.email)   missing.push('Work email');
+      if (!data.company) missing.push('Company');
+      if (!data.role)    missing.push('Role');
+      if (!data.consent) missing.push('Consent checkbox');
+      if (missing.length) {
+        alert('Please complete: ' + missing.join(', '));
+        return;
+      }
+
+      // 1. Trigger PDF download immediately — primary value delivery
+      var dl = document.createElement('a');
+      dl.href = 'SEAMline_Field_Kit_v1.pdf';
+      dl.download = 'SEAMline_Field_Kit_v1.pdf';
+      dl.style.display = 'none';
+      document.body.appendChild(dl);
+      dl.click();
+      document.body.removeChild(dl);
+
+      // 2. Open lead-capture mailto in a new tab — does NOT navigate away
+      var subject = 'Field Kit request — ' + data.company + ' (' + data.name + ')';
+      var body =
+        'Field Kit request\n' +
+        '====================\n\n' +
+        'Name:     ' + data.name + '\n' +
+        'Email:    ' + data.email + '\n' +
+        'Company:  ' + data.company + '\n' +
+        'Role:     ' + data.role + '\n' +
+        'Consent:  yes\n\n' +
+        '— Sent from the Field Kit gate.\n';
+      var mailto = 'mailto:info@singhpowerupcoach.com'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+      window.open(mailto, '_blank');
+
+      // 3. Swap form for confirmation panel
+      form.innerHTML =
+        '<div class="form-title">The Field Kit is downloading.</div>' +
+        '<div class="form-sub">Check your downloads folder · PDF · 12 pages</div>' +
+        '<p style="font-family: var(--serif); font-style: italic; color: var(--navy); font-size: 16px; line-height: 1.5;">' +
+          'A draft email also just opened in your mail client so I know you have it. Please hit send. ' +
+          'If your browser blocked the download, ' +
+          '<a href="SEAMline_Field_Kit_v1.pdf" download style="color: var(--navy); text-decoration: underline;">click here to download manually</a>.' +
+        '</p>' +
+        '<p style="font-family: var(--sans); font-size: 14px; color: var(--navy-80); line-height: 1.5;">' +
+          'Three things to do with V.1 (the ten-question diagnostic) in the next thirty minutes:' +
+        '</p>' +
+        '<ol style="font-family: var(--sans); font-size: 14px; color: var(--navy-80); line-height: 1.6; padding-left: 20px;">' +
+          '<li>Pick one specific chain you operate inside, not all of them.</li>' +
+          '<li>Run the ten yes/no questions. Honest answers only.</li>' +
+          '<li>If the chain scores 6 or higher, the audit conversation is the right next move.</li>' +
+        '</ol>' +
+        '<p style="margin-top: 20px;">' +
+          '<a class="btn btn-primary" href="https://calendly.com/singhleadership/let-s-just-talk" target="_blank" rel="noopener">' +
+            'Already scored a 6+? → Book the call <span class="arrow">→</span>' +
+          '</a>' +
+        '</p>';
     });
   })();
 </script>

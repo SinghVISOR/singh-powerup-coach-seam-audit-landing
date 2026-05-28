@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fracture Diagnostic Toolkit — The SEAMline Method | FABRIC</title>
+<meta name="description" content="A self-service organizational diagnostic that productizes the canonical 6 × 4 × 3 Fracture Diagnostic. 39-page workbook + 9-tab scoring engine + 72-cell benchmark. USD 349. Single-organization license." />
+<meta property="og:title" content="Fracture Diagnostic Toolkit — Run the SEAMline cube walk on your own chain." />
+<meta property="og:description" content="The middle rung between the free Field Kit and the $15K Seam Audit. Self-service. Defensible. Shippable." />
+<meta property="og:type" content="product" />
+<meta property="product:price:amount" content="349.00" />
+<meta property="product:price:currency" content="USD" />
+
+<!-- Brand fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Lemon Squeezy overlay script (loads checkout overlay when ?embed=1 URL is clicked) -->
+<script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
+
+<style>
+  /* ---------- Brand tokens (locked May 21, 2026) ---------- */
+  :root {
+    --navy: #0F1E3D;
+    --navy-80: #2B3A5A;
+    --navy-60: #5A6580;
+    --rust: #B8512A;
+    --rust-soft: #D77A52;
+    --bone: #F5F1EB;
+    --bone-deep: #ECE6DC;
+    --paper: #FFFFFF;
+    --rule: rgba(15, 30, 61, 0.14);
+    --rule-strong: rgba(15, 30, 61, 0.28);
+
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --max: 1120px;
+    --gutter: clamp(20px, 4vw, 56px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bone); color: var(--navy);
+    font-family: var(--sans); font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--rust); color: var(--bone); }
+  a { color: var(--navy); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--rust); }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  section { padding: clamp(56px, 9vw, 112px) 0; border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: none; }
+
+  /* ---------- Header (matches root index.html) ---------- */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245, 241, 235, 0.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .site-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brandmark { display: inline-flex; flex-direction: column; line-height: 1; text-decoration: none; }
+  .brandmark .wordmark {
+    font-family: var(--serif); font-weight: 600; font-size: 22px;
+    letter-spacing: 0.5px; color: var(--navy);
+  }
+  .brandmark .wordmark .caps { letter-spacing: 1.2px; }
+  .brandmark .wordmark .tail { font-style: italic; font-weight: 400; letter-spacing: 0; }
+  .brandmark .seamline {
+    margin-top: 4px; height: 2px; width: 100%;
+    background: linear-gradient(to right, var(--navy) 0%, var(--navy) 78%, var(--rust) 78%, var(--rust) 100%);
+  }
+  nav.site-nav { display: flex; gap: 28px; align-items: center; }
+  nav.site-nav a {
+    font-family: var(--mono); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 1.4px; text-decoration: none; color: var(--navy-80);
+  }
+  nav.site-nav a:hover { color: var(--rust); }
+  nav.site-nav a[aria-current="page"] { color: var(--rust); }
+  nav.site-nav .btn-mini {
+    font-family: var(--sans); font-size: 13px; letter-spacing: 0;
+    text-transform: none; padding: 8px 14px;
+    background: var(--navy); color: var(--bone); border-radius: 2px;
+  }
+  nav.site-nav .btn-mini:hover { background: var(--rust); color: var(--bone); }
+  @media (max-width: 860px) { nav.site-nav a:not(.btn-mini) { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-top: clamp(56px, 8vw, 96px); padding-bottom: clamp(40px, 6vw, 72px); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--rust); margin-bottom: 22px;
+  }
+  h1.hero-title {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(34px, 5vw, 56px); line-height: 1.08;
+    letter-spacing: -0.5px; margin: 0 0 24px; max-width: 22ch;
+  }
+  h1.hero-title .accent { color: var(--rust); font-style: italic; font-weight: 600; }
+  .hero-deck {
+    font-family: var(--serif); font-weight: 400; font-style: italic;
+    font-size: clamp(18px, 2vw, 22px); line-height: 1.45;
+    color: var(--navy-80); max-width: 58ch; margin: 0 0 36px;
+  }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans); font-weight: 600; font-size: 16px;
+    padding: 16px 26px; border-radius: 2px;
+    text-decoration: none; border: 1px solid transparent;
+    transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--navy); color: var(--bone); border-color: var(--navy); }
+  .btn-primary:hover { background: var(--rust); border-color: var(--rust); color: var(--bone); }
+  .btn-ghost { background: transparent; color: var(--navy); border-color: var(--rule-strong); }
+  .btn-ghost:hover { border-color: var(--navy); color: var(--navy); background: var(--bone-deep); }
+  .btn .arrow { transition: transform 120ms ease; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  .hero-meta {
+    margin-top: 48px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    border-top: 1px solid var(--rule); padding-top: 28px;
+  }
+  .hero-meta dt {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1.4px; color: var(--navy-60); margin-bottom: 6px;
+  }
+  .hero-meta dd { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 18px; color: var(--navy); }
+  @media (max-width: 820px) { .hero-meta { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .hero-meta { grid-template-columns: 1fr; } }
+
+  /* ---------- Section heads ---------- */
+  .section-eyebrow {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1.8px; color: var(--rust); margin-bottom: 14px;
+  }
+  h2 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(28px, 3.6vw, 42px); line-height: 1.15; letter-spacing: -0.3px;
+    margin: 0 0 24px; max-width: 22ch;
+  }
+  h3 { font-family: var(--serif); font-weight: 600; font-size: 22px; line-height: 1.25; margin: 0 0 10px; }
+  p.lead {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(18px, 1.9vw, 22px); line-height: 1.5;
+    color: var(--navy-80); max-width: 62ch; margin: 0 0 36px;
+  }
+  p { max-width: 64ch; }
+
+  /* ---------- Ladder placement strip ---------- */
+  .ladder {
+    background: var(--bone-deep);
+    padding: clamp(32px, 5vw, 56px) 0;
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .ladder-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+  @media (max-width: 820px) { .ladder-grid { grid-template-columns: 1fr; } }
+  .rung {
+    background: var(--paper); border: 1px solid var(--rule);
+    padding: 24px; border-radius: 3px;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .rung.current { background: var(--navy); color: var(--bone); border-color: var(--navy); }
+  .rung .rung-tier {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--navy-60); margin-bottom: 8px;
+  }
+  .rung.current .rung-tier { color: var(--rust-soft); }
+  .rung .rung-name { font-family: var(--serif); font-weight: 600; font-size: 20px; margin-bottom: 6px; }
+  .rung .rung-price { font-family: var(--serif); font-weight: 700; font-size: 24px; margin-bottom: 10px; color: var(--rust); }
+  .rung.current .rung-price { color: var(--rust-soft); }
+  .rung .rung-body { font-size: 14px; line-height: 1.55; color: var(--navy-80); margin: 0; }
+  .rung.current .rung-body { color: rgba(245, 241, 235, 0.82); }
+  .rung .rung-current-tag {
+    position: absolute; top: -12px; right: 20px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--bone);
+    background: var(--rust); padding: 4px 10px; border-radius: 2px;
+  }
+
+  /* ---------- What's inside ---------- */
+  .inside-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 40px; }
+  @media (max-width: 820px) { .inside-grid { grid-template-columns: 1fr; gap: 32px; } }
+  .inside-card { background: var(--paper); border: 1px solid var(--rule); padding: 32px; border-radius: 3px; }
+  .inside-card .file-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--rust); margin-bottom: 12px;
+  }
+  .inside-card h3 { margin-bottom: 14px; }
+  .inside-card ul { list-style: none; padding: 0; margin: 0; }
+  .inside-card li {
+    padding: 12px 0 12px 22px; position: relative;
+    border-top: 1px solid var(--rule);
+    font-size: 15px; line-height: 1.5; color: var(--navy-80);
+  }
+  .inside-card li:last-child { border-bottom: 1px solid var(--rule); }
+  .inside-card li::before {
+    content: ""; position: absolute; left: 0; top: 19px;
+    width: 12px; height: 2px; background: var(--rust);
+  }
+
+  /* ---------- Who this is for ---------- */
+  .fit { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  @media (max-width: 820px) { .fit { grid-template-columns: 1fr; gap: 32px; } }
+  .fit-col h3 { margin-bottom: 18px; }
+  .fit-col ul { list-style: none; padding: 0; margin: 0; }
+  .fit-col li {
+    padding: 14px 0 14px 28px; position: relative;
+    border-top: 1px solid var(--rule);
+    font-size: 15px; line-height: 1.5; color: var(--navy-80);
+  }
+  .fit-col li:last-child { border-bottom: 1px solid var(--rule); }
+  .fit-col.yes li::before {
+    content: ""; position: absolute; left: 0; top: 22px;
+    width: 14px; height: 2px; background: var(--rust);
+  }
+  .fit-col.no li::before {
+    content: "×"; position: absolute; left: 0; top: 12px;
+    font-family: var(--mono); color: var(--navy-60); font-size: 18px;
+  }
+
+  /* ---------- FABRIC Check badge ---------- */
+  .fabric-check {
+    background: var(--navy); color: var(--bone);
+    padding: 40px; border-radius: 3px;
+    display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center;
+  }
+  @media (max-width: 720px) { .fabric-check { grid-template-columns: 1fr; gap: 20px; padding: 32px; } }
+  .fabric-mark {
+    font-family: var(--serif); font-weight: 700; font-size: 64px; line-height: 1;
+    color: var(--bone); letter-spacing: -1px; border-bottom: 2px solid var(--rust);
+    padding-bottom: 8px; display: inline-block;
+  }
+  .fabric-text .fc-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--rust-soft); margin-bottom: 8px;
+  }
+  .fabric-text h3 { color: var(--bone); margin-bottom: 8px; font-size: 22px; }
+  .fabric-text p { color: rgba(245, 241, 235, 0.82); font-size: 15px; margin: 0; max-width: 60ch; }
+
+  /* ---------- Single-tier pricing (v1 launch posture) ---------- */
+  .pricing-single {
+    margin-top: 40px;
+    display: flex; justify-content: center;
+  }
+  .price-card-solo {
+    background: var(--navy); color: var(--bone); border: 1px solid var(--navy);
+    padding: 40px; border-radius: 3px;
+    max-width: 480px; width: 100%;
+    display: flex; flex-direction: column; align-items: stretch;
+    box-shadow: 0 18px 40px -20px rgba(15,30,61,0.4);
+    position: relative;
+  }
+  .price-card-solo .price-tag {
+    position: absolute; top: -12px; left: 32px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--bone);
+    background: var(--rust); padding: 4px 10px; border-radius: 2px;
+  }
+  .price-card-solo .price-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--rust-soft); margin-bottom: 14px;
+  }
+  .price-card-solo .price-num {
+    font-family: var(--serif); font-weight: 700; font-size: 56px; line-height: 1;
+    color: var(--bone); letter-spacing: -1px; margin-bottom: 10px;
+  }
+  .price-card-solo .price-num .currency { font-size: 22px; font-weight: 400; color: var(--rust-soft); margin-right: 6px; }
+  .price-card-solo .price-name {
+    font-family: var(--serif); font-weight: 600; font-size: 22px;
+    color: var(--bone); margin-bottom: 18px;
+  }
+  .price-card-solo .price-body {
+    font-size: 15px; line-height: 1.6; color: rgba(245, 241, 235, 0.82); margin: 0 0 28px;
+  }
+  .price-card-solo ul.includes {
+    list-style: none; padding: 0; margin: 0 0 28px;
+    border-top: 1px solid rgba(245, 241, 235, 0.16);
+  }
+  .price-card-solo ul.includes li {
+    padding: 12px 0 12px 22px; position: relative;
+    border-bottom: 1px solid rgba(245, 241, 235, 0.16);
+    font-size: 14px; line-height: 1.5; color: rgba(245, 241, 235, 0.88);
+  }
+  .price-card-solo ul.includes li::before {
+    content: ""; position: absolute; left: 0; top: 19px;
+    width: 12px; height: 2px; background: var(--rust);
+  }
+  .price-card-solo .price-cta {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--sans); font-weight: 600; font-size: 16px;
+    padding: 16px 26px; border-radius: 2px; text-decoration: none;
+    border: 1px solid var(--bone); background: var(--bone); color: var(--navy);
+    cursor: pointer; transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  }
+  .price-card-solo .price-cta:hover { background: var(--rust); border-color: var(--rust); color: var(--bone); }
+  .price-card-solo .price-fine {
+    margin-top: 14px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.4px; color: rgba(245, 241, 235, 0.72); text-align: center;
+  }
+  .pricing-footnote {
+    margin-top: 32px; text-align: center;
+    font-family: var(--serif); font-style: italic;
+    font-size: 16px; color: var(--navy-80); max-width: 64ch;
+    margin-left: auto; margin-right: auto;
+  }
+  .pricing-footnote a { color: var(--navy); }
+  .pricing-footnote a:hover { color: var(--rust); }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { margin-top: 32px; }
+  .faq-item { border-top: 1px solid var(--rule); padding: 22px 0; }
+  .faq-item:last-child { border-bottom: 1px solid var(--rule); }
+  .faq-item summary {
+    font-family: var(--serif); font-weight: 600; font-size: 19px;
+    color: var(--navy); cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    padding-right: 16px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "+"; font-family: var(--serif); font-weight: 400;
+    font-size: 28px; color: var(--rust); line-height: 1;
+    transition: transform 200ms ease;
+  }
+  .faq-item[open] summary::after { content: "−"; }
+  .faq-item .faq-body {
+    margin-top: 14px; font-size: 15px; line-height: 1.6;
+    color: var(--navy-80); max-width: 70ch;
+  }
+
+  /* ---------- Bridge to Audit ---------- */
+  .bridge {
+    background: var(--bone-deep);
+    padding: 28px 0;
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .bridge .wrap {
+    display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center;
+  }
+  @media (max-width: 760px) { .bridge .wrap { grid-template-columns: 1fr; gap: 18px; } }
+  .bridge .b-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--rust); margin-bottom: 6px;
+  }
+  .bridge .b-line {
+    font-family: var(--serif); font-size: 18px; line-height: 1.45;
+    color: var(--navy); margin: 0; max-width: 70ch;
+  }
+  .bridge .btn-ghost { padding: 12px 20px; font-size: 14px; white-space: nowrap; }
+
+  /* ---------- Footer ---------- */
+  footer.site {
+    border-top: 1px solid var(--rule);
+    padding: 40px 0 56px;
+    background: var(--bone-deep);
+  }
+  .foot-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: end; }
+  @media (max-width: 640px) { .foot-inner { grid-template-columns: 1fr; } }
+  .foot-tag { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--navy-80); }
+  .foot-tag .sep { color: var(--rust); padding: 0 8px; font-style: normal; }
+  .foot-legal {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1.2px; color: var(--navy-60); text-align: right;
+  }
+  @media (max-width: 640px) { .foot-legal { text-align: left; } }
+
+  @media print {
+    header.site, nav.site-nav, .hero-ctas, .price-cta, .bridge { display: none; }
+    body { background: white; color: black; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="wrap site-inner">
+    <a href="/" class="brandmark" aria-label="The SEAMline Method">
+      <span class="wordmark"><span class="caps">SEAM</span><span class="tail">line</span></span>
+      <span class="seamline" aria-hidden="true"></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/#pattern">The pattern</a>
+      <a href="/#audit">The audit</a>
+      <a href="/toolkit/" aria-current="page">The toolkit</a>
+      <a href="/#method">SEAMline</a>
+      <a href="/#fieldkit">Field Kit</a>
+      <a href="#pricing" class="btn-mini">Buy the toolkit</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Fracture Diagnostic Toolkit · Self-service · USD 349</div>
+    <h1 class="hero-title">
+      Run the cube walk on your own chain. <span class="accent">No consultant required.</span>
+    </h1>
+    <p class="hero-deck">
+      The Fracture Diagnostic Toolkit productizes the canonical 6 × 4 × 3 cube from The SEAMline Method. A 39-page workbook, a 9-tab scoring engine, and a 72-cell benchmark dataset. Built to be run by an internal operator in four working sessions — and to produce a defensible fracture list at the end.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary lemonsqueezy-button"
+         href="https://fabricpress.lemonsqueezy.com/checkout/buy/d101bc49-0dce-4d5f-a27a-b6853413242f?embed=1&media=0">
+        Buy the toolkit — $349 <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="btn btn-ghost" href="#inside">
+        What's actually inside <span class="arrow" aria-hidden="true">↓</span>
+      </a>
+    </div>
+    <dl class="hero-meta">
+      <div>
+        <dt>Format</dt>
+        <dd>Workbook + spreadsheet + benchmark</dd>
+      </div>
+      <div>
+        <dt>Time to run</dt>
+        <dd>Four working sessions</dd>
+      </div>
+      <div>
+        <dt>License</dt>
+        <dd>Single organization · perpetual</dd>
+      </div>
+      <div>
+        <dt>Refund window</dt>
+        <dd>14 days · no questions</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ LADDER PLACEMENT ============ -->
+<aside class="ladder" aria-label="Where the toolkit sits in the SEAMline product ladder">
+  <div class="wrap">
+    <div class="section-eyebrow" style="margin-bottom: 18px;">Where this sits</div>
+    <h2 style="font-size: clamp(24px, 3vw, 32px); margin-bottom: 28px;">
+      The middle rung. Between the free Field Kit and the $15K Seam Audit.
+    </h2>
+    <div class="ladder-grid">
+      <div class="rung">
+        <div class="rung-tier">Free · Discovery</div>
+        <div class="rung-name">The Field Kit</div>
+        <div class="rung-price">$0</div>
+        <p class="rung-body">Ten-question self-diagnostic. Vocabulary. One-page Seam Audit template. Thirty minutes. Use this first if you haven't met the method yet.</p>
+      </div>
+      <div class="rung current">
+        <span class="rung-current-tag">You are here</span>
+        <div class="rung-tier">Self-service · Diagnostic</div>
+        <div class="rung-name">Fracture Diagnostic Toolkit</div>
+        <div class="rung-price">$349</div>
+        <p class="rung-body">The full cube walk. 39-page workbook, 9-tab scoring engine, 72-cell benchmark. An internal operator runs the diagnostic end-to-end and produces a defensible fracture list.</p>
+      </div>
+      <div class="rung">
+        <div class="rung-tier">Facilitated · Audit</div>
+        <div class="rung-name">The Seam Audit</div>
+        <div class="rung-price">$15,000</div>
+        <p class="rung-body">Two-week fixed-scope diagnostic, facilitated by FABRIC. Three engagements per month. Use this when the room is politically incapable of honest scoring, or when the fracture pattern points to architecture.</p>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ============ WHAT'S INSIDE ============ -->
+<section id="inside">
+  <div class="wrap">
+    <div class="section-eyebrow">What's inside</div>
+    <h2>Four files. One coherent diagnostic.</h2>
+    <p class="lead">
+      The bundle is engineered to work as a single instrument. The workbook tells you what to do; the scoring engine captures what you find; the benchmark gives you something defensible to compare against; the PDF is the read-only copy you hand to a colleague.
+    </p>
+
+    <div class="inside-grid">
+      <div class="inside-card">
+        <div class="file-label">File 01 · Workbook</div>
+        <h3>The 39-page operator's manual.</h3>
+        <ul>
+          <li>Cover, license, contents, and the how-to-use protocol (four working sessions; resumeable cadence).</li>
+          <li>Part I — the chain as the unit of analysis (not the function, not the org).</li>
+          <li>Parts II–III — the 6 × 4 × 3 cube fully enumerated, with operator-recognizable definitions for every cell.</li>
+          <li>Part IV — four worked examples from real chains (insurance, warranty, analytics, M&amp;A).</li>
+          <li>Parts V–VI — the cube walk protocol, evidence-note rules, and economic-weighting strategies.</li>
+          <li>Part VII — the Ignore / Monitor / Intervene framework and three indicators for escalation to a Seam Audit.</li>
+          <li>Part VIII — the Diagnostic Summary template with notation requirements.</li>
+        </ul>
+      </div>
+      <div class="inside-card">
+        <div class="file-label">File 02 · Scoring engine</div>
+        <h3>The 9-tab spreadsheet.</h3>
+        <ul>
+          <li>Cube Walk — 72 rows (one per cell), with evidence notes, severity scores, and economic weights.</li>
+          <li>Heatmap Pattern A, B, C — the three diagnostic patterns auto-rendered from the Cube Walk inputs.</li>
+          <li>Top Fractures — auto-formatted output in 6 × 4 × 3 notation, ready to paste into the Diagnostic Summary.</li>
+          <li>Benchmark Comparison — your scores against the 72-cell composite benchmark dataset.</li>
+          <li>Diagnostic Summary — the one-page output that closes the engagement.</li>
+          <li>Three supporting tabs for license terms, change log, and assumptions.</li>
+        </ul>
+      </div>
+      <div class="inside-card">
+        <div class="file-label">File 03 · Benchmark methodology</div>
+        <h3>The defensibility document.</h3>
+        <ul>
+          <li>Standalone document explaining how the 72-cell composite benchmark was constructed.</li>
+          <li>Source classes, weighting rationale, and the maturity-score interpretation disclaimer.</li>
+          <li>Designed to satisfy a skeptical CFO or chief actuary asking "compared to what?"</li>
+        </ul>
+      </div>
+      <div class="inside-card">
+        <div class="file-label">File 04 · PDF</div>
+        <h3>The read-only copy.</h3>
+        <ul>
+          <li>Same content as the workbook, typeset for distribution to colleagues who don't need to edit.</li>
+          <li>Use for steering-committee pre-reads, board appendices, or audit defense.</li>
+          <li>Distributable within the licensed organization.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FABRIC CHECK ============ -->
+<section style="background: var(--bone-deep);">
+  <div class="wrap">
+    <div class="fabric-check">
+      <div class="fabric-mark" aria-hidden="true">5/5</div>
+      <div class="fabric-text">
+        <div class="fc-label">FABRIC Check · The SEAMline Method</div>
+        <h3>This SKU passes all five FABRIC criteria.</h3>
+        <p>
+          Chain-altitude diagnosis. Seam-named specificity in 6 × 4 × 3 notation. Operator-recognizable evidence requirements in every scoring cell. Conservative economic weighting with explicit caution against inflation. Defensible recommended response via the Ignore / Monitor / Intervene framework. Every SEAMline deliverable runs through this check before circulation.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO THIS IS FOR ============ -->
+<section id="fit">
+  <div class="wrap">
+    <div class="section-eyebrow">Who this is for</div>
+    <h2>And, just as importantly, who it isn't.</h2>
+
+    <div class="fit">
+      <div class="fit-col yes">
+        <h3>You should buy this if —</h3>
+        <ul>
+          <li>You are an internal transformation lead, COO, CFO, or chief actuary at a multi-party chain — insurance, TPA, OEM warranty, self-insured plan, analytics provider, PE portfolio operator.</li>
+          <li>You have used the free Field Kit and recognized the methodology has more depth than the ten questions surface.</li>
+          <li>You believe your chain is leaking margin somewhere in the seams, but a $15K consulting line item is not the right next move this quarter.</li>
+          <li>You are a boutique consulting partner doing chain-level diagnostic work and want a defensible instrument to use on engagements (multi-organization licenses available on request).</li>
+          <li>You can give the toolkit four working sessions of real attention over two to four weeks.</li>
+        </ul>
+      </div>
+      <div class="fit-col no">
+        <h3>You should not buy this if —</h3>
+        <ul>
+          <li>Your problem is inside a single function and you have not yet established that the chain is the unit of analysis. Start with the Field Kit and the SEAMline paper first.</li>
+          <li>You are looking for a quick template to drop into a slide deck. This is an instrument, not a graphic.</li>
+          <li>You already know the room is politically incapable of honest scoring. The Seam Audit is the right next move.</li>
+          <li>You expect the toolkit to do the diagnostic work for you. It will not. It is a structured instrument; the operator's judgment carries the work.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING (single tier, v1) ============ -->
+<section id="pricing" style="background: var(--bone-deep);">
+  <div class="wrap">
+    <div class="section-eyebrow">Pricing</div>
+    <h2>One price. One license. One bundle.</h2>
+    <p class="lead">
+      Perpetual single-organization license. No subscription. No renewals. Refunds within 14 days, no questions asked.
+    </p>
+
+    <div class="pricing-single">
+      <div class="price-card-solo">
+        <span class="price-tag">Available now</span>
+        <div class="price-label">Fracture Diagnostic Toolkit · Single-organization license</div>
+        <div class="price-num"><span class="currency">USD</span>349</div>
+        <div class="price-name">The full cube walk, self-service.</div>
+        <p class="price-body">
+          Use the toolkit on one organization's chain. Unlimited internal users within that organization. Perpetual license. Future-version upgrades offered at a reduced price to existing buyers.
+        </p>
+        <ul class="includes">
+          <li>39-page workbook (Word + typeset PDF)</li>
+          <li>9-tab scoring engine with embedded benchmark</li>
+          <li>72-cell composite benchmark methodology document</li>
+          <li>Four worked examples from real multi-party chains</li>
+          <li>14-day no-questions refund window</li>
+        </ul>
+        <a class="price-cta lemonsqueezy-button"
+           href="https://fabricpress.lemonsqueezy.com/checkout/buy/d101bc49-0dce-4d5f-a27a-b6853413242f?embed=1&media=0">
+          Buy the toolkit <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <div class="price-fine">Secure checkout via Lemon Squeezy · MoR handles tax / VAT</div>
+      </div>
+    </div>
+
+    <p class="pricing-footnote">
+      Multi-organization and firm-wide licenses available on request. Boutique consultancies running the toolkit on multiple client engagements should email <a href="mailto:info@singhpowerupcoach.com?subject=Toolkit%20—%20Multi-org%20or%20firm%20license%20inquiry">info@singhpowerupcoach.com</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ============ BRIDGE TO AUDIT ============ -->
+<aside class="bridge" aria-label="Bridge to the Seam Audit">
+  <div class="wrap">
+    <div>
+      <div class="b-eyebrow">If the room can't score honestly —</div>
+      <p class="b-line">
+        Part VII of the workbook names three indicators where the next move is the facilitated Seam Audit instead of a self-service Intervene. Read it before you decide. The bridge is honest by design.
+      </p>
+    </div>
+    <a class="btn btn-ghost" href="/#audit">
+      About the Seam Audit <span class="arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</aside>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-eyebrow">FAQ</div>
+    <h2>What buyers ask before purchasing.</h2>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>How long does it actually take to run the diagnostic?</summary>
+        <p class="faq-body">
+          Four working sessions of roughly two hours each, spaced across two to four weeks. The workbook is engineered to be resumeable — you can pause between sessions without losing context. Most operators finish the cube walk in week one and spend weeks two through four on evidence, weighting, and the Diagnostic Summary.
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>What do I get immediately after purchase?</summary>
+        <p class="faq-body">
+          A confirmation email with download links to all four files and your license key. The download portal stays active for the life of the license — you can re-download at any time. We'll also send a Day-7 check-in (where are you in the four-session cadence?) and a Day-21 completion prompt. Both are short and skippable.
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I run the toolkit on more than one chain?</summary>
+        <p class="faq-body">
+          Not under the default single-organization license. Multi-organization and firm-wide licenses are available on request — email <a href="mailto:info@singhpowerupcoach.com?subject=Toolkit%20—%20License%20expansion">info@singhpowerupcoach.com</a> with a one-line description of how you want to use it. If you start on the single-org license and need to expand later, we'll credit your initial purchase toward the upgrade.
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>Is the toolkit a lead magnet for the $15K Seam Audit?</summary>
+        <p class="faq-body">
+          No. The toolkit is engineered as a fully standalone diagnostic — most buyers will run it, produce a defensible fracture list, and act on the output without speaking to FABRIC. Part VII does name three indicators where escalation to the Audit is the right call (Pattern A heatmap with Critical fractures lacking governance; Pattern C indicating an Architect-stage problem; a room politically incapable of honest scoring). That bridge is honest, not a funnel.
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>What's your refund policy?</summary>
+        <p class="faq-body">
+          Fourteen days, no questions, full refund. Email <a href="mailto:info@singhpowerupcoach.com?subject=Toolkit%20refund%20request">info@singhpowerupcoach.com</a> with the order ID from your Lemon Squeezy receipt. The 14-day window starts at the purchase timestamp.
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>Who's behind the toolkit?</summary>
+        <p class="faq-body">
+          The SEAMline Method is the operating methodology built by Pankaj Singh over twenty-five years inside insurance, auto warranty, data and analytics, M&amp;A, and PE portfolios. The toolkit productizes the canonical 6 × 4 × 3 Fracture Diagnostic from the method's published paper. Singh PowerUp Coach LLC, operating as FABRIC Press, is the contracting entity.
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>How is sales tax / VAT handled?</summary>
+        <p class="faq-body">
+          We sell through Lemon Squeezy, which is our Merchant of Record. They collect and remit all applicable sales tax and VAT in your jurisdiction at checkout — no surprise tax bills, no separate invoices. Your receipt is from "Lemon Squeezy on behalf of FABRIC Press."
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I see a sample before buying?</summary>
+        <p class="faq-body">
+          Yes. The free <a href="/#fieldkit">Field Kit</a> is the operator-side preview of the methodology — ten questions, vocabulary, one-page Seam Audit template. The Field Kit shares the same diagnostic frame as the toolkit at roughly 5% of the depth. If the Field Kit clicks, the toolkit is the next step.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap foot-inner">
+    <div class="foot-tag">
+      Find the seam. <span class="sep">·</span> Hold the line. <span class="sep">|</span> Built to FABRIC.
+    </div>
+    <div class="foot-legal">
+      © 2026 Singh PowerUp Coach LLC · Florida<br />
+      The SEAMline Method™ · FABRIC™ · USPTO applied-for
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
