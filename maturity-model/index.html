@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Seam Maturity Model — The SEAMline Method | FABRIC</title>
+<meta name="description" content="A 5-level maturity instrument for multi-party value chains. 25-page workbook + 9-tab scoring engine + 5-cohort benchmark + worked example. USD 449. Single-organization license." />
+<meta property="og:title" content="Seam Maturity Model — Diagnose where you sit. Architect the climb." />
+<meta property="og:description" content="The trajectory instrument. Pairs with the Fracture Diagnostic. Built to be run by an internal operator across nine months of climb." />
+<meta property="og:type" content="product" />
+<meta property="product:price:amount" content="449.00" />
+<meta property="product:price:currency" content="USD" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
+
+<style>
+  :root {
+    --navy: #0F1E3D; --navy-80: #2B3A5A; --navy-60: #5A6580;
+    --rust: #B8512A; --rust-soft: #D77A52;
+    --bone: #F5F1EB; --bone-deep: #ECE6DC; --paper: #FFFFFF;
+    --rule: rgba(15, 30, 61, 0.14); --rule-strong: rgba(15, 30, 61, 0.28);
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --max: 1120px; --gutter: clamp(20px, 4vw, 56px);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bone); color: var(--navy);
+    font-family: var(--sans); font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--rust); color: var(--bone); }
+  a { color: var(--navy); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--rust); }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  section { padding: clamp(56px, 9vw, 112px) 0; border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: none; }
+
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245, 241, 235, 0.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .site-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brandmark { display: inline-flex; flex-direction: column; line-height: 1; text-decoration: none; }
+  .brandmark .wordmark { font-family: var(--serif); font-weight: 600; font-size: 22px; letter-spacing: 0.5px; color: var(--navy); }
+  .brandmark .wordmark .caps { letter-spacing: 1.2px; }
+  .brandmark .wordmark .tail { font-style: italic; font-weight: 400; letter-spacing: 0; }
+  .brandmark .seamline {
+    margin-top: 4px; height: 2px; width: 100%;
+    background: linear-gradient(to right, var(--navy) 0%, var(--navy) 78%, var(--rust) 78%, var(--rust) 100%);
+  }
+  nav.site-nav { display: flex; gap: 28px; align-items: center; }
+  nav.site-nav a {
+    font-family: var(--mono); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 1.4px; text-decoration: none; color: var(--navy-80);
+  }
+  nav.site-nav a:hover { color: var(--rust); }
+  nav.site-nav a[aria-current="page"] { color: var(--rust); }
+  nav.site-nav .btn-mini {
+    font-family: var(--sans); font-size: 13px; letter-spacing: 0;
+    text-transform: none; padding: 8px 14px;
+    background: var(--navy); color: var(--bone); border-radius: 2px;
+  }
+  nav.site-nav .btn-mini:hover { background: var(--rust); color: var(--bone); }
+  @media (max-width: 860px) { nav.site-nav a:not(.btn-mini) { display: none; } }
+
+  .hero { padding-top: clamp(56px, 8vw, 96px); padding-bottom: clamp(40px, 6vw, 72px); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--rust); margin-bottom: 22px;
+  }
+  h1.hero-title {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(34px, 5vw, 56px); line-height: 1.08;
+    letter-spacing: -0.5px; margin: 0 0 24px; max-width: 22ch;
+  }
+  h1.hero-title .accent { color: var(--rust); font-style: italic; font-weight: 600; }
+  .hero-deck {
+    font-family: var(--serif); font-weight: 400; font-style: italic;
+    font-size: clamp(18px, 2vw, 22px); line-height: 1.45;
+    color: var(--navy-80); max-width: 58ch; margin: 0 0 36px;
+  }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans); font-weight: 600; font-size: 16px;
+    padding: 16px 26px; border-radius: 2px;
+    text-decoration: none; border: 1px solid transparent;
+    transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--navy); color: var(--bone); border-color: var(--navy); }
+  .btn-primary:hover { background: var(--rust); border-color: var(--rust); color: var(--bone); }
+  .btn-ghost { background: transparent; color: var(--navy); border-color: var(--rule-strong); }
+  .btn-ghost:hover { border-color: var(--navy); color: var(--navy); background: var(--bone-deep); }
+  .btn .arrow { transition: transform 120ms ease; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  .hero-meta {
+    margin-top: 48px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    border-top: 1px solid var(--rule); padding-top: 28px;
+  }
+  .hero-meta dt {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1.4px; color: var(--navy-60); margin-bottom: 6px;
+  }
+  .hero-meta dd { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 18px; color: var(--navy); }
+  @media (max-width: 820px) { .hero-meta { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .hero-meta { grid-template-columns: 1fr; } }
+
+  .section-eyebrow {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1.8px; color: var(--rust); margin-bottom: 14px;
+  }
+  h2 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(28px, 3.6vw, 42px); line-height: 1.15; letter-spacing: -0.3px;
+    margin: 0 0 24px; max-width: 22ch;
+  }
+  h3 { font-family: var(--serif); font-weight: 600; font-size: 22px; line-height: 1.25; margin: 0 0 10px; }
+  p.lead {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(18px, 1.9vw, 22px); line-height: 1.5;
+    color: var(--navy-80); max-width: 62ch; margin: 0 0 36px;
+  }
+  p { max-width: 64ch; }
+
+  /* Pair callout */
+  .pair-callout {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-left: 3px solid var(--rust);
+    padding: 24px 28px; margin: 32px 0 0;
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+  }
+  @media (max-width: 760px) { .pair-callout { grid-template-columns: 1fr; gap: 14px; } }
+  .pair-callout .pc-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--rust); margin-bottom: 6px;
+  }
+  .pair-callout .pc-line {
+    font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--navy); margin: 0; max-width: 62ch;
+  }
+  .pair-callout .pc-line strong { color: var(--navy); font-weight: 600; }
+
+  /* Ladder */
+  .ladder { background: var(--bone-deep); padding: clamp(32px, 5vw, 56px) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .ladder-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+  @media (max-width: 820px) { .ladder-grid { grid-template-columns: 1fr; } }
+  .rung { background: var(--paper); border: 1px solid var(--rule); padding: 24px; border-radius: 3px; display: flex; flex-direction: column; position: relative; }
+  .rung.current { background: var(--navy); color: var(--bone); border-color: var(--navy); }
+  .rung .rung-tier { font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--navy-60); margin-bottom: 8px; }
+  .rung.current .rung-tier { color: var(--rust-soft); }
+  .rung .rung-name { font-family: var(--serif); font-weight: 600; font-size: 20px; margin-bottom: 6px; }
+  .rung .rung-price { font-family: var(--serif); font-weight: 700; font-size: 24px; margin-bottom: 10px; color: var(--rust); }
+  .rung.current .rung-price { color: var(--rust-soft); }
+  .rung .rung-body { font-size: 14px; line-height: 1.55; color: var(--navy-80); margin: 0; }
+  .rung.current .rung-body { color: rgba(245, 241, 235, 0.82); }
+  .rung .rung-current-tag {
+    position: absolute; top: -12px; right: 20px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--bone);
+    background: var(--rust); padding: 4px 10px; border-radius: 2px;
+  }
+
+  /* Inside */
+  .inside-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; }
+  @media (max-width: 820px) { .inside-grid { grid-template-columns: 1fr; gap: 24px; } }
+  .inside-card { background: var(--paper); border: 1px solid var(--rule); padding: 32px; border-radius: 3px; }
+  .inside-card.featured-new { border-left: 3px solid var(--rust); }
+  .inside-card .file-label { font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rust); margin-bottom: 12px; }
+  .inside-card .new-pill {
+    display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--bone); background: var(--rust);
+    padding: 3px 8px; border-radius: 2px; margin-left: 10px;
+  }
+  .inside-card h3 { margin-bottom: 14px; }
+  .inside-card ul { list-style: none; padding: 0; margin: 0; }
+  .inside-card li {
+    padding: 12px 0 12px 22px; position: relative;
+    border-top: 1px solid var(--rule);
+    font-size: 15px; line-height: 1.5; color: var(--navy-80);
+  }
+  .inside-card li:last-child { border-bottom: 1px solid var(--rule); }
+  .inside-card li::before { content: ""; position: absolute; left: 0; top: 19px; width: 12px; height: 2px; background: var(--rust); }
+
+  /* Fit */
+  .fit { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  @media (max-width: 820px) { .fit { grid-template-columns: 1fr; gap: 32px; } }
+  .fit-col h3 { margin-bottom: 18px; }
+  .fit-col ul { list-style: none; padding: 0; margin: 0; }
+  .fit-col li {
+    padding: 14px 0 14px 28px; position: relative;
+    border-top: 1px solid var(--rule);
+    font-size: 15px; line-height: 1.5; color: var(--navy-80);
+  }
+  .fit-col li:last-child { border-bottom: 1px solid var(--rule); }
+  .fit-col.yes li::before { content: ""; position: absolute; left: 0; top: 22px; width: 14px; height: 2px; background: var(--rust); }
+  .fit-col.no li::before { content: "×"; position: absolute; left: 0; top: 12px; font-family: var(--mono); color: var(--navy-60); font-size: 18px; }
+
+  /* FABRIC */
+  .fabric-check {
+    background: var(--navy); color: var(--bone);
+    padding: 40px; border-radius: 3px;
+    display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center;
+  }
+  @media (max-width: 720px) { .fabric-check { grid-template-columns: 1fr; gap: 20px; padding: 32px; } }
+  .fabric-mark { font-family: var(--serif); font-weight: 700; font-size: 64px; line-height: 1; color: var(--bone); letter-spacing: -1px; border-bottom: 2px solid var(--rust); padding-bottom: 8px; display: inline-block; }
+  .fabric-text .fc-label { font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--rust-soft); margin-bottom: 8px; }
+  .fabric-text h3 { color: var(--bone); margin-bottom: 8px; font-size: 22px; }
+  .fabric-text p { color: rgba(245, 241, 235, 0.82); font-size: 15px; margin: 0; max-width: 60ch; }
+
+  /* Pricing */
+  .pricing-single {
+    max-width: 480px; margin: 40px auto 0;
+    background: var(--navy); color: var(--bone);
+    padding: 40px; border-radius: 3px;
+    box-shadow: 0 18px 40px -20px rgba(15,30,61,0.4);
+    text-align: center;
+  }
+  .pricing-single .price-label { font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--rust-soft); margin-bottom: 14px; }
+  .pricing-single .price-num { font-family: var(--serif); font-weight: 700; font-size: 56px; line-height: 1; color: var(--bone); letter-spacing: -1px; margin-bottom: 6px; }
+  .pricing-single .price-num .currency { font-size: 20px; font-weight: 400; color: var(--rust-soft); margin-right: 6px; vertical-align: top; }
+  .pricing-single .price-name { font-family: var(--serif); font-weight: 600; font-size: 20px; color: var(--bone); margin-bottom: 18px; }
+  .pricing-single ul.includes { list-style: none; padding: 0; margin: 0 0 28px; border-top: 1px solid rgba(245,241,235,0.16); text-align: left; }
+  .pricing-single ul.includes li {
+    padding: 12px 0 12px 22px; position: relative;
+    border-bottom: 1px solid rgba(245,241,235,0.16);
+    font-size: 14px; line-height: 1.5; color: rgba(245, 241, 235, 0.88);
+  }
+  .pricing-single ul.includes li::before { content: ""; position: absolute; left: 0; top: 19px; width: 11px; height: 2px; background: var(--rust); }
+  .pricing-single .price-cta {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: var(--sans); font-weight: 600; font-size: 16px;
+    padding: 16px 32px; border-radius: 2px; text-decoration: none;
+    background: var(--bone); color: var(--navy); border: 1px solid var(--bone);
+    cursor: pointer; transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  }
+  .pricing-single .price-cta:hover { background: var(--rust); color: var(--bone); border-color: var(--rust); }
+
+  .pricing-meta { margin-top: 24px; text-align: center; font-family: var(--mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--navy-60); }
+  .pricing-meta .sep { color: var(--rust); margin: 0 10px; }
+  .pricing-closing { margin-top: 22px; text-align: center; font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--navy-80); max-width: 64ch; margin-left: auto; margin-right: auto; }
+
+  /* FAQ */
+  .faq-list { margin-top: 32px; }
+  .faq-item { border-top: 1px solid var(--rule); padding: 22px 0; }
+  .faq-item:last-child { border-bottom: 1px solid var(--rule); }
+  .faq-item summary {
+    font-family: var(--serif); font-weight: 600; font-size: 19px;
+    color: var(--navy); cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    padding-right: 16px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "+"; font-family: var(--serif); font-weight: 400;
+    font-size: 28px; color: var(--rust); line-height: 1;
+    transition: transform 200ms ease;
+  }
+  .faq-item[open] summary::after { content: "−"; }
+  .faq-item .faq-body { margin-top: 14px; font-size: 15px; line-height: 1.6; color: var(--navy-80); max-width: 70ch; }
+
+  /* Bridge */
+  .bridge { background: var(--bone-deep); padding: 28px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .bridge .wrap { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; }
+  @media (max-width: 760px) { .bridge .wrap { grid-template-columns: 1fr; gap: 18px; } }
+  .bridge .b-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--rust); margin-bottom: 6px; }
+  .bridge .b-line { font-family: var(--serif); font-size: 18px; line-height: 1.45; color: var(--navy); margin: 0; max-width: 70ch; }
+  .bridge .btn-ghost { padding: 12px 20px; font-size: 14px; white-space: nowrap; }
+
+  /* Footer */
+  footer.site { border-top: 1px solid var(--rule); padding: 40px 0 56px; background: var(--bone-deep); }
+  .foot-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: end; }
+  @media (max-width: 640px) { .foot-inner { grid-template-columns: 1fr; } }
+  .foot-tag { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--navy-80); }
+  .foot-tag .sep { color: var(--rust); padding: 0 8px; font-style: normal; }
+  .foot-legal { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--navy-60); text-align: right; }
+  @media (max-width: 640px) { .foot-legal { text-align: left; } }
+</style>
+</head>
+
+<body>
+
+<header class="site">
+  <div class="wrap site-inner">
+    <a href="/" class="brandmark" aria-label="The SEAMline Method">
+      <span class="wordmark"><span class="caps">SEAM</span><span class="tail">line</span></span>
+      <span class="seamline" aria-hidden="true"></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/#pattern">The pattern</a>
+      <a href="/#audit">The audit</a>
+      <a href="/toolkit/">Fracture Toolkit</a>
+      <a href="/maturity-model/" aria-current="page">Maturity Model</a>
+      <a href="/#fieldkit">Field Kit</a>
+      <a href="#pricing" class="btn-mini">Buy — $449</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Seam Maturity Model · Self-service · USD 449</div>
+    <h1 class="hero-title">
+      Diagnose where you sit. <span class="accent">Architect the climb.</span>
+    </h1>
+    <p class="hero-deck">
+      The Seam Maturity Model is a 5-level instrument for multi-party value chains. Score your chain. Compute your SEAMline Maturity Index. Compare against five industry cohort benchmarks. Build a nine-month climb plan using the published playbook — and use the worked example to see exactly how one chain ran it.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary lemonsqueezy-button" href="https://fabricpress.lemonsqueezy.com/checkout/buy/33502adc-f00a-492b-b43f-cd1f592d0dbf?embed=1&media=0">
+        Buy the toolkit — $449 <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="btn btn-ghost" href="#inside">
+        What's actually inside <span class="arrow" aria-hidden="true">↓</span>
+      </a>
+    </div>
+    <dl class="hero-meta">
+      <div><dt>Format</dt><dd>Workbook + engine + benchmark + worked example</dd></div>
+      <div><dt>Time to run</dt><dd>Three weeks to baseline · 9 months to climb</dd></div>
+      <div><dt>License</dt><dd>Single organization · perpetual</dd></div>
+      <div><dt>Refund policy</dt><dd>All sales final</dd></div>
+    </dl>
+    <div class="pair-callout">
+      <div>
+        <div class="pc-label">Pairs with the Fracture Diagnostic</div>
+        <p class="pc-line"><strong>The Fracture Diagnostic</strong> shows you where the chain is bleeding now. <strong>The Seam Maturity Model</strong> tells you why the bleeding keeps recurring — and what level of organizational maturity will stop it. You can use either alone. Used together, they close the loop.</p>
+      </div>
+      <a class="btn btn-ghost" href="/toolkit/">See the Fracture Diagnostic →</a>
+    </div>
+  </div>
+</section>
+
+<aside class="ladder" aria-label="Where the toolkit sits in the SEAMline product ladder">
+  <div class="wrap">
+    <div class="section-eyebrow" style="margin-bottom: 18px;">Where this sits</div>
+    <h2 style="font-size: clamp(24px, 3vw, 32px); margin-bottom: 28px;">
+      The trajectory instrument. Above the snapshot. Below the facilitated audit.
+    </h2>
+    <div class="ladder-grid">
+      <div class="rung">
+        <div class="rung-tier">Free · Discovery</div>
+        <div class="rung-name">Field Kit + Self-Check</div>
+        <div class="rung-price">$0</div>
+        <p class="rung-body">Ten-question self-diagnostic + the 12-question Fracture Self-Check. Use these first if you haven't met the method yet.</p>
+      </div>
+      <div class="rung current">
+        <span class="rung-current-tag">You are here</span>
+        <div class="rung-tier">Self-service · Trajectory</div>
+        <div class="rung-name">Seam Maturity Model</div>
+        <div class="rung-price">$449</div>
+        <p class="rung-body">5-level maturity model. 30 process areas × 4 parties. SMI on a 0–100 scale benchmarked against five industry cohorts. 9-month climb playbook. Worked example included.</p>
+      </div>
+      <div class="rung">
+        <div class="rung-tier">Facilitated · Audit</div>
+        <div class="rung-name">The Seam Audit</div>
+        <div class="rung-price">$15,000</div>
+        <p class="rung-body">Two-week fixed-scope diagnostic, facilitated by FABRIC. Use this when the climb plan is contested across parties — or when leadership needs an external party to anchor the conversation.</p>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<section id="inside">
+  <div class="wrap">
+    <div class="section-eyebrow">What's inside</div>
+    <h2>Five files. One instrument that climbs with you.</h2>
+    <p class="lead">
+      The workbook tells you what to do. The scoring engine captures what you find. The benchmark gives you something defensible to compare against. The worked example shows you exactly how one chain ran it — including where they almost did the wrong thing.
+    </p>
+    <div class="inside-grid">
+      <div class="inside-card">
+        <div class="file-label">File 1 · Workbook · 25 pages</div>
+        <h3>The anchor document</h3>
+        <ul>
+          <li>Foundations of the 5-level model and the 4-parties layer</li>
+          <li>Per-level definitions, behaviors, telltale fractures, climb prerequisites</li>
+          <li>30 process areas with intent and evidence-of-satisfaction criteria</li>
+          <li>The Climb Sequencing Playbook — 4 plays per level transition</li>
+          <li>The SEAMline Maturity Index (SMI) methodology and interpretation</li>
+          <li>The Ignore / Monitor / Intervene response rubric</li>
+          <li>FABRIC Check 5/5 — passes published</li>
+        </ul>
+      </div>
+      <div class="inside-card">
+        <div class="file-label">File 2 · Scoring engine · 9 tabs</div>
+        <h3>Where the work happens</h3>
+        <ul>
+          <li>README and Level Self-Score quick read</li>
+          <li>120-cell Process Area Walk with dropdowns and evidence enforcement</li>
+          <li>Auto-rolling Party Maturity Grid (5 levels × 4 parties)</li>
+          <li>Heatmap across all 30 process areas × 4 parties</li>
+          <li>Maturity trajectory chart</li>
+          <li>Top 20 climb gaps, auto-ranked by priority</li>
+          <li>Benchmark tab with SMI computation and cohort comparison</li>
+          <li>Printable one-page Summary</li>
+        </ul>
+      </div>
+      <div class="inside-card">
+        <div class="file-label">File 3 · Benchmark methodology</div>
+        <h3>How the cohort dataset was built</h3>
+        <ul>
+          <li>Construction sources (5 source families)</li>
+          <li>Per-cohort sample composition and caveats</li>
+          <li>What the benchmark does and does not claim</li>
+          <li>How to use it honestly — three principles</li>
+          <li>Revision policy</li>
+        </ul>
+      </div>
+      <div class="inside-card featured-new">
+        <div class="file-label">File 4 · Worked example · 10 pages <span class="new-pill">New for SKU #2</span></div>
+        <h3>"Meridian Auto Protection" — a 9-month climb</h3>
+        <ul>
+          <li>Fictional composite — assembled from sanitized practitioner archive</li>
+          <li>Month 0 baseline, including the customer-party drag the leadership team did not see</li>
+          <li>Phase 1: stabilize Level 2 across all four parties (Months 2–4)</li>
+          <li>Phase 2: the Level 2-to-3 climb (Months 5–7) — and where it stalled</li>
+          <li>Phase 3: earning the Level 3 call (Months 8–9)</li>
+          <li>Month 9 re-score, operational outcomes, and what the climb cost</li>
+          <li>Mistakes Meridian made, kept honestly</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fit">
+  <div class="wrap">
+    <div class="section-eyebrow">Who this is for</div>
+    <h2>And, just as importantly, who it isn't.</h2>
+    <div class="fit">
+      <div class="fit-col yes">
+        <h3>Buy this if you are</h3>
+        <ul>
+          <li>An operating leader of a multi-party value chain that has degraded measurably in the last 12–18 months</li>
+          <li>A transformation lead under pressure to defend a maturity diagnosis to a board or executive committee</li>
+          <li>An advisor or external consultant who wants a working instrument — not a slide deck — to anchor a maturity conversation with a client</li>
+          <li>Already running the Fracture Diagnostic Toolkit and ready to add the trajectory lens to the snapshot</li>
+          <li>Operating in auto F&I, healthcare insurance, B2B SaaS partner ecosystems, self-insured employer health, or manufactured-product warranty</li>
+        </ul>
+      </div>
+      <div class="fit-col no">
+        <h3>Skip this if you are</h3>
+        <ul>
+          <li>Running a chain with fewer than three parties — the instrument is overweight for two-party arrangements</li>
+          <li>Looking for a CMMI replacement — the SMM is purpose-built for multi-party chains, not software organizations or single-org process management</li>
+          <li>Looking for a benchmarking sales narrative without an attached climb plan</li>
+          <li>Expecting the toolkit to deliver outcomes without internal effort — this is a working instrument, not a self-running assessment</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background: var(--bone-deep);">
+  <div class="wrap">
+    <div class="fabric-check">
+      <div class="fabric-mark">5/5</div>
+      <div class="fabric-text">
+        <div class="fc-label">FABRIC Check · PASS</div>
+        <h3>The toolkit passes the same audit every SEAMline production deliverable passes.</h3>
+        <p>Foundation: chain-altitude diagnosis. Anatomy: seam-named specificity at the cell level. Behavior: evidence required at score 3 and above. Reality: the climb is explicitly costed and Part IX names when the climb is the wrong investment. Integrity: the Ignore/Monitor/Intervene rubric is published. Continuity: the toolkit composes with the rest of the catalog.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-eyebrow">Pricing</div>
+    <h2>One price. Single-organization license. No refunds.</h2>
+    <p class="lead">Multi-org and firm-wide licenses are available — email hello@theseamlinemethod.com if you need them. The single-org price is the right price for most buyers.</p>
+    <div class="pricing-single">
+      <div class="price-label">Single-organization · perpetual</div>
+      <div class="price-num"><span class="currency">$</span>449</div>
+      <div class="price-name">Seam Maturity Model Toolkit</div>
+      <ul class="includes">
+        <li>Workbook (25 pages, PDF + DOCX)</li>
+        <li>9-tab Scoring Engine (XLSX)</li>
+        <li>Benchmark Methodology (DOCX)</li>
+        <li>Worked Example (10 pages, PDF)</li>
+        <li>Lifetime access to v1; revision notifications</li>
+        <li>License: single legal entity, internal use</li>
+      </ul>
+      <a class="price-cta lemonsqueezy-button" href="https://fabricpress.lemonsqueezy.com/checkout/buy/33502adc-f00a-492b-b43f-cd1f592d0dbf?embed=1&media=0">
+        Buy now — $449 <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+    <div class="pricing-meta">Lemon Squeezy checkout <span class="sep">·</span> EU VAT &amp; UK VAT handled <span class="sep">·</span> Instant download</div>
+    <p class="pricing-closing">All sales final. If you want to validate fit before purchase, run the free Fracture Self-Check or download the free Field Kit at <a href="/#fieldkit">theseamlinemethod.com</a>. Both are the right de-risk path.</p>
+  </div>
+</section>
+
+<div class="bridge">
+  <div class="wrap">
+    <div>
+      <div class="b-eyebrow">If the climb is contested</div>
+      <p class="b-line">When parties disagree on the diagnosis — or when leadership needs an external anchor to make a maturity call defensible to a board — the Seam Audit is the standard facilitated engagement. Two weeks, fixed scope, three engagements per month.</p>
+    </div>
+    <a class="btn btn-ghost" href="/#audit">About the Seam Audit →</a>
+  </div>
+</div>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-eyebrow">FAQ</div>
+    <h2>What buyers ask before purchasing.</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>How is this different from the Fracture Diagnostic Toolkit?</summary>
+        <div class="faq-body">
+          The Fracture Diagnostic is a snapshot: where is the chain broken right now? Six phases × four parties × three fracture types = a 72-cell diagnostic. The Seam Maturity Model is the trajectory: how mature is the organization at NOT breaking the chain, and what does the climb look like? Five levels × four parties × thirty process areas. You can use either alone. Used together, they close a real diagnostic loop.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Is this related to BPMM or CMMI?</summary>
+        <div class="faq-body">
+          The Seam Maturity Model takes design inspiration from the CMMI lineage and the OMG Business Process Maturity Model, but it is purpose-built for multi-party value chains, not software organizations or single-org process management. The 4-parties layer is the unique addition — BPMM and CMMI treat the organization as monolithic; SMM treats it as a chain.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>How long does it take to score?</summary>
+        <div class="faq-body">
+          Three weeks of intermittent effort to establish a defensible baseline. The scoring engine has 120 cells across 30 process areas × 4 parties. Each score requires evidence at 3 or above. Done honestly, that pace is what reality permits; done in a single 90-minute session, the score will be wrong.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need both this and the Fracture Diagnostic Toolkit?</summary>
+        <div class="faq-body">
+          No. Either is genuinely sufficient on its own. The Worked Example included with this toolkit shows the chain running SMM standalone for nine months. If you can buy both, the diagnose-then-climb pairing is more powerful — but the toolkit is not designed as half of a forced bundle.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Can I share the toolkit with my consulting firm or my advisory client?</summary>
+        <div class="faq-body">
+          The single-organization license covers internal use by employees and engaged advisors of one legal entity. If you want to use SMM across multiple client engagements, the firm-wide license is the right purchase — email hello@theseamlinemethod.com. Verbatim quotation up to 250 words in client memos is permitted under any tier with attribution.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>What if I score my chain and discover I'm at Level 1?</summary>
+        <div class="faq-body">
+          The toolkit is sufficient for the Level 1-to-2 climb. The Workbook Part VII.2 carries the four-play climb sequence. Most operators climbing from Level 1 stall before they start because they begin without an executive sponsor; the playbook addresses this explicitly. If your situation is more complicated than self-led work can handle, the Seam Audit is the supported next step.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>What is the refund policy?</summary>
+        <div class="faq-body">
+          All sales final. No refunds on digital toolkit purchases. Pankaj-locked policy across the SEAMline catalog. If you want to validate fit before purchase, the free Fracture Self-Check (12 questions, three minutes) and the free SEAMline Field Kit are the right de-risk path.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-tag">Diagnose the fracture. <span class="sep">·</span> Architect the continuity.</div>
+      <div class="foot-legal">© 2026 Singh PowerUp Coach LLC · The SEAMline Method™ · FABRIC™</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
