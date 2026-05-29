@@ -247,74 +247,91 @@
   .fabric-text h3 { color: var(--bone); margin-bottom: 8px; font-size: 22px; }
   .fabric-text p { color: rgba(245, 241, 235, 0.82); font-size: 15px; margin: 0; max-width: 60ch; }
 
-  /* ---------- Single-tier pricing (v1 launch posture) ---------- */
-  .pricing-single {
-    margin-top: 40px;
-    display: flex; justify-content: center;
+  /* ---------- 3-tier pricing grid ---------- */
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 40px; align-items: stretch;
   }
-  .price-card-solo {
-    background: var(--navy); color: var(--bone); border: 1px solid var(--navy);
-    padding: 40px; border-radius: 3px;
-    max-width: 480px; width: 100%;
-    display: flex; flex-direction: column; align-items: stretch;
+  @media (max-width: 820px) { .pricing-grid { grid-template-columns: 1fr; } }
+  .price-card {
+    background: var(--paper); border: 1px solid var(--rule);
+    padding: 32px 28px; border-radius: 3px;
+    display: flex; flex-direction: column; position: relative;
+  }
+  .price-card.featured {
+    background: var(--navy); color: var(--bone); border-color: var(--navy);
+    transform: translateY(-8px);
     box-shadow: 0 18px 40px -20px rgba(15,30,61,0.4);
-    position: relative;
   }
-  .price-card-solo .price-tag {
-    position: absolute; top: -12px; left: 32px;
+  @media (max-width: 820px) { .price-card.featured { transform: none; } }
+  .price-card .price-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px;
+    text-transform: uppercase; color: var(--navy-60); margin-bottom: 12px;
+  }
+  .price-card.featured .price-label { color: var(--rust-soft); }
+  .price-card .price-num {
+    font-family: var(--serif); font-weight: 700; font-size: 38px; line-height: 1;
+    color: var(--navy); letter-spacing: -0.5px; margin-bottom: 8px;
+  }
+  .price-card.featured .price-num { color: var(--bone); }
+  .price-card .price-num .currency { font-size: 16px; font-weight: 400; color: var(--navy-60); margin-right: 4px; }
+  .price-card.featured .price-num .currency { color: var(--rust-soft); }
+  .price-card .price-name {
+    font-family: var(--serif); font-weight: 600; font-size: 19px;
+    color: var(--navy); margin-bottom: 14px;
+  }
+  .price-card.featured .price-name { color: var(--bone); }
+  .price-card .price-body {
+    font-size: 14px; line-height: 1.55; color: var(--navy-80); margin: 0 0 22px;
+  }
+  .price-card.featured .price-body { color: rgba(245, 241, 235, 0.82); }
+  .price-card ul.includes {
+    list-style: none; padding: 0; margin: 0 0 24px;
+    border-top: 1px solid var(--rule);
+    flex-grow: 1;
+  }
+  .price-card.featured ul.includes { border-top-color: rgba(245, 241, 235, 0.16); }
+  .price-card ul.includes li {
+    padding: 11px 0 11px 20px; position: relative;
+    border-bottom: 1px solid var(--rule);
+    font-size: 13px; line-height: 1.5; color: var(--navy-80);
+  }
+  .price-card.featured ul.includes li {
+    border-bottom-color: rgba(245, 241, 235, 0.16);
+    color: rgba(245, 241, 235, 0.88);
+  }
+  .price-card ul.includes li::before {
+    content: ""; position: absolute; left: 0; top: 18px;
+    width: 11px; height: 2px; background: var(--rust);
+  }
+  .price-card .price-tag {
+    position: absolute; top: -12px; left: 28px;
     font-family: var(--mono); font-size: 10px; letter-spacing: 1.6px;
     text-transform: uppercase; color: var(--bone);
     background: var(--rust); padding: 4px 10px; border-radius: 2px;
   }
-  .price-card-solo .price-label {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px;
-    text-transform: uppercase; color: var(--rust-soft); margin-bottom: 14px;
-  }
-  .price-card-solo .price-num {
-    font-family: var(--serif); font-weight: 700; font-size: 56px; line-height: 1;
-    color: var(--bone); letter-spacing: -1px; margin-bottom: 10px;
-  }
-  .price-card-solo .price-num .currency { font-size: 22px; font-weight: 400; color: var(--rust-soft); margin-right: 6px; }
-  .price-card-solo .price-name {
-    font-family: var(--serif); font-weight: 600; font-size: 22px;
-    color: var(--bone); margin-bottom: 18px;
-  }
-  .price-card-solo .price-body {
-    font-size: 15px; line-height: 1.6; color: rgba(245, 241, 235, 0.82); margin: 0 0 28px;
-  }
-  .price-card-solo ul.includes {
-    list-style: none; padding: 0; margin: 0 0 28px;
-    border-top: 1px solid rgba(245, 241, 235, 0.16);
-  }
-  .price-card-solo ul.includes li {
-    padding: 12px 0 12px 22px; position: relative;
-    border-bottom: 1px solid rgba(245, 241, 235, 0.16);
-    font-size: 14px; line-height: 1.5; color: rgba(245, 241, 235, 0.88);
-  }
-  .price-card-solo ul.includes li::before {
-    content: ""; position: absolute; left: 0; top: 19px;
-    width: 12px; height: 2px; background: var(--rust);
-  }
-  .price-card-solo .price-cta {
+  .price-card .price-cta {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    font-family: var(--sans); font-weight: 600; font-size: 16px;
-    padding: 16px 26px; border-radius: 2px; text-decoration: none;
-    border: 1px solid var(--bone); background: var(--bone); color: var(--navy);
+    font-family: var(--sans); font-weight: 600; font-size: 15px;
+    padding: 14px 22px; border-radius: 2px; text-decoration: none;
+    border: 1px solid var(--navy); background: var(--navy); color: var(--bone);
     cursor: pointer; transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
   }
-  .price-card-solo .price-cta:hover { background: var(--rust); border-color: var(--rust); color: var(--bone); }
-  .price-card-solo .price-fine {
-    margin-top: 14px; font-family: var(--mono); font-size: 11px;
-    letter-spacing: 0.4px; color: rgba(245, 241, 235, 0.72); text-align: center;
-  }
-  .pricing-footnote {
+  .price-card .price-cta:hover { background: var(--rust); border-color: var(--rust); color: var(--bone); }
+  .price-card.featured .price-cta { background: var(--bone); color: var(--navy); border-color: var(--bone); }
+  .price-card.featured .price-cta:hover { background: var(--rust); color: var(--bone); border-color: var(--rust); }
+  .pricing-meta {
     margin-top: 32px; text-align: center;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--navy-60);
+  }
+  .pricing-meta .sep { color: var(--rust); margin: 0 10px; }
+  .pricing-closing {
+    margin-top: 22px; text-align: center;
     font-family: var(--serif); font-style: italic;
     font-size: 16px; color: var(--navy-80); max-width: 64ch;
     margin-left: auto; margin-right: auto;
   }
-  .pricing-footnote a { color: var(--navy); }
-  .pricing-footnote a:hover { color: var(--rust); }
 
   /* ---------- FAQ ---------- */
   .faq-list { margin-top: 32px; }
@@ -435,8 +452,8 @@
         <dd>Single organization · perpetual</dd>
       </div>
       <div>
-        <dt>Refund window</dt>
-        <dd>14 days · no questions</dd>
+        <dt>Refund policy</dt>
+        <dd>All sales final</dd>
       </div>
     </dl>
   </div>
@@ -576,41 +593,88 @@
   </div>
 </section>
 
-<!-- ============ PRICING (single tier, v1) ============ -->
+<!-- ============ PRICING (3 tiers) ============ -->
 <section id="pricing" style="background: var(--bone-deep);">
   <div class="wrap">
     <div class="section-eyebrow">Pricing</div>
-    <h2>One price. One license. One bundle.</h2>
+    <h2>Three license tiers. Identical bundle. Different scope of use.</h2>
     <p class="lead">
-      Perpetual single-organization license. No subscription. No renewals. Refunds within 14 days, no questions asked.
+      All three tiers ship the same four files. What differs is the license scope — how many chains, and which kind of organization. Pick the tier that matches how you will use the toolkit.
     </p>
 
-    <div class="pricing-single">
-      <div class="price-card-solo">
-        <span class="price-tag">Available now</span>
-        <div class="price-label">Fracture Diagnostic Toolkit · Single-organization license</div>
+    <div class="pricing-grid">
+
+      <!-- Tier 1: Single-organization — FEATURED -->
+      <div class="price-card featured">
+        <span class="price-tag">Most chosen</span>
+        <div class="price-label">Tier 01 · Default</div>
         <div class="price-num"><span class="currency">USD</span>349</div>
-        <div class="price-name">The full cube walk, self-service.</div>
+        <div class="price-name">Single-organization license</div>
         <p class="price-body">
-          Use the toolkit on one organization's chain. Unlimited internal users within that organization. Perpetual license. Future-version upgrades offered at a reduced price to existing buyers.
+          Use the toolkit on one organization's chain. Unlimited internal users within that organization.
         </p>
         <ul class="includes">
-          <li>39-page workbook (Word + typeset PDF)</li>
-          <li>9-tab scoring engine with embedded benchmark</li>
-          <li>72-cell composite benchmark methodology document</li>
-          <li>Four worked examples from real multi-party chains</li>
-          <li>14-day no-questions refund window</li>
+          <li>39-page workbook (Word + PDF)</li>
+          <li>9-tab scoring engine</li>
+          <li>72-cell benchmark methodology</li>
+          <li>Four worked examples</li>
+          <li>All sales final · digital download</li>
         </ul>
         <a class="price-cta lemonsqueezy-button"
            href="https://fabricpress.lemonsqueezy.com/checkout/buy/d101bc49-0dce-4d5f-a27a-b6853413242f?embed=1&media=0">
-          Buy the toolkit <span class="arrow" aria-hidden="true">→</span>
+          Buy — $349 <span class="arrow" aria-hidden="true">→</span>
         </a>
-        <div class="price-fine">Secure checkout via Lemon Squeezy · MoR handles tax / VAT</div>
       </div>
+
+      <!-- Tier 2: Three-organization -->
+      <div class="price-card">
+        <div class="price-label">Tier 02 · Multi-org</div>
+        <div class="price-num"><span class="currency">USD</span>799</div>
+        <div class="price-name">Three-organization license</div>
+        <p class="price-body">
+          Use the toolkit on up to three organizations' chains. For holding companies running the diagnostic across portfolio companies, or a small consulting practice.
+        </p>
+        <ul class="includes">
+          <li>Same complete bundle</li>
+          <li>Use across 3 organizations</li>
+          <li>Unlimited internal users per org</li>
+          <li>Perpetual license</li>
+          <li>All sales final · digital download</li>
+        </ul>
+        <a class="price-cta lemonsqueezy-button"
+           href="https://fabricpress.lemonsqueezy.com/checkout/buy/d101bc49-0dce-4d5f-a27a-b6853413242f?embed=1&media=0">
+          Buy — $799 <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Tier 3: Firm -->
+      <div class="price-card">
+        <div class="price-label">Tier 03 · Firm</div>
+        <div class="price-num"><span class="currency">USD</span>2,499</div>
+        <div class="price-name">Firm license</div>
+        <p class="price-body">
+          Unlimited internal use within a consulting firm. For boutique consultancies who want the SEAMline instrument as part of their engagement toolkit. Cannot be rebadged as the firm's own framework.
+        </p>
+        <ul class="includes">
+          <li>Same complete bundle</li>
+          <li>Unlimited internal firm use</li>
+          <li>Use on unlimited client engagements</li>
+          <li>Perpetual license</li>
+          <li>All sales final · digital download</li>
+        </ul>
+        <a class="price-cta lemonsqueezy-button"
+           href="https://fabricpress.lemonsqueezy.com/checkout/buy/d101bc49-0dce-4d5f-a27a-b6853413242f?embed=1&media=0">
+          Buy — $2,499 <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+
     </div>
 
-    <p class="pricing-footnote">
-      Multi-organization and firm-wide licenses available on request. Boutique consultancies running the toolkit on multiple client engagements should email <a href="mailto:info@singhpowerupcoach.com?subject=Toolkit%20—%20Multi-org%20or%20firm%20license%20inquiry">info@singhpowerupcoach.com</a>.
+    <p class="pricing-meta">
+      Perpetual licenses <span class="sep">·</span> No subscription <span class="sep">·</span> All sales final <span class="sep">·</span> Tax / VAT handled at checkout
+    </p>
+    <p class="pricing-closing">
+      All three tiers route to the same secure checkout — select your tier inside the Lemon Squeezy modal. Questions about volume pricing or a custom license: <a href="mailto:info@singhpowerupcoach.com?subject=Toolkit%20licensing%20question">info@singhpowerupcoach.com</a>.
     </p>
   </div>
 </section>
@@ -664,7 +728,13 @@
       <details class="faq-item">
         <summary>What's your refund policy?</summary>
         <p class="faq-body">
-          Fourteen days, no questions, full refund. Email <a href="mailto:info@singhpowerupcoach.com?subject=Toolkit%20refund%20request">info@singhpowerupcoach.com</a> with the order ID from your Lemon Squeezy receipt. The 14-day window starts at the purchase timestamp.
+          All sales are final. The Toolkit is a digital download — once purchased and delivered, it cannot be returned. We make this explicit so you can decide carefully before buying.
+        </p>
+        <p class="faq-body" style="margin-top: 10px;">
+          The free <a href="/#fieldkit">Field Kit</a> at theseamlinemethod.com is the operator-side preview of the methodology — ten questions, vocabulary, one-page Seam Audit template. Run that first. If the Field Kit clicks, the Toolkit is the proven next step. If it doesn't, the Toolkit isn't the right purchase for you yet.
+        </p>
+        <p class="faq-body" style="margin-top: 10px;">
+          Pre-purchase questions about scope, fit, or license terms: <a href="mailto:info@singhpowerupcoach.com?subject=Toolkit%20—%20Pre-purchase%20question">info@singhpowerupcoach.com</a>. Reply within one business day.
         </p>
       </details>
       <details class="faq-item">
