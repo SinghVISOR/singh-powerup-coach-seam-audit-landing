@@ -1,8 +1,9 @@
-# GitHub Upload — Toolkit Page Deploy
+# GitHub Upload — Legal Pages Deploy
 
 **Repo:** `https://github.com/SinghVISOR/singh-powerup-coach-seam-audit-landing`
 **Branch:** main (auto-deploys to Vercel → theseamlinemethod.com)
 **Time to ship:** ~10 minutes including verification.
+**Purpose:** Publish the three legal pages Paddle (and every other payment processor) requires.
 
 ---
 
@@ -10,49 +11,58 @@
 
 | File in this folder | Goes to repo path | Resulting URL |
 |---|---|---|
-| `index.html` | `/index.html` (overwrites existing root) | `https://theseamlinemethod.com/` |
-| `toolkit/index.html` | `/toolkit/index.html` (new folder + file) | `https://theseamlinemethod.com/toolkit/` |
+| `terms/index.html` | `/terms/index.html` (new folder + file) | `https://theseamlinemethod.com/terms/` |
+| `privacy/index.html` | `/privacy/index.html` (new folder + file) | `https://theseamlinemethod.com/privacy/` |
+| `refund-policy/index.html` | `/refund-policy/index.html` (new folder + file) | `https://theseamlinemethod.com/refund-policy/` |
 
-That's it. Two files. No config changes, no `vercel.json` edits, no build step.
+Three files. Three new folders. No changes to the existing root `index.html`, no changes to `/toolkit/`, no config edits, no `vercel.json` changes, no build step.
 
 ---
 
-## Why the folder path matters
+## Why the folder structure matters
 
-Vercel serves `/toolkit/index.html` at the URL `/toolkit/` automatically — that's the convention for static sites. **Do not** rename it to `toolkit.html` at the repo root; that would serve at `/toolkit.html` (uglier, breaks the nav link I wrote, and gives you a worse URL for sharing in email).
+This matches the same convention you used for `/toolkit/` — Vercel serves `/terms/index.html` at the clean URL `/terms/` automatically. Paddle accepts the trailing-slash form, and so do Lemon Squeezy, Stripe, and every other processor.
 
 The folder structure you want in the repo after this push:
 
 ```
 singh-powerup-coach-seam-audit-landing/
-├── index.html                ← root landing (updated)
+├── index.html                ← existing, untouched
 ├── SEAMline_Field_Kit_v1.pdf ← existing, untouched
 ├── toolkit/
+│   └── index.html            ← existing, untouched
+├── terms/
+│   └── index.html            ← NEW
+├── privacy/
+│   └── index.html            ← NEW
+├── refund-policy/
 │   └── index.html            ← NEW
 └── (other existing files)
 ```
 
 ---
 
-## What changed in the root `index.html`
+## URLs to paste into Paddle (and any other processor) after deploy
 
-Three surgical edits — nothing else moved. If you want to diff against the existing version: only these blocks are different.
+| Paddle field | URL |
+|---|---|
+| Terms of service | `https://theseamlinemethod.com/terms/` |
+| Privacy policy | `https://theseamlinemethod.com/privacy/` |
+| Refund policy | `https://theseamlinemethod.com/refund-policy/` |
 
-1. **Nav (in `<header class="site">`):** added `<a href="/toolkit/">The toolkit</a>` between "The audit" and "Pricing".
-2. **Gate strip section:** added a second `<aside class="fieldkit-gate">` right after the existing Field Kit gate strip. Same component, white background (`var(--paper)`) instead of bone-deep, parallel framing — "Past the Field Kit but $15K isn't this quarter?" → toolkit CTA.
-3. **Pricing closing copy:** added a second line referencing the toolkit as a lateral step.
-
-No CSS changes. No script changes. The Field Kit form, the Seam Audit intake, the analytics, and all the legal links are untouched.
+Paddle's form requires a path (won't accept the bare domain). The trailing-slash form is what works with the folder-based routing.
 
 ---
 
-## What's in the new `toolkit/index.html`
+## What's in each file
 
-- Full standalone product page styled to match the root site (same brand tokens, same fonts, same header/footer grammar).
-- **Live $349 buy button wired** to your Lemon Squeezy checkout: `https://fabricpress.lemonsqueezy.com/checkout/buy/d101bc49-0dce-4d5f-a27a-b6853413242f?embed=1&media=0`
-- Single-tier pricing for v1 (per SKU1 launch doc §4.2 — defer the multi-org and firm tiers until single-org has shipped 20+ units). Multi-org and firm pricing footnote routes to `mailto:info@singhpowerupcoach.com`.
-- Lemon Squeezy overlay script in `<head>` (`https://app.lemonsqueezy.com/js/lemon.js`).
-- Buttons use `class="lemonsqueezy-button"` which is the hook LS's script looks for. The `?embed=1&media=0` URL params trigger overlay mode.
+All three are self-contained HTML files with inline CSS. No external dependencies. They will render in any browser the moment they hit the repo and Vercel finishes deploying.
+
+- **`terms/index.html`** — Terms of Service. Singh PowerUp Coach LLC as merchant. FL governing law, St. Johns County venue. Cross-references the Privacy Policy and Refund Policy by their new URLs. Based on counsel-approved ToS v1.1 (LegalShield, 2026-05-21).
+- **`privacy/index.html`** — Privacy Policy. GDPR/UK GDPR rights section, CCPA/CPRA rights section, processor disclosure, international transfer language. Based on counsel-approved Privacy Policy v1.1.
+- **`refund-policy/index.html`** — Refund Policy v1.0. Codifies the locked 2026-05-28 all-sales-final decision. EU/UK 14-day withdrawal right expressly waived via consent-to-immediate-delivery clause. Cohort and consulting carve-outs.
+
+All three list `contact@singhpowerupcoach.com` as the customer/legal contact.
 
 ---
 
@@ -60,75 +70,94 @@ No CSS changes. No script changes. The Field Kit form, the Seam Audit intake, th
 
 ### Option A — GitHub web UI (fastest, no Git needed) — recommended for this push
 
-1. Go to `https://github.com/SinghVISOR/singh-powerup-coach-seam-audit-landing`.
-2. **Replace root `index.html`:**
-   - Click `index.html` in the file list → click the pencil icon (top right) → delete all content → paste content from `repo-upload/index.html` in this folder → scroll down → commit message: `feat: add toolkit page link to nav + gate strip + pricing closing` → "Commit directly to the main branch" → Commit changes.
-3. **Add the new `toolkit/index.html`:**
-   - From the repo root, click "Add file" → "Create new file".
-   - In the filename field, type `toolkit/index.html` (typing the `/` automatically creates the `toolkit` folder).
-   - Paste content from `repo-upload/toolkit/index.html` in this folder.
-   - Commit message: `feat: ship Fracture Diagnostic Toolkit product page (SKU #1)` → "Commit directly to the main branch" → Commit new file.
-4. Watch Vercel deploy: go to your Vercel dashboard → the project → Deployments. You'll see a build start within ~10 seconds of the second commit. Static-only sites deploy in 30–60 seconds.
+From `https://github.com/SinghVISOR/singh-powerup-coach-seam-audit-landing`, repeat the same three-step pattern for each of the three folders:
+
+**1. Add `terms/index.html`:**
+- From the repo root, click "Add file" → "Create new file".
+- In the filename field, type `terms/index.html` (typing the `/` automatically creates the `terms` folder).
+- Open `repo-upload/terms/index.html` in this folder, copy the whole file, paste it in.
+- Commit message: `feat: publish Terms of Service at /terms/` → "Commit directly to the main branch" → Commit new file.
+
+**2. Add `privacy/index.html`:**
+- From the repo root, click "Add file" → "Create new file".
+- In the filename field, type `privacy/index.html`.
+- Open `repo-upload/privacy/index.html`, copy, paste.
+- Commit message: `feat: publish Privacy Policy at /privacy/` → Commit new file.
+
+**3. Add `refund-policy/index.html`:**
+- From the repo root, click "Add file" → "Create new file".
+- In the filename field, type `refund-policy/index.html`.
+- Open `repo-upload/refund-policy/index.html`, copy, paste.
+- Commit message: `feat: publish Refund Policy v1.0 at /refund-policy/` → Commit new file.
+
+**4. Watch Vercel deploy:** your Vercel dashboard → the project → Deployments. Each commit triggers a build; static-only sites deploy in 30–60 seconds. After the third commit lands, all three pages will be live.
 
 ### Option B — GitHub Desktop
 
 1. Pull latest main.
-2. Drag `index.html` (this folder's version) into the repo root, overwriting the existing.
-3. Drag the entire `toolkit/` folder (with `index.html` inside) into the repo root.
-4. Commit both as one commit: `feat: ship SKU #1 toolkit page + nav/gate updates on root`.
-5. Push to origin.
+2. Drag the three folders (`terms/`, `privacy/`, `refund-policy/`) from this `repo-upload/` folder into the repo root.
+3. Commit all three folders as one commit: `feat: publish Terms, Privacy, Refund Policy for processor onboarding`.
+4. Push to origin.
 
 ### Option C — Git CLI
 
 ```bash
 cd singh-powerup-coach-seam-audit-landing
-# from this Commerce folder, copy both files into the repo
-cp /path/to/repo-upload/index.html ./index.html
-mkdir -p ./toolkit
-cp /path/to/repo-upload/toolkit/index.html ./toolkit/index.html
 
-git add index.html toolkit/index.html
-git commit -m "feat: ship SKU #1 toolkit page + nav/gate updates on root"
+# from this repo-upload folder, copy the three folders into the repo root
+cp -r /path/to/repo-upload/terms ./terms
+cp -r /path/to/repo-upload/privacy ./privacy
+cp -r /path/to/repo-upload/refund-policy ./refund-policy
+
+git add terms privacy refund-policy
+git commit -m "feat: publish Terms, Privacy, Refund Policy for processor onboarding"
 git push origin main
 ```
 
 ---
 
-## Verification — 5 checks after Vercel finishes deploying
+## Verification — 4 checks after Vercel finishes deploying
 
 Open an **incognito window** so you're not seeing cached pages.
 
-1. **`https://theseamlinemethod.com/`** loads → nav now shows "The toolkit" → both gate strips appear after the hero → pricing closing has the new toolkit line.
-2. **Click "The toolkit" in the nav** → routes to `/toolkit/` cleanly.
-3. **`https://theseamlinemethod.com/toolkit/`** loads with the full toolkit page → hero shows $349 → ladder strip shows "You are here" on the middle rung.
-4. **Click the big "Buy the toolkit — $349" button** → Lemon Squeezy overlay opens with your product. **Do not** complete the purchase (use a 100%-off test discount in LS if you want to verify the full flow — see Step 8 of the LS setup checklist).
-5. **Back button works** from the overlay → returns you to the page in the same scroll position.
+1. **`https://theseamlinemethod.com/terms/`** loads → renders cleanly → contact email shows `contact@singhpowerupcoach.com` → links to `/privacy` and `/refund-policy` are present in §14.2 and §6.
+2. **`https://theseamlinemethod.com/privacy/`** loads → renders cleanly → GDPR section visible → CCPA section visible → contact email correct.
+3. **`https://theseamlinemethod.com/refund-policy/`** loads → renders cleanly → summary block at top is styled (soft tan background, accent rule on left) → EU/UK §6.1 is intact.
+4. **Test the mailto links** — click any `contact@singhpowerupcoach.com` link on any of the three pages → your mail client opens with that address pre-filled.
 
-If the LS overlay doesn't appear and instead redirects to a full LS-hosted page: that's still functional, just not the polished UX. The `class="lemonsqueezy-button"` + the `lemon.js` script in `<head>` should trigger overlay. If it doesn't, the most likely cause is the URL format. To switch to true overlay, in LS go to Product → Share → **Overlay** tab (not Direct checkout) → copy that URL — it'll look like `https://fabricpress.lemonsqueezy.com/buy/[uuid]?embed=1` instead of `/checkout/buy/[uuid]`. Swap the two `href`s in `toolkit/index.html` (hero button + pricing button) and re-push.
+If a page returns 404: the most likely cause is the file landed at the wrong path. From the repo's Code view, navigate into the `terms/` (or `privacy/`, or `refund-policy/`) folder and confirm `index.html` is inside. If it's there but still 404, force-rebuild from the Vercel dashboard (Deployments → ⋯ → Redeploy).
+
+---
+
+## After it's live — paste into Paddle
+
+Go back to your Paddle onboarding form and enter:
+
+- Terms of service: `https://theseamlinemethod.com/terms/`
+- Privacy policy: `https://theseamlinemethod.com/privacy/`
+- Refund policy: `https://theseamlinemethod.com/refund-policy/`
+
+Paddle will crawl each URL during merchant review. The pages are self-contained HTML with no JavaScript dependencies, so the crawl will succeed on the first try.
 
 ---
 
 ## What I deliberately did not change
 
-- Your Field Kit form and its mailto flow.
-- Your Seam Audit intake form.
-- The pricing module's 3 tiers ($7,500 / $15,000 / $25,000). Toolkit lives on its own page, not in this module.
-- The capacity strip, About strip, contact section, footer.
-- Any legal links or copyright text.
-- Any of your existing JavaScript.
+- The root `index.html` (your Seam Audit landing page).
+- The `/toolkit/` page (SKU #1 Fracture Diagnostic Toolkit).
+- Any existing files in the repo.
+- Your Vercel config, domain mapping, or DNS.
+- Your Field Kit form, Seam Audit intake form, Calendly links, or analytics.
 
-The root page is **additive only** — three small additions, zero removals.
-
----
-
-## After it's live
-
-1. Test purchase using a 100%-off discount code (LS Dashboard → Discounts → New).
-2. Confirm the post-purchase email arrives with all 4 download links + license key.
-3. Mark the test order as `Test` in LS so it doesn't pollute revenue reports.
-4. Soft launch via warm channel (don't announce publicly yet) — add the P.S. to your existing warm templates pointing at `theseamlinemethod.com/toolkit`.
-5. Watch for 48 hours, then announce in Issue 0 of The Seam newsletter.
+This push is **additive only** — three new folders, three new files, zero removals or edits.
 
 ---
 
-— Saved 2026-05-28
+## One thing to set up in parallel
+
+Make sure `contact@singhpowerupcoach.com` is a real mailbox (or forwarder to one you check). All three legal pages route customer and counsel inquiries there. If the address bounces, you have a compliance problem regardless of whether Paddle approves you.
+
+---
+
+— Saved 2026-05-29
+*Singh PowerUp Coach LLC*
