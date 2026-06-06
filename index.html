@@ -140,9 +140,6 @@
   .btn-primary:hover { background: var(--rust); border-color: var(--rust); color: var(--bone); }
   .btn-ghost { background: transparent; color: var(--navy); border-color: var(--rule-strong); }
   .btn-ghost:hover { border-color: var(--navy); color: var(--navy); background: var(--bone-deep); }
-  .btn-rust { background: var(--rust); color: var(--bone); border-color: var(--rust); }
-  .btn-rust:hover { background: var(--navy); border-color: var(--navy); color: var(--bone); }
-  .fieldkit-gate .btn-rust { padding: 12px 20px; font-size: 14px; white-space: nowrap; }
   .btn .arrow { transition: transform 120ms ease; }
   .btn:hover .arrow { transform: translateX(3px); }
 
@@ -237,6 +234,9 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
   }
   @media (max-width: 820px) { .anatomy { grid-template-columns: 1fr; gap: 40px; } }
+  .fk-capture { position: sticky; top: 24px; }
+  .fk-capture .form-sub { margin-bottom: 20px; }
+  .fk-capture iframe { width: 100% !important; }
   .anatomy-card {
     background: var(--navy); color: var(--bone);
     padding: 40px; border-radius: 3px;
@@ -572,10 +572,10 @@
     <nav class="site-nav" aria-label="Primary">
       <a href="#pattern">The pattern</a>
       <a href="#audit">The audit</a>
-      <a href="/toolkit/">Fracture Toolkit</a>
-      <a href="/maturity-model/">Maturity Model</a>
+      <a href="#pricing">Pricing</a>
       <a href="#method">SEAMline</a>
       <a href="#fieldkit">Field Kit</a>
+      <a href="#about">About</a>
       <a href="#contact" class="btn-mini">Start the audit</a>
     </nav>
   </div>
@@ -635,36 +635,6 @@
     </div>
     <a class="btn btn-ghost" href="#fieldkit">
       Get the Field Kit (free) <span class="arrow" aria-hidden="true">→</span>
-    </a>
-  </div>
-</aside>
-
-<!-- ============ TOOLKIT GATE STRIP ============ -->
-<aside class="fieldkit-gate" style="background: var(--paper);" aria-label="Fracture Diagnostic Toolkit gate">
-  <div class="wrap">
-    <div>
-      <div class="fk-eyebrow">Past the Field Kit but $15K isn&rsquo;t this quarter?</div>
-      <p class="fk-line">
-        The Fracture Diagnostic Toolkit is the snapshot rung. Self-service. $349. A 39-page workbook, a 9-tab scoring engine, and a 72-cell benchmark — the full cube walk for an internal operator to run on their own chain.
-      </p>
-    </div>
-    <a class="btn btn-rust" href="/toolkit/">
-      See the toolkit ($349) <span class="arrow" aria-hidden="true">→</span>
-    </a>
-  </div>
-</aside>
-
-<!-- ============ MATURITY MODEL GATE STRIP ============ -->
-<aside class="fieldkit-gate" aria-label="Seam Maturity Model gate">
-  <div class="wrap">
-    <div>
-      <div class="fk-eyebrow">Already know where you&rsquo;re bleeding — and want the climb?</div>
-      <p class="fk-line">
-        The Seam Maturity Model is the trajectory rung. Self-service. $449. A 25-page workbook, a 9-tab scoring engine, a five-cohort benchmark, and a worked example PDF — five levels × four parties × 30 process areas, with a 9-month climb playbook.
-      </p>
-    </div>
-    <a class="btn btn-rust" href="/maturity-model/">
-      See the model ($449) <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>
 </aside>
@@ -790,48 +760,10 @@
     </div>
 
     <p class="pricing-closing">
-      If $15,000 feels expensive, the Field Kit will tell you whether the audit is the right next move. <a href="#fieldkit">Read it first →</a><br />
-      Or step laterally to the self-service catalog: the <a href="/toolkit/">$349 Fracture Diagnostic Toolkit</a> for the snapshot, or the <a href="/maturity-model/">$449 Seam Maturity Model</a> for the trajectory.
+      If $15,000 feels expensive, the Field Kit will tell you whether the audit is the right next move. <a href="#fieldkit">Read it first →</a>
     </p>
   </div>
 </section>
-
-<!-- ============ TOOLKIT CATALOG STRIP ============ -->
-<aside class="ladder" style="background: var(--paper);">
-  <div class="wrap">
-    <div class="section-eyebrow">Self-service catalog</div>
-    <h2 style="font-size: clamp(24px, 3vw, 32px); margin-bottom: 28px;">
-      Two toolkits. One method. Snapshot and trajectory.
-    </h2>
-    <div class="ladder-grid" style="grid-template-columns: 1fr 1fr;">
-      <div class="rung">
-        <div class="rung-tier">Diagnostic · Snapshot</div>
-        <div class="rung-name">Fracture Diagnostic Toolkit</div>
-        <div class="rung-price">$349</div>
-        <p class="rung-body">
-          The 6 × 4 × 3 cube walk. 39-page workbook, 9-tab scoring engine, 72-cell benchmark. An internal operator runs the diagnostic and produces a defensible fracture list. Four working sessions.
-        </p>
-        <p style="margin-top: 18px;">
-          <a href="/toolkit/" style="font-family: var(--mono); font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rust);">See the toolkit →</a>
-        </p>
-      </div>
-      <div class="rung">
-        <div class="rung-tier">Maturity · Trajectory</div>
-        <div class="rung-name">Seam Maturity Model</div>
-        <div class="rung-price">$449</div>
-        <p class="rung-body">
-          The 5-level maturity instrument. 30 process areas × 4 parties. SMI on a 0–100 scale benchmarked against five industry cohorts. 9-month climb playbook. Worked example included.
-        </p>
-        <p style="margin-top: 18px;">
-          <a href="/maturity-model/" style="font-family: var(--mono); font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rust);">See the model →</a>
-        </p>
-      </div>
-    </div>
-    <p class="pricing-closing" style="margin-top: 32px;">
-      Use either alone. Used together, the Fracture Diagnostic identifies which 6×4×3 cells are bleeding today; the Maturity Model tells you why the bleeding keeps recurring and what level of organizational maturity will stop it.
-    </p>
-  </div>
-</aside>
 
 <!-- ============ THE METHOD ============ -->
 <section id="method">
@@ -955,51 +887,14 @@
         </ul>
       </div>
 
-      <form class="intake" id="fkForm" novalidate>
-        <div class="form-title">Send me the Field Kit.</div>
-        <div class="form-sub">Four fields · Two minutes · Unsubscribe in one click</div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="fk-name">Name <span class="req">*</span></label>
-            <input id="fk-name" name="name" type="text" autocomplete="name" required />
-          </div>
-          <div class="field">
-            <label for="fk-email">Work email <span class="req">*</span></label>
-            <input id="fk-email" name="email" type="email" autocomplete="email" required />
-          </div>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="fk-company">Company <span class="req">*</span></label>
-            <input id="fk-company" name="company" type="text" autocomplete="organization" required />
-          </div>
-          <div class="field">
-            <label for="fk-role">Role / title <span class="req">*</span></label>
-            <input id="fk-role" name="role" type="text" autocomplete="organization-title" required />
-          </div>
-        </div>
-
-        <div class="field" style="display:flex; gap:10px; align-items:flex-start;">
-          <input id="fk-consent" name="consent" type="checkbox" required style="width:auto; margin-top:5px;" />
-          <label for="fk-consent" style="text-transform:none; letter-spacing:0; font-family: var(--sans); font-size: 13px; color: var(--navy-80); line-height: 1.5;">
-            Send me the Field Kit and a five-email follow-up over the next two weeks. Unsubscribe in one click anytime. <span class="req">*</span>
-          </label>
-        </div>
-
-        <!-- Honeypot (anti-bot, hidden) -->
-        <div style="position:absolute; left:-9999px;" aria-hidden="true">
-          <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-        </div>
-
-        <div class="submit-row">
-          <button type="submit" class="btn btn-primary">
-            Send me the Field Kit <span class="arrow" aria-hidden="true">→</span>
-          </button>
-          <span class="privacy">We never share your email.</span>
-        </div>
-      </form>
+      <!-- Field Kit capture → beehiiv "The Seam". Subscriber lands in beehiiv; the welcome email delivers the kit. -->
+      <div class="fk-capture">
+        <div class="form-title">Get the Field Kit.</div>
+        <div class="form-sub">Enter your email · The Field Kit lands in your inbox · Unsubscribe in one click</div>
+        <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+        <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="45cbdff1-e6de-4852-8caa-e9d13a13bc9c"></script>
+        <p class="privacy" style="margin-top:14px;">Prefer to read it now? <a href="SEAMline_Field_Kit_v1.pdf" download style="text-decoration:underline; color:inherit;">Download the PDF directly &rarr;</a></p>
+      </div>
     </div>
   </div>
 </section>
@@ -1264,4 +1159,16 @@
         '<div class="form-sub">Check your downloads folder · PDF · 12 pages</div>' +
         '<p style="font-family: var(--serif); font-style: italic; color: var(--navy); font-size: 16px; line-height: 1.5;">' +
           'A draft email also just opened in your mail client so I know you have it. Please hit send. ' +
-    
+          'If your browser blocked the download, ' +
+          '<a href="SEAMline_Field_Kit_v1.pdf" download style="color: var(--navy); text-decoration: underline;">click here to download manually</a>.' +
+        '</p>' +
+        '<p style="font-family: var(--sans); font-size: 14px; color: var(--navy-80); line-height: 1.5;">' +
+          'Three things to do with V.1 (the ten-question diagnostic) in the next thirty minutes:' +
+        '</p>' +
+        '<ol style="font-family: var(--sans); font-size: 14px; color: var(--navy-80); line-height: 1.6; padding-left: 20px;">' +
+          '<li>Pick one specific chain you operate inside, not all of them.</li>' +
+          '<li>Run the ten yes/no questions. Honest answers only.</li>' +
+          '<li>If the chain scores 6 or higher, the audit conversation is the right next move.</li>' +
+        '</ol>' +
+        '<p style="margin-top: 20px;">' +
+          '<a class="btn btn-primary" href="https://calendly.com/singhleadership/let-s-just-talk" 
