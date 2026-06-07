@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Quickstart for Teams — Get your team using AI this week | SEAMline · FABRIC</title>
+<meta name="description" content="A live 90-minute workshop that gets your team actually using AI on real work — with the build done on screen and a 10-play playbook to keep. $497. The fee credits 100% toward seam work." />
+<meta property="og:title" content="AI Quickstart for Teams — In 90 minutes, your team is actually using AI." />
+<meta property="og:description" content="Most teams buy an AI tool and nothing happens, because nobody built the first workflow. This is that one sitting — live, with your real tasks." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --navy:#0F1E3D; --navy-80:#2B3A5A; --navy-60:#5A6580;
+    --rust:#B8512A; --rust-soft:#D77A52;
+    --bone:#F5F1EB; --bone-deep:#ECE6DC; --paper:#FFFFFF;
+    --rule:rgba(15,30,61,0.14); --rule-strong:rgba(15,30,61,0.28);
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --max:1120px; --gutter:clamp(20px,4vw,56px);
+  }
+  *,*::before,*::after { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--bone); color:var(--navy); font-family:var(--sans); font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  ::selection { background:var(--rust); color:var(--bone); }
+  a { color:var(--navy); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; }
+  a:hover { color:var(--rust); }
+  .wrap { max-width:var(--max); margin:0 auto; padding:0 var(--gutter); }
+  section { padding:clamp(56px,9vw,104px) 0; border-top:1px solid var(--rule); }
+  section:first-of-type { border-top:none; }
+
+  /* Header */
+  header.site { position:sticky; top:0; z-index:50; background:rgba(245,241,235,0.92); backdrop-filter:saturate(140%) blur(8px); -webkit-backdrop-filter:saturate(140%) blur(8px); border-bottom:1px solid var(--rule); }
+  .site-inner { display:flex; align-items:center; justify-content:space-between; height:68px; }
+  .brandmark { display:inline-flex; flex-direction:column; line-height:1; text-decoration:none; }
+  .brandmark .wordmark { font-family:var(--serif); font-weight:600; font-size:22px; letter-spacing:0.5px; color:var(--navy); }
+  .brandmark .wordmark .caps { letter-spacing:1.2px; } .brandmark .wordmark .tail { font-style:italic; font-weight:400; letter-spacing:0; }
+  .brandmark .seamline { margin-top:4px; height:2px; width:100%; background:linear-gradient(to right,var(--navy) 0 78%,var(--rust) 78% 100%); }
+  nav.site-nav { display:flex; gap:28px; align-items:center; }
+  nav.site-nav a { font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:1.4px; text-decoration:none; color:var(--navy-80); }
+  nav.site-nav a:hover { color:var(--rust); }
+  nav.site-nav .btn-mini { font-family:var(--sans); font-size:13px; letter-spacing:0; text-transform:none; padding:8px 14px; background:var(--navy); color:var(--bone); border-radius:2px; }
+  nav.site-nav .btn-mini:hover { background:var(--rust); color:var(--bone); }
+  @media (max-width:860px) { nav.site-nav a:not(.btn-mini) { display:none; } }
+
+  /* Buttons */
+  .btn { display:inline-flex; align-items:center; gap:10px; font-family:var(--sans); font-weight:600; font-size:16px; padding:16px 26px; border-radius:2px; text-decoration:none; border:1px solid transparent; transition:background 120ms ease,color 120ms ease,border-color 120ms ease; cursor:pointer; }
+  .btn-primary { background:var(--navy); color:var(--bone); border-color:var(--navy); }
+  .btn-primary:hover { background:var(--rust); border-color:var(--rust); color:var(--bone); }
+  .btn-ghost { background:transparent; color:var(--navy); border-color:var(--rule-strong); }
+  .btn-ghost:hover { border-color:var(--navy); color:var(--navy); background:var(--bone-deep); }
+  .btn .arrow { transition:transform 120ms ease; }
+  .btn:hover .arrow { transform:translateX(3px); }
+
+  /* Hero */
+  .hero { padding-top:clamp(48px,7vw,84px); padding-bottom:clamp(48px,7vw,84px); }
+  .eyebrow { font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:2px; color:var(--rust); margin-bottom:22px; }
+  h1.hero-title { font-family:var(--serif); font-weight:600; font-size:clamp(36px,5.6vw,62px); line-height:1.05; letter-spacing:-0.5px; margin:0 0 26px; max-width:20ch; }
+  h1.hero-title .accent { color:var(--rust); }
+  .hero-deck { font-family:var(--serif); font-weight:400; font-style:italic; font-size:clamp(19px,2.2vw,24px); line-height:1.45; color:var(--navy-80); max-width:54ch; margin:0 0 36px; }
+  .hero-ctas { display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+  .hero-tertiary { margin-top:18px; font-family:var(--serif); font-style:italic; font-size:15px; color:var(--navy-80); }
+  .hero-tertiary a { color:var(--navy); }
+  .hero-meta { margin-top:52px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px; border-top:1px solid var(--rule); padding-top:28px; }
+  .hero-meta dt { font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:1.4px; color:var(--navy-60); margin-bottom:6px; }
+  .hero-meta dd { margin:0; font-family:var(--serif); font-weight:600; font-size:19px; color:var(--navy); }
+  @media (max-width:820px) { .hero-meta { grid-template-columns:1fr 1fr; } }
+  @media (max-width:540px) { .hero-meta { grid-template-columns:1fr; } }
+
+  /* Section heads */
+  .section-eyebrow { font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:1.8px; color:var(--rust); margin-bottom:14px; }
+  h2 { font-family:var(--serif); font-weight:600; font-size:clamp(27px,3.4vw,40px); line-height:1.15; letter-spacing:-0.3px; margin:0 0 20px; max-width:24ch; }
+  p.lead { font-size:clamp(18px,2vw,21px); line-height:1.55; color:var(--navy-80); max-width:62ch; margin:0 0 8px; }
+  .body-narrow { max-width:64ch; }
+
+  /* Two-col */
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+  @media (max-width:820px) { .two { grid-template-columns:1fr; gap:32px; } }
+
+  /* Included list */
+  ul.feat { list-style:none; margin:24px 0 0; padding:0; }
+  ul.feat li { padding:16px 0; border-top:1px solid var(--rule); display:flex; gap:14px; }
+  ul.feat li .mk { font-family:var(--serif); font-weight:700; color:var(--rust); font-size:20px; line-height:1.3; }
+  ul.feat li .tx b { font-family:var(--serif); font-weight:600; }
+  ul.feat li .tx span { display:block; color:var(--navy-80); font-size:15px; margin-top:2px; }
+
+  /* Run of show */
+  .ros { margin-top:8px; border-top:1px solid var(--rule-strong); }
+  .ros .row { display:grid; grid-template-columns:120px 1fr; gap:24px; padding:20px 0; border-bottom:1px solid var(--rule); align-items:baseline; }
+  .ros .row .t { font-family:var(--mono); font-size:13px; letter-spacing:0.5px; color:var(--rust); }
+  .ros .row .d b { font-family:var(--serif); font-weight:600; font-size:19px; display:block; margin-bottom:4px; }
+  .ros .row .d span { color:var(--navy-80); font-size:15px; }
+  @media (max-width:600px) { .ros .row { grid-template-columns:1fr; gap:6px; } }
+
+  /* Pricing */
+  .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; align-items:stretch; }
+  @media (max-width:820px) { .pricing-grid { grid-template-columns:1fr; } }
+  .price-card { background:var(--paper); border:1px solid var(--rule); padding:32px 28px; border-radius:3px; display:flex; flex-direction:column; position:relative; }
+  .price-card.featured { background:var(--navy); color:var(--bone); border-color:var(--navy); transform:translateY(-8px); box-shadow:0 18px 40px -20px rgba(15,30,61,0.4); }
+  @media (max-width:820px) { .price-card.featured { transform:none; } }
+  .price-card .price-label { font-family:var(--mono); font-size:11px; letter-spacing:1.6px; text-transform:uppercase; color:var(--navy-60); margin-bottom:12px; }
+  .price-card.featured .price-label { color:var(--rust-soft); }
+  .price-card .price-num { font-family:var(--serif); font-weight:700; font-size:38px; line-height:1; color:var(--navy); letter-spacing:-0.5px; margin-bottom:8px; }
+  .price-card.featured .price-num { color:var(--bone); }
+  .price-card .price-name { font-family:var(--serif); font-weight:600; font-size:19px; color:var(--navy); margin-bottom:14px; }
+  .price-card.featured .price-name { color:var(--bone); }
+  .price-card .price-body { font-size:14px; line-height:1.55; color:var(--navy-80); margin:0 0 20px; }
+  .price-card.featured .price-body { color:rgba(245,241,235,0.82); }
+  .price-card .price-tag { position:absolute; top:-12px; left:28px; font-family:var(--mono); font-size:10px; letter-spacing:1.6px; text-transform:uppercase; color:var(--bone); background:var(--rust); padding:4px 10px; border-radius:2px; }
+  .price-card .btn { margin-top:auto; justify-content:center; width:100%; }
+  .price-card.featured .btn-primary { background:var(--rust); border-color:var(--rust); }
+  .price-card.featured .btn-primary:hover { background:var(--rust-soft); border-color:var(--rust-soft); }
+  .founding { margin-top:14px; font-family:var(--serif); font-style:italic; font-size:13.5px; }
+  .price-card.featured .founding { color:var(--rust-soft); }
+  .price-card.featured .founding a { color:var(--bone); text-decoration-color:var(--rust-soft); }
+  .pricing-closing { margin-top:36px; font-family:var(--serif); font-style:italic; font-size:17px; color:var(--navy-80); max-width:62ch; }
+
+  /* About */
+  .about { background:var(--paper); border:1px solid var(--rule); border-radius:4px; padding:44px; display:grid; grid-template-columns:1fr; gap:18px; }
+  .about .q { font-family:var(--serif); font-weight:600; font-size:clamp(22px,2.6vw,30px); line-height:1.3; letter-spacing:-0.3px; max-width:30ch; }
+  .about .q .accent { color:var(--rust); }
+  .about p { margin:0; color:var(--navy-80); max-width:64ch; }
+
+  /* Final CTA */
+  .final { background:var(--navy); color:var(--bone); }
+  .final h2 { color:var(--bone); }
+  .final .section-eyebrow { color:var(--rust-soft); }
+  .final p.lead { color:rgba(245,241,235,0.82); font-style:italic; font-family:var(--serif); }
+  .final .btn-ghost { color:var(--bone); border-color:rgba(245,241,235,0.4); }
+  .final .btn-ghost:hover { background:rgba(245,241,235,0.08); border-color:var(--bone); color:var(--bone); }
+  .final .fineprint { margin-top:20px; font-family:var(--mono); font-size:12px; letter-spacing:0.4px; color:rgba(245,241,235,0.6); }
+
+  /* Footer */
+  footer.site { border-top:1px solid var(--rule); padding:40px 0 56px; background:var(--bone-deep); }
+  .foot-inner { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:end; }
+  @media (max-width:640px) { .foot-inner { grid-template-columns:1fr; } }
+  .foot-tag { font-family:var(--serif); font-style:italic; font-size:16px; color:var(--navy-80); }
+  .foot-tag .sep { color:var(--rust); padding:0 8px; font-style:normal; }
+  .foot-legal { font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--navy-60); text-align:right; }
+  @media (max-width:640px) { .foot-legal { text-align:left; } }
+</style>
+</head>
+<body>
+<a id="top"></a>
+
+<!-- HEADER -->
+<header class="site">
+  <div class="wrap site-inner">
+    <a href="/" class="brandmark" aria-label="The SEAMline Method">
+      <span class="wordmark"><span class="caps">SEAM</span><span class="tail">line</span></span>
+      <span class="seamline" aria-hidden="true"></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#included">What you get</a>
+      <a href="#how">The 90 minutes</a>
+      <a href="#pricing">Pricing</a>
+      <a href="/">The Seam Audit</a>
+      <a href="#pricing" class="btn-mini">Book the workshop</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">AI Quickstart for Teams · 90 minutes · Live · Team of up to 8</div>
+    <h1 class="hero-title">In 90 minutes, your team is <span class="accent">actually using AI</span> on real work.</h1>
+    <p class="hero-deck">Most teams buy an AI tool and nothing changes — because nobody ever sat down and built the first workflow. This is that one sitting. Live, with your real tasks, on screen. Everyone leaves with a workflow they set up themselves and a playbook so it sticks.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://buy.stripe.com/7sY7sFdaw96H9H0d1Zb7y05" target="_blank" rel="noopener">Book the workshop — $497 <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href="https://buy.stripe.com/cNi6oB7QcaaL4mG8LJb7y07" target="_blank" rel="noopener">Get the $47 playbook <span class="arrow" aria-hidden="true">↓</span></a>
+    </div>
+    <p class="hero-tertiary">First three teams this month: <a href="https://buy.stripe.com/aFaeV7c6sciT9H0aTRb7y06" target="_blank" rel="noopener">founding rate $297 →</a></p>
+    <dl class="hero-meta">
+      <div><dt>Format</dt><dd>Live · 90 min · Zoom</dd></div>
+      <div><dt>For</dt><dd>Your team of up to 8</dd></div>
+      <div><dt>You leave with</dt><dd>A live workflow + playbook</dd></div>
+      <div><dt>Price</dt><dd>USD 497 · credits forward</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section id="why">
+  <div class="wrap two">
+    <div>
+      <div class="section-eyebrow">Why this, why now</div>
+      <h2>The tool was never the problem.</h2>
+    </div>
+    <div class="body-narrow">
+      <p class="lead">Every leader privately worries their team is falling behind on AI and doesn't know where to start. So they buy a license, send a link, and wait. Nothing happens — because adoption isn't a tool you install, it's a first workflow somebody builds.</p>
+      <p style="margin-top:16px; color:var(--navy-80);">This workshop is the opposite of a webinar. No slides about "the future of work." We take one task someone on your team does every week and build the AI workflow for it together, on screen, start to finish — then everyone builds their own. By the end, AI isn't a thing you're meaning to try. It's a thing your team already did.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section id="included">
+  <div class="wrap two">
+    <div>
+      <div class="section-eyebrow">What you get</div>
+      <h2>A live build, and a playbook that keeps it alive.</h2>
+      <p class="lead">Two deliverables. One you watch happen; one you keep.</p>
+    </div>
+    <div>
+      <ul class="feat">
+        <li><span class="mk">1</span><span class="tx"><b>The 90-minute live workshop</b><span>The five things AI is genuinely good at for a team like yours — and two it isn't. Then the live build: we take one real weekly task and build its AI workflow on screen. Each person sets up their own first workflow before we end.</span></span></li>
+        <li><span class="mk">2</span><span class="tx"><b>The 10-play AI Quickstart Playbook (yours to keep)</b><span>Ten ready-to-use AI plays for everyday work, each with the exact prompt to copy and a good-vs-bad example. Plus a 30-day adoption plan and a one-page AI guardrails sheet that makes "yes, the team can use this" an easy call.</span></span></li>
+        <li><span class="mk">↗</span><span class="tx"><b>The fee credits forward, 100%</b><span>If the deeper issue turns out to be between teams — not the tools — your Quickstart fee comes straight off a Seam Working Session, Sprint, or Audit. You're never paying twice.</span></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- HOW: RUN OF SHOW -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-eyebrow">The 90 minutes</div>
+    <h2>What actually happens on the call.</h2>
+    <div class="ros">
+      <div class="row"><div class="t">0–10 min</div><div class="d"><b>Where teams waste AI</b><span>The five good uses, the two bad ones. We set the goal: everyone leaves with one working workflow.</span></div></div>
+      <div class="row"><div class="t">10–25 min</div><div class="d"><b>Your team's real tasks</b><span>Quick round — each person names one weekly task that eats time. We pick the best one to build.</span></div></div>
+      <div class="row"><div class="t">25–60 min</div><div class="d"><b>The live build</b><span>We build that workflow on screen, start to finish, thinking out loud. This is the part your team remembers.</span></div></div>
+      <div class="row"><div class="t">60–80 min</div><div class="d"><b>Everyone builds</b><span>Each person sets up their own first workflow while we float and unstick. Hands on keyboards.</span></div></div>
+      <div class="row"><div class="t">80–90 min</div><div class="d"><b>Make it stick</b><span>You get the 30-day adoption plan and the guardrails sheet. We name what's next if you want it run across the whole operation.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-eyebrow">Three ways in</div>
+    <h2>Start where it fits.</h2>
+    <p class="lead">The playbook is the do-it-yourself version. The workshop is done-with-you. The Sprint embeds it.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-label">Self-serve</div>
+        <div class="price-num">$47</div>
+        <div class="price-name">The AI Quickstart Playbook</div>
+        <p class="price-body">The full 10-play playbook (PDF) — exact prompts, good-vs-bad examples, the 30-day plan, and the guardrails sheet. Instant download. The same playbook your team gets in the workshop.</p>
+        <a class="btn btn-ghost" href="https://buy.stripe.com/cNi6oB7QcaaL4mG8LJb7y07" target="_blank" rel="noopener">Get the playbook <span class="arrow">→</span></a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tag">Most teams start here</div>
+        <div class="price-label">Live · done with you</div>
+        <div class="price-num">$497</div>
+        <div class="price-name">The AI Quickstart Workshop</div>
+        <p class="price-body">90 minutes, your team of up to 8, your real tasks. We build the first workflows on screen together. Includes the playbook. Fee credits 100% toward later seam work.</p>
+        <a class="btn btn-primary" href="https://buy.stripe.com/7sY7sFdaw96H9H0d1Zb7y05" target="_blank" rel="noopener">Book the workshop <span class="arrow">→</span></a>
+        <div class="founding">First 3 teams this month: <a href="https://buy.stripe.com/aFaeV7c6sciT9H0aTRb7y06" target="_blank" rel="noopener">founding rate $297 →</a></div>
+      </div>
+      <div class="price-card">
+        <div class="price-label">Embed it</div>
+        <div class="price-num">$1,750</div>
+        <div class="price-name">Team AI Sprint</div>
+        <p class="price-body">Three sessions over two weeks to make AI stick across the team — not just spark it. For teams that want adoption to outlast the first call. Booked after a short scoping conversation.</p>
+        <a class="btn btn-ghost" href="https://calendly.com/singhleadership/discovery-call" target="_blank" rel="noopener">Talk it through <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <p class="pricing-closing">Prepaid. All sales final — the free <a href="/self-check">2-minute Self-Check</a> and the $47 playbook are the de-risk paths. Booking confirms after payment; you'll be sent straight to the calendar to pick your time.</p>
+  </div>
+</section>
+
+<!-- ABOUT / CREDIBILITY -->
+<section id="about">
+  <div class="wrap">
+    <div class="about">
+      <div class="section-eyebrow">Why me</div>
+      <div class="q">"I rebuilt a 25-year consulting practice on this AI platform in three weeks. <span class="accent">I'll show your team how to do the same with their daily work.</span>"</div>
+      <p>Pankaj Singh — twenty-five years inside insurance, auto warranty, data and analytics, M&amp;A, and PE portfolios. Most "AI trainers" have never run an operation. This workshop is built from a working practice that runs on AI every day: the prompts in the playbook are the ones actually in use, not demos. You're not buying theory about AI — you're borrowing a setup that already works.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <div class="section-eyebrow">Book it</div>
+    <h2>Stop meaning to try AI. Have your team using it by Friday.</h2>
+    <p class="lead">Pick a time, prepay, and we'll confirm the session. Bring your real work — that's the whole point.</p>
+    <div class="hero-ctas" style="margin-top:30px;">
+      <a class="btn btn-primary" href="https://buy.stripe.com/7sY7sFdaw96H9H0d1Zb7y05" target="_blank" rel="noopener">Book the workshop — $497 <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="https://buy.stripe.com/cNi6oB7QcaaL4mG8LJb7y07" target="_blank" rel="noopener">Or start with the $47 playbook</a>
+    </div>
+    <p class="fineprint">Founding rate $297 for the first three teams this month · Fee credits 100% toward a Seam Working Session, Sprint, or Audit</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap foot-inner">
+    <div class="foot-tag">Find the seam. <span class="sep">·</span> Hold the line. <span class="sep">|</span> Built to FABRIC.</div>
+    <div class="foot-legal">© 2026 Singh PowerUp Coach LLC · Florida<br />The SEAMline Method™ · FABRIC™ · USPTO applied-for</div>
+  </div>
+</footer>
+
+</body>
+</html>

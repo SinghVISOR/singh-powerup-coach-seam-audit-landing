@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Your AI Quickstart Playbook — thank you | SEAMline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root { --navy:#0F1E3D; --navy-80:#2B3A5A; --navy-60:#5A6580; --rust:#B8512A; --rust-soft:#D77A52; --bone:#F5F1EB; --bone-deep:#ECE6DC; --paper:#FFFFFF; --rule:rgba(15,30,61,0.14); --rule-strong:rgba(15,30,61,0.28); --serif:"Source Serif 4",Georgia,serif; --sans:"Inter",-apple-system,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace; }
+  *,*::before,*::after { box-sizing:border-box; }
+  body { margin:0; background:var(--bone); color:var(--navy); font-family:var(--sans); font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:var(--navy); }
+  .wrap { max-width:660px; margin:0 auto; padding:clamp(56px,10vw,120px) clamp(20px,5vw,40px); }
+  .brandmark { display:inline-flex; flex-direction:column; line-height:1; text-decoration:none; margin-bottom:48px; }
+  .brandmark .wordmark { font-family:var(--serif); font-weight:600; font-size:22px; letter-spacing:0.5px; }
+  .brandmark .wordmark .caps { letter-spacing:1.2px; } .brandmark .wordmark .tail { font-style:italic; font-weight:400; }
+  .brandmark .seamline { margin-top:4px; height:2px; width:100%; background:linear-gradient(to right,var(--navy) 0 78%,var(--rust) 78% 100%); }
+  .eyebrow { font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:2px; color:var(--rust); margin-bottom:20px; }
+  h1 { font-family:var(--serif); font-weight:600; font-size:clamp(30px,5vw,44px); line-height:1.1; letter-spacing:-0.5px; margin:0 0 20px; }
+  p { color:var(--navy-80); max-width:54ch; }
+  .btn { display:inline-flex; align-items:center; gap:10px; font-family:var(--sans); font-weight:600; font-size:16px; padding:16px 26px; border-radius:2px; text-decoration:none; border:1px solid transparent; cursor:pointer; }
+  .btn-primary { background:var(--navy); color:var(--bone); border-color:var(--navy); }
+  .btn-primary:hover { background:var(--rust); border-color:var(--rust); }
+  .btn-ghost { background:transparent; color:var(--navy); border-color:var(--rule-strong); }
+  .btn-ghost:hover { border-color:var(--navy); background:var(--bone-deep); }
+  .ctas { display:flex; flex-wrap:wrap; gap:14px; margin:32px 0 0; }
+  .next { margin-top:48px; padding-top:28px; border-top:1px solid var(--rule); }
+  .next h2 { font-family:var(--serif); font-weight:600; font-size:20px; margin:0 0 8px; }
+  .next p { font-size:15px; margin:0 0 14px; }
+  .foot { margin-top:56px; font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--navy-60); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="/" class="brandmark" aria-label="The SEAMline Method">
+    <span class="wordmark"><span class="caps">SEAM</span><span class="tail">line</span></span>
+    <span class="seamline" aria-hidden="true"></span>
+  </a>
+  <div class="eyebrow">Payment received · Thank you</div>
+  <h1>Your playbook is downloading.</h1>
+  <p>If it didn't start automatically, use the button below. A receipt is on its way to your email. The same ten plays, exact prompts, 30-day plan, and guardrails sheet — yours to keep and share with your team.</p>
+  <div class="ctas">
+    <a class="btn btn-primary" id="dl" href="/ai-quickstart/playbook/AI_Quickstart_Playbook.pdf" download>Download the playbook <span aria-hidden="true">↓</span></a>
+  </div>
+
+  <div class="next">
+    <h2>Want it run live for your team?</h2>
+    <p>The playbook is the do-it-yourself version. The 90-minute workshop is done-with-you — we build the first workflows on screen with your real tasks. The fee credits 100% toward later seam work.</p>
+    <a class="btn btn-ghost" href="https://buy.stripe.com/7sY7sFdaw96H9H0d1Zb7y05" target="_blank" rel="noopener">See the workshop — $497 <span aria-hidden="true">→</span></a>
+  </div>
+
+  <div class="foot">Find the seam. Hold the line. · Built to FABRIC · Singh PowerUp Coach LLC · 2026</div>
+</div>
+<script>
+  // Auto-start the download once on load.
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var a = document.getElementById('dl');
+      if (a) { var t = document.createElement('a'); t.href = a.href; t.download = ''; document.body.appendChild(t); t.click(); document.body.removeChild(t); }
+    }, 700);
+  });
+</script>
+</body>
+</html>
