@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NSAI — Strategy your board can defend | The SEAMline Method · FABRIC</title>
+<meta name="description" content="Fixed-fee strategic diagnostics produced in days by NSAI — a gated intelligence engine — and reviewed by a Fortune-500 strategist. Nine diagnostics. One defensible shape. Find the seam. Hold the line." />
+<meta property="og:title" content="NSAI — Strategy numbers your board can defend." />
+<meta property="og:description" content="Productized strategic diagnostics: fixed fee, days not months, every number cleared through an integrity engine." />
+<meta property="og:type" content="website" />
+
+<!-- Brand fonts: Source Serif 4 (headlines) · Inter (body) · JetBrains Mono (meta) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  /* ---------- Brand tokens (locked May 21, 2026) ---------- */
+  :root {
+    --navy: #0F1E3D;
+    --navy-80: #2B3A5A;
+    --navy-60: #5A6580;
+    --rust: #B8512A;
+    --rust-soft: #D77A52;
+    --bone: #F5F1EB;
+    --bone-deep: #ECE6DC;
+    --paper: #FFFFFF;
+    --rule: rgba(15, 30, 61, 0.14);
+    --rule-strong: rgba(15, 30, 61, 0.28);
+
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --max: 1120px;
+    --gutter: clamp(20px, 4vw, 56px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bone); color: var(--navy);
+    font-family: var(--sans); font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--rust); color: var(--bone); }
+  a { color: var(--navy); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--rust); }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  section { padding: clamp(56px, 9vw, 112px) 0; border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: none; }
+
+  /* ---------- Header ---------- */
+  header.site { position: sticky; top: 0; z-index: 50; background: rgba(245, 241, 235, 0.92); backdrop-filter: saturate(140%) blur(8px); -webkit-backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--rule); }
+  .site-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brandmark { display: inline-flex; flex-direction: column; line-height: 1; text-decoration: none; }
+  .brandmark .wordmark { font-family: var(--serif); font-weight: 600; font-size: 22px; letter-spacing: 0.5px; color: var(--navy); }
+  .brandmark .wordmark .caps { letter-spacing: 1.2px; }
+  .brandmark .wordmark .tail { font-style: italic; font-weight: 400; letter-spacing: 0; }
+  .brandmark .seamline { margin-top: 4px; height: 2px; width: 100%; background: linear-gradient(to right, var(--navy) 0%, var(--navy) 78%, var(--rust) 78%, var(--rust) 100%); }
+  nav.site-nav { display: flex; gap: 28px; align-items: center; }
+  nav.site-nav a { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1.4px; text-decoration: none; color: var(--navy-80); }
+  nav.site-nav a:hover { color: var(--rust); }
+  nav.site-nav .btn-mini { font-family: var(--sans); font-size: 13px; letter-spacing: 0; text-transform: none; padding: 8px 14px; background: var(--navy); color: var(--bone); border-radius: 2px; }
+  nav.site-nav .btn-mini:hover { background: var(--rust); color: var(--bone); }
+  @media (max-width: 980px) { nav.site-nav a:not(.btn-mini) { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-top: clamp(56px, 8vw, 96px); padding-bottom: clamp(56px, 8vw, 96px); }
+  .eyebrow { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--rust); margin-bottom: 22px; }
+  h1.hero-title { font-family: var(--serif); font-weight: 600; font-size: clamp(38px, 6vw, 68px); line-height: 1.05; letter-spacing: -0.5px; margin: 0 0 28px; max-width: 18ch; }
+  h1.hero-title .accent { color: var(--rust); font-style: italic; font-weight: 600; }
+  .hero-deck { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: clamp(19px, 2.2vw, 24px); line-height: 1.45; color: var(--navy-80); max-width: 58ch; margin: 0 0 40px; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--sans); font-weight: 600; font-size: 16px; padding: 16px 26px; border-radius: 2px; text-decoration: none; border: 1px solid transparent; transition: background 120ms ease, color 120ms ease, border-color 120ms ease; cursor: pointer; }
+  .btn-primary { background: var(--navy); color: var(--bone); border-color: var(--navy); }
+  .btn-primary:hover { background: var(--rust); border-color: var(--rust); color: var(--bone); }
+  .btn-ghost { background: transparent; color: var(--navy); border-color: var(--rule-strong); }
+  .btn-ghost:hover { border-color: var(--navy); color: var(--navy); background: var(--bone-deep); }
+  .btn .arrow { transition: transform 120ms ease; }
+  .btn:hover .arrow { transform: translateX(3px); }
+  .hero-meta { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; border-top: 1px solid var(--rule); padding-top: 28px; }
+  .hero-meta dt { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--navy-60); margin-bottom: 6px; }
+  .hero-meta dd { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 19px; color: var(--navy); }
+  @media (max-width: 820px) { .hero-meta { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .hero-meta { grid-template-columns: 1fr; } }
+
+  /* ---------- On-ramp strip ---------- */
+  .ramp { background: var(--bone-deep); padding: 28px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .ramp .wrap { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; }
+  @media (max-width: 760px) { .ramp .wrap { grid-template-columns: 1fr; gap: 18px; } }
+  .ramp .r-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--rust); margin-bottom: 6px; }
+  .ramp .r-line { font-family: var(--serif); font-size: 18px; line-height: 1.45; color: var(--navy); margin: 0; max-width: 70ch; }
+  .ramp .btn-ghost { padding: 12px 20px; font-size: 14px; white-space: nowrap; }
+
+  /* ---------- Section heads ---------- */
+  .section-eyebrow { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.8px; color: var(--rust); margin-bottom: 14px; }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 3.6vw, 42px); line-height: 1.15; letter-spacing: -0.3px; margin: 0 0 24px; max-width: 24ch; }
+  h3 { font-family: var(--serif); font-weight: 600; font-size: 22px; line-height: 1.25; margin: 0 0 10px; }
+  p.lead { font-family: var(--serif); font-style: italic; font-size: clamp(18px, 1.9vw, 22px); line-height: 1.5; color: var(--navy-80); max-width: 62ch; margin: 0 0 36px; }
+  p { max-width: 64ch; }
+
+  /* ---------- 3-card grid (problem / audience) ---------- */
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 40px; }
+  .gcard { background: var(--paper); border: 1px solid var(--rule); padding: 28px; border-radius: 3px; }
+  .gcard .num { font-family: var(--mono); font-size: 12px; letter-spacing: 1.4px; color: var(--rust); margin-bottom: 10px; }
+  .gcard p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--navy-80); }
+  @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } }
+
+  /* ---------- Pipeline (7 stages) ---------- */
+  .pipeline { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; margin-top: 44px; border-top: 1px solid var(--rule-strong); }
+  .pipeline .pstep { border-right: 1px solid var(--rule); padding: 24px 18px 24px 0; }
+  .pipeline .pstep:last-child { border-right: none; }
+  .pipeline .pstep .c { font-family: var(--mono); font-size: 12px; letter-spacing: 1.2px; color: var(--rust); font-weight: 500; }
+  .pipeline .pstep h4 { font-family: var(--serif); font-weight: 600; font-size: 17px; margin: 10px 0 6px; color: var(--navy); }
+  .pipeline .pstep p { font-size: 13px; line-height: 1.5; color: var(--navy-80); margin: 0; }
+  @media (max-width: 920px) { .pipeline { grid-template-columns: 1fr 1fr; } .pipeline .pstep { border-right: none; border-bottom: 1px solid var(--rule); padding: 20px 0; } .pipeline .pstep:last-child { border-bottom: none; } }
+
+  /* ---------- Anatomy (integrity + deliverable) ---------- */
+  .anatomy { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-top: 8px; }
+  @media (max-width: 820px) { .anatomy { grid-template-columns: 1fr; gap: 40px; } }
+  .ilist { list-style: none; padding: 0; margin: 0; }
+  .ilist li { padding: 18px 0; border-top: 1px solid var(--rule); }
+  .ilist li:first-child { border-top: none; }
+  .ilist .h { font-family: var(--serif); font-weight: 600; font-size: 18px; color: var(--navy); }
+  .ilist .h em { font-style: normal; color: var(--rust); margin-right: 8px; }
+  .ilist p { font-size: 14.5px; color: var(--navy-80); margin: 6px 0 0; }
+  .anatomy-card { background: var(--navy); color: var(--bone); padding: 40px; border-radius: 3px; position: relative; overflow: hidden; }
+  .anatomy-card::before { content: ""; position: absolute; left: 40px; right: 40px; bottom: 30px; height: 2px; background: linear-gradient(to right, var(--bone) 0%, var(--bone) 78%, var(--rust) 78%, var(--rust) 100%); }
+  .anatomy-card .label { font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--rust-soft); margin-bottom: 14px; }
+  .anatomy-card h3 { color: var(--bone); font-size: 26px; margin-bottom: 18px; }
+  .anatomy-card .quote { font-family: var(--serif); font-size: 23px; line-height: 1.32; color: var(--bone); margin: 0 0 18px; }
+  .anatomy-card .qsub { font-size: 14px; line-height: 1.55; color: rgba(245,241,235,0.78); margin: 0 0 40px; }
+  .anatomy-card ul { list-style: none; padding: 0; margin: 0 0 48px; }
+  .anatomy-card li { padding: 13px 0; border-top: 1px solid rgba(245, 241, 235, 0.16); font-size: 15px; line-height: 1.5; }
+  .anatomy-card li:last-child { border-bottom: 1px solid rgba(245, 241, 235, 0.16); }
+  .anatomy-card li .k { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rust-soft); margin-bottom: 4px; }
+
+  /* ---------- Diagnostics catalog ---------- */
+  .diag-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+  @media (max-width: 860px) { .diag-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .diag-grid { grid-template-columns: 1fr; } }
+  .diag { background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; padding: 26px; display: flex; flex-direction: column; position: relative; }
+  .diag .dnum { font-family: var(--mono); font-size: 12px; letter-spacing: 1.4px; color: var(--navy-60); margin-bottom: 10px; }
+  .diag h3 { font-size: 19px; margin-bottom: 10px; }
+  .diag .exp { font-size: 14px; line-height: 1.55; color: var(--navy-80); flex: 1; margin: 0; }
+  .diag .lad { font-family: var(--mono); font-size: 11px; letter-spacing: 0.4px; color: var(--navy-60); margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .diag .lad b { color: var(--rust); font-weight: 500; }
+  .diag.flag { background: var(--navy); border-color: var(--navy); box-shadow: 0 18px 40px -20px rgba(15,30,61,0.4); }
+  .diag.flag h3, .diag.flag .dnum { color: var(--bone); }
+  .diag.flag .exp { color: rgba(245,241,235,0.82); }
+  .diag.flag .lad { color: rgba(245,241,235,0.7); border-top-color: rgba(245,241,235,0.18); }
+  .diag.flag .lad b { color: var(--rust-soft); }
+  .diag .dtag { position: absolute; top: -12px; left: 24px; font-family: var(--mono); font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--bone); background: var(--rust); padding: 4px 10px; border-radius: 2px; }
+
+  /* ---------- Ladder (pricing) ---------- */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; align-items: stretch; }
+  @media (max-width: 820px) { .pricing-grid { grid-template-columns: 1fr; } }
+  .price-card { background: var(--paper); border: 1px solid var(--rule); padding: 32px 28px; border-radius: 3px; display: flex; flex-direction: column; position: relative; }
+  .price-card.featured { background: var(--navy); color: var(--bone); border-color: var(--navy); transform: translateY(-8px); box-shadow: 0 18px 40px -20px rgba(15,30,61,0.4); }
+  @media (max-width: 820px) { .price-card.featured { transform: none; } }
+  .price-card .price-label { font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--navy-60); margin-bottom: 12px; }
+  .price-card.featured .price-label { color: var(--rust-soft); }
+  .price-card .price-num { font-family: var(--serif); font-weight: 700; font-size: 30px; line-height: 1; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 8px; }
+  .price-card.featured .price-num { color: var(--bone); }
+  .price-card .price-name { font-family: var(--serif); font-weight: 600; font-size: 19px; color: var(--navy); margin-bottom: 14px; }
+  .price-card.featured .price-name { color: var(--bone); }
+  .price-card .price-body { font-size: 14px; line-height: 1.55; color: var(--navy-80); margin: 0 0 18px; }
+  .price-card.featured .price-body { color: rgba(245, 241, 235, 0.82); }
+  .price-card .price-cta { margin-top: auto; font-family: var(--sans); font-weight: 600; font-size: 14px; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--rust); padding-bottom: 3px; align-self: flex-start; }
+  .price-card.featured .price-cta { color: var(--bone); }
+  .price-card .price-cta:hover { color: var(--rust); }
+  .price-card.featured .price-cta:hover { color: var(--rust-soft); }
+  .price-card .price-tag { position: absolute; top: -12px; left: 28px; font-family: var(--mono); font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--bone); background: var(--rust); padding: 4px 10px; border-radius: 2px; }
+  .pricing-closing { margin-top: 36px; font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--navy-80); max-width: 64ch; }
+  .pricing-closing a { color: var(--navy); }
+  .pricing-closing a:hover { color: var(--rust); }
+
+  /* ---------- People (built by) ---------- */
+  .people { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 8px; }
+  @media (max-width: 820px) { .people { grid-template-columns: 1fr; } }
+  .person { background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; padding: 32px; }
+  .person .pmono { font-family: var(--serif); font-weight: 700; font-size: 48px; line-height: 1; color: var(--navy); letter-spacing: -1px; border-bottom: 2px solid var(--rust); padding-bottom: 8px; display: inline-block; margin-bottom: 18px; }
+  .person .prole { font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rust); margin-bottom: 8px; }
+  .person h3 { margin-bottom: 4px; }
+  .person .cred { font-family: var(--mono); font-size: 12px; letter-spacing: 0.6px; color: var(--navy-60); margin-bottom: 14px; }
+  .person p { font-size: 15px; line-height: 1.6; color: var(--navy-80); margin: 0; }
+  .metrics { margin-top: 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; border-top: 1px solid var(--rule); padding-top: 28px; }
+  .metrics dt { font-family: var(--serif); font-weight: 700; font-size: 26px; color: var(--navy); }
+  .metrics dd { margin: 6px 0 0; font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy-60); line-height: 1.4; }
+  @media (max-width: 760px) { .metrics { grid-template-columns: 1fr 1fr; } }
+
+  /* ---------- Capacity strip ---------- */
+  .capacity { padding: clamp(40px, 6vw, 64px) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--bone-deep); }
+  .capacity .cap-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--rust); margin-bottom: 10px; }
+  .capacity .cap-statement { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 3.2vw, 34px); line-height: 1.15; color: var(--navy); margin: 0 0 18px; max-width: 26ch; }
+  .capacity .cap-body { font-size: 15px; line-height: 1.6; color: var(--navy-80); max-width: 80ch; margin: 0 0 22px; }
+  .capacity a.cap-cta { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans); font-weight: 600; font-size: 14px; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--rust); padding-bottom: 2px; }
+  .capacity a.cap-cta:hover { color: var(--rust); }
+
+  /* ---------- Contact ---------- */
+  .contact { background: var(--navy); color: var(--bone); margin: 0 calc(-1 * var(--gutter)); }
+  .contact-inner { max-width: var(--max); margin: 0 auto; padding: clamp(56px, 7vw, 96px) var(--gutter); display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; }
+  @media (max-width: 880px) { .contact-inner { grid-template-columns: 1fr; gap: 40px; } }
+  .contact-left .section-eyebrow { color: var(--rust-soft); }
+  .contact-left h2 { color: var(--bone); }
+  .contact-left p.lead { color: rgba(245, 241, 235, 0.78); font-style: italic; }
+  .contact-channels { margin-top: 32px; border-top: 1px solid rgba(245, 241, 235, 0.18); }
+  .channel { display: block; padding: 22px 0; border-bottom: 1px solid rgba(245, 241, 235, 0.18); color: var(--bone); text-decoration: none; transition: padding-left 160ms ease; }
+  .channel:hover { padding-left: 12px; color: var(--bone); }
+  .channel:hover .channel-title { color: var(--rust-soft); }
+  .channel .channel-label { font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--rust-soft); margin-bottom: 6px; }
+  .channel .channel-title { font-family: var(--serif); font-size: 20px; font-weight: 600; transition: color 120ms ease; }
+  .channel .channel-sub { font-size: 14px; color: rgba(245, 241, 235, 0.7); margin-top: 4px; }
+  form.intake { background: var(--bone); color: var(--navy); padding: 40px; border-radius: 3px; }
+  form.intake .form-title { font-family: var(--serif); font-weight: 600; font-size: 22px; margin: 0 0 6px; }
+  form.intake .form-sub { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--navy-60); margin-bottom: 28px; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--navy-80); margin-bottom: 6px; }
+  .field label .req { color: var(--rust); }
+  .field input, .field select, .field textarea { width: 100%; padding: 12px 14px; font-family: var(--sans); font-size: 15px; color: var(--navy); background: var(--paper); border: 1px solid var(--rule-strong); border-radius: 2px; transition: border-color 120ms ease, box-shadow 120ms ease; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(184, 81, 42, 0.18); }
+  .field textarea { min-height: 104px; resize: vertical; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 540px) { .field-row { grid-template-columns: 1fr; } }
+  form.intake .submit-row { margin-top: 8px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  form.intake .privacy { font-family: var(--mono); font-size: 11px; color: var(--navy-60); letter-spacing: 0.3px; }
+
+  /* ---------- Footer ---------- */
+  footer.site { border-top: 1px solid var(--rule); padding: 40px 0 56px; background: var(--bone-deep); }
+  .foot-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: end; }
+  @media (max-width: 640px) { .foot-inner { grid-template-columns: 1fr; } }
+  .foot-tag { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--navy-80); }
+  .foot-tag .sep { color: var(--rust); padding: 0 8px; font-style: normal; }
+  .foot-legal { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--navy-60); text-align: right; }
+  @media (max-width: 640px) { .foot-legal { text-align: left; } }
+
+  @media print { header.site, nav.site-nav, .hero-ctas, form.intake { display: none; } body { background: white; color: black; } }
+</style>
+</head>
+
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="wrap site-inner">
+    <a href="https://theseamlinemethod.com/" class="brandmark" aria-label="The SEAMline Method">
+      <span class="wordmark"><span class="caps">SEAM</span><span class="tail">line</span></span>
+      <span class="seamline" aria-hidden="true"></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#engine">The engine</a>
+      <a href="#integrity">Integrity</a>
+      <a href="#catalog">Diagnostics</a>
+      <a href="#ladder">How it works</a>
+      <a href="/ai-quickstart">AI Quickstart</a>
+      <a href="#contact" class="btn-mini">Request access</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">VISOR Analytics · NSAI · Strategic-Intelligence Engine</div>
+    <h1 class="hero-title">
+      Strategy numbers your board can <span class="accent">actually defend.</span>
+    </h1>
+    <p class="hero-deck">
+      Fixed-fee strategic diagnostics that surface a costly fracture in days — produced by NSAI, a gated intelligence engine, and cleared through an integrity system before a single number reaches you.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://calendly.com/singhleadership/let-s-just-talk" target="_blank" rel="noopener">
+        Book a working call <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="btn btn-ghost" href="#catalog">
+        See the diagnostics <span class="arrow" aria-hidden="true">↓</span>
+      </a>
+    </div>
+    <dl class="hero-meta">
+      <div><dt>Input</dt><dd>A company description</dd></div>
+      <div><dt>Output</dt><dd>Board-grade analysis</dd></div>
+      <div><dt>Method</dt><dd>Nine diagnostics · gated</dd></div>
+      <div><dt>Built for</dt><dd>Numbers that hold up</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ ON-RAMP: AI QUICKSTART ============ -->
+<aside class="ramp" aria-label="AI Quickstart on-ramp">
+  <div class="wrap">
+    <div>
+      <div class="r-eyebrow">A smaller first step</div>
+      <p class="r-line">Not ready to commission a diagnostic? Get your team actually using AI in a live 90-minute workshop — $497, fee credits 100% toward seam work.</p>
+    </div>
+    <a class="btn btn-ghost" href="/ai-quickstart">See the AI Quickstart <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</aside>
+
+<!-- ============ THE PROBLEM ============ -->
+<section id="problem">
+  <div class="wrap">
+    <div class="section-eyebrow">Why this exists</div>
+    <h2>AI will hand you a confident number. It won't tell you it's wrong.</h2>
+    <p class="lead">Ask a general-purpose model to size a market or value a company and it returns a clean, persuasive answer. The problem isn't fluency — it's that one bad assumption upstream silently rewrites everything downstream, and nothing flags it.</p>
+    <div class="grid3">
+      <div class="gcard">
+        <div class="num">01 · The cascade</div>
+        <h3>One wrong input rewrites the rest.</h3>
+        <p>A market-size filter applied in the wrong place can pull a valuation off by an order of magnitude — and every chart still looks finished.</p>
+      </div>
+      <div class="gcard">
+        <div class="num">02 · The tell</div>
+        <h3>Plausible is not defensible.</h3>
+        <p>A deck that reads well in a meeting falls apart in diligence, the moment someone asks where the denominator came from.</p>
+      </div>
+      <div class="gcard">
+        <div class="num">03 · The cost</div>
+        <h3>No provenance, no trust.</h3>
+        <p>If you can't trace a figure to a source or a stated assumption, you can't put your name on it in front of a board or an investor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE ENGINE ============ -->
+<section id="engine" style="background: var(--bone-deep);">
+  <div class="wrap">
+    <div class="section-eyebrow">The engine · NSAI</div>
+    <h2>A repeatable pipeline that reasons like an analyst — and checks its own work.</h2>
+    <p class="lead">NSAI runs a company through seven gated stages, from raw description to a board-ready report. Each stage produces real artifacts, and no stage advances until the numbers behind it pass a structured validation.</p>
+    <div class="pipeline">
+      <div class="pstep"><div class="c">C1</div><h4>Foundation</h4><p>Parse the business; lock the revenue streams.</p></div>
+      <div class="pstep"><div class="c">C2</div><h4>Numbers</h4><p>Market size, unit economics, pricing.</p></div>
+      <div class="pstep"><div class="c">C3</div><h4>Competition</h4><p>Who else, and where the gaps are.</p></div>
+      <div class="pstep"><div class="c">C4</div><h4>Position</h4><p>Archetype and strategic posture.</p></div>
+      <div class="pstep"><div class="c">C5</div><h4>Strategy</h4><p>The plan and how it's designed.</p></div>
+      <div class="pstep"><div class="c">C6</div><h4>Valuation</h4><p>DCF plus a blended enterprise value.</p></div>
+      <div class="pstep"><div class="c">C7</div><h4>The Report</h4><p>One board-grade deliverable.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTEGRITY ============ -->
+<section id="integrity">
+  <div class="wrap">
+    <div class="section-eyebrow">The difference</div>
+    <h2>The integrity system is the product.</h2>
+    <p class="lead">Anyone can generate a number. NSAI is engineered to refuse one it can't stand behind — through defenses that sit between each stage and block the analysis from advancing until it reconciles.</p>
+    <div class="anatomy">
+      <ul class="ilist">
+        <li><div class="h"><em>1</em>Filter firewall</div><p>Every adjustment is classified before it's applied, so a market-share haircut can never quietly shrink the total market it belongs to.</p></li>
+        <li><div class="h"><em>2</em>Anchor independence</div><p>No figure may be reverse-engineered toward a target. Each result has to stand on its own method.</p></li>
+        <li><div class="h"><em>3</em>Nine validation gates</div><p>Each stage clears a structured checklist — convergence, misclassification, scope, and a sanity band on the final valuation — before it locks.</p></li>
+        <li><div class="h"><em>4</em>Lock-invalidation protocol</div><p>Change a locked input and every downstream number is flagged and re-derived. Publication is blocked until the chain reconciles.</p></li>
+      </ul>
+      <div class="anatomy-card">
+        <div class="label">Why it exists</div>
+        <p class="quote">"We rebuilt the gates after a market size came out roughly 20× too low — and passed the old checks anyway. That can't happen now."</p>
+        <p class="qsub">Confident, structurally-wrong output is the real risk. Every defense traces to a failure we engineered out — and every gate is set and held by an independent reviewer, not the system that produced the number.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE DELIVERABLE ============ -->
+<section id="deliverable" style="background: var(--bone-deep);">
+  <div class="wrap">
+    <div class="section-eyebrow">What you get</div>
+    <h2>One board-grade report — and the work underneath it.</h2>
+    <div class="anatomy">
+      <div>
+        <p style="margin-bottom:16px;">Every diagnostic lands on a single terminal deliverable in the same five-part shape — so a buyer of one report instantly understands the next, and anyone who questions a figure can see exactly where it came from.</p>
+        <p style="font-family: var(--serif); font-style: italic; color: var(--navy); font-size: 17px;">Standardization is the moat: identical shape lets the engine produce fast, and lets a buyer value the next report on sight.</p>
+      </div>
+      <div class="anatomy-card">
+        <div class="label">The report · five parts</div>
+        <h3>The same shape, every time.</h3>
+        <ul>
+          <li><span class="k">01 · Maturity / opportunity score</span>A single defensible number, with sub-scores.</li>
+          <li><span class="k">02 · Fracture map</span>Phase × party × fracture — where continuity breaks.</li>
+          <li><span class="k">03 · Quantified gap + cost of inaction</span>What the fracture is costing, in their numbers.</li>
+          <li><span class="k">04 · One-page heatmap</span>The finding an executive grasps in ten seconds.</li>
+          <li><span class="k">05 · What the full run fixes</span>The bridge to the SEAMline Architecture.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATALOG ============ -->
+<section id="catalog">
+  <div class="wrap">
+    <div class="section-eyebrow">What you can commission</div>
+    <h2>Nine diagnostics. One repeatable shape.</h2>
+    <p class="lead">Each is a fixed-scope report that surfaces a costly fracture fast — and opens a clear path to the full plan that fixes it.</p>
+    <div class="diag-grid">
+      <div class="diag">
+        <div class="dnum">01</div>
+        <h3>Growth &amp; Hidden-Opportunity X-Ray</h3>
+        <p class="exp">TAM/SAM plus the hidden segments and demand left on the table.</p>
+        <div class="lad">Ladders into → <b>Strategy + valuation plan</b></div>
+      </div>
+      <div class="diag flag">
+        <span class="dtag">Flagship</span>
+        <h3>Data &amp; Analytics Maturity</h3>
+        <p class="exp">Maturity across governance, data quality, and analytics enablement — scored against a target with a quantified gap.</p>
+        <div class="lad">Ladders into → <b>Data &amp; analytics strategy + roadmap</b></div>
+      </div>
+      <div class="diag">
+        <div class="dnum">03</div>
+        <h3>IT / Digital Transformation Readiness</h3>
+        <p class="exp">Tech-stack and capability gaps measured against the digital ambition.</p>
+        <div class="lad">Ladders into → <b>IT roadmap + transformation plan</b></div>
+      </div>
+      <div class="diag">
+        <div class="dnum">04</div>
+        <h3>Operating Model &amp; Process Maturity</h3>
+        <p class="exp">Process maturity, waste, and org-design friction across the handoffs.</p>
+        <div class="lad">Ladders into → <b>Operating-model redesign</b></div>
+      </div>
+      <div class="diag">
+        <div class="dnum">05</div>
+        <h3>Marketing &amp; Demand</h3>
+        <p class="exp">Funnel and positioning gaps; where marketing spend is leaking efficiency.</p>
+        <div class="lad">Ladders into → <b>Full marketing plan</b></div>
+      </div>
+      <div class="diag">
+        <div class="dnum">06</div>
+        <h3>Sales Effectiveness &amp; Pipeline</h3>
+        <p class="exp">Pipeline health, account coverage, and how real the projections are.</p>
+        <div class="lad">Ladders into → <b>Sales plan + territory/comp</b></div>
+      </div>
+      <div class="diag">
+        <div class="dnum">07</div>
+        <h3>Financial Health &amp; Value</h3>
+        <p class="exp">Profitability leaks and the real value-creation drivers.</p>
+        <div class="lad">Ladders into → <b>Financial / value-creation plan</b></div>
+      </div>
+      <div class="diag">
+        <div class="dnum">08</div>
+        <h3>Risk, Continuity &amp; Cyber Readiness</h3>
+        <p class="exp">BCP/DR gaps, risk-log exposure, and cyber posture.</p>
+        <div class="lad">Ladders into → <b>Risk &amp; resilience plan</b></div>
+      </div>
+      <div class="diag">
+        <div class="dnum">09</div>
+        <h3>Deal &amp; Integration Readiness</h3>
+        <p class="exp">Pre-deal diligence gaps and post-merger integration risk.</p>
+        <div class="lad">Ladders into → <b>Diligence / 100-day integration plan</b></div>
+      </div>
+    </div>
+    <p style="margin-top:24px; font-family: var(--mono); font-size: 12px; letter-spacing:0.4px; color: var(--navy-60); max-width: 80ch;">Data &amp; Analytics Maturity leads the line — the diagnostic backed by named-client work (GuideWell / Florida Blue). Engagement outcomes are illustrative pending verification.</p>
+  </div>
+</section>
+
+<!-- ============ THE LADDER ============ -->
+<section id="ladder" style="background: var(--bone-deep);">
+  <div class="wrap">
+    <div class="section-eyebrow">How it works</div>
+    <h2>Start with one fracture. Climb only if it's worth it.</h2>
+    <p class="lead">Every diagnostic is rung one of a three-step ladder. You buy the fracture-finding first — fast and fixed — then decide whether to go further.</p>
+    <div class="pricing-grid">
+      <div class="price-card featured">
+        <span class="price-tag">Start here</span>
+        <div class="price-label">Rung 1 · Diagnostic</div>
+        <div class="price-num">The fracture report</div>
+        <div class="price-name">Fixed fee · days, not months</div>
+        <p class="price-body">One question, one price. Surfaces the fracture, scores the gap, and quantifies the cost of inaction — produced by NSAI and cleared through its integrity gates.</p>
+        <a class="price-cta" href="https://calendly.com/singhleadership/let-s-just-talk" target="_blank" rel="noopener">Request pricing →</a>
+      </div>
+      <div class="price-card">
+        <div class="price-label">Rung 2 · Blueprint</div>
+        <div class="price-num">The full run</div>
+        <div class="price-name">Higher fee · weeks</div>
+        <p class="price-body">The SEAMline Architecture — the sequenced, costed plan that closes the gap the diagnostic exposed.</p>
+        <a class="price-cta" href="https://calendly.com/singhleadership/let-s-just-talk" target="_blank" rel="noopener">Request pricing →</a>
+      </div>
+      <div class="price-card">
+        <div class="price-label">Rung 3 · Build</div>
+        <div class="price-num">Implementation</div>
+        <div class="price-name">Retainer or project</div>
+        <p class="price-body">Hands-on delivery or ongoing advisory to put the architecture into the operation.</p>
+        <a class="price-cta" href="https://calendly.com/singhleadership/let-s-just-talk" target="_blank" rel="noopener">Request pricing →</a>
+      </div>
+    </div>
+    <p class="pricing-closing">
+      Prefer to start yourself? The same nine questions exist as do-it-yourself toolkits — from $37, including the $147 Fracture Diagnostic and the $197 Redesign Playbook. <a href="#contact">Ask about the toolkits →</a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ BUILT BY ============ -->
+<section id="proof">
+  <div class="wrap">
+    <div class="section-eyebrow">Who's behind it</div>
+    <h2>Built by operators who've had to defend these numbers.</h2>
+    <p class="lead">NSAI pairs a builder with an independent reviewer on purpose. One designs the engine; the other sets the gates and holds them — so the integrity isn't self-graded.</p>
+    <div class="people">
+      <div class="person">
+        <div class="pmono">PS</div>
+        <div class="prole">Builder &amp; operator</div>
+        <h3>Pankaj Singh</h3>
+        <div class="cred">VISOR Analytics · former COO / CTO / CIO</div>
+        <p>Twenty-five years running the exact rooms these reports go into — PE-backed integrations, enterprise data, and valuations that had to survive a board. He builds the pipeline and owns the locks.</p>
+      </div>
+      <div class="person">
+        <div class="pmono">PS</div>
+        <div class="prole">Quality reviewer · sets the gates</div>
+        <h3>Peter Schrady</h3>
+        <div class="cred">Former Chief Strategy Officer, Avnet · SVP/GM ProLiant, HPE</div>
+        <p>A Fortune-500 strategy operator who defines the validation gates and stands as the standing reviewer on the high-stakes ones. The numbers don't publish until they clear his bar.</p>
+      </div>
+    </div>
+    <dl class="metrics">
+      <div><dt>28</dt><dd>acquisitions integrated (PE-backed)</dd></div>
+      <div><dt>$75M→$300M</dt><dd>scale led as COO / CTO</dd></div>
+      <div><dt>$120M</dt><dd>funding secured on a data blueprint</dd></div>
+      <div><dt>$36M+</dt><dd>savings delivered across roles</dd></div>
+    </dl>
+    <p style="margin-top:18px; font-family: var(--mono); font-size: 12px; letter-spacing:0.4px; color: var(--navy-60);">Headline metrics reflect Pankaj Singh's operating roles.</p>
+  </div>
+</section>
+
+<!-- ============ WHO IT'S FOR ============ -->
+<section id="fit" style="background: var(--bone-deep);">
+  <div class="wrap">
+    <div class="section-eyebrow">Fit</div>
+    <h2>When the number has to hold up.</h2>
+    <div class="grid3">
+      <div class="gcard"><h3>PE &amp; VC diligence</h3><p>A fast, defensible read on a target's market and value — with the assumptions exposed.</p></div>
+      <div class="gcard"><h3>Corp dev &amp; M&amp;A</h3><p>Board-grade sizing and valuation for a deal thesis you'll have to defend internally.</p></div>
+      <div class="gcard"><h3>Founders &amp; CFOs</h3><p>A raise- or board-ready strategy and valuation that survives the hard questions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPACITY ============ -->
+<aside class="capacity" aria-label="Access">
+  <div class="wrap">
+    <div class="cap-eyebrow">Access · 2026</div>
+    <h2 class="cap-statement">By application. Scoped per engagement.</h2>
+    <p class="cap-body">The Report Factory is being made available to a small number of partners through a short scoping conversation. Tell us the company and the decision it's feeding — we'll show you what the engine produces.</p>
+    <a class="cap-cta" href="#contact">Request access <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</aside>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" style="border-top: none; padding: 0;">
+  <div class="wrap">
+    <div class="contact">
+      <div class="contact-inner">
+        <div class="contact-left">
+          <div class="section-eyebrow">An invitation</div>
+          <h2>Bring a company. Leave with an analysis you'd put in front of a board.</h2>
+          <p class="lead">Tell us what you're deciding. If a diagnostic is the right fit, we'll scope it on the call. If it isn't, we'll tell you that on the call.</p>
+          <div class="contact-channels">
+            <a class="channel" href="https://calendly.com/singhleadership/let-s-just-talk" target="_blank" rel="noopener">
+              <div class="channel-label">Book directly · 30 minutes</div>
+              <div class="channel-title">Let's just talk →</div>
+              <div class="channel-sub">calendly.com/singhleadership/let-s-just-talk</div>
+            </a>
+            <a class="channel" href="mailto:info@singhpowerupcoach.com?subject=Report%20Factory%20%E2%80%94%20request%20access">
+              <div class="channel-label">Or email</div>
+              <div class="channel-title">info@singhpowerupcoach.com</div>
+              <div class="channel-sub">Reply within one business day.</div>
+            </a>
+          </div>
+        </div>
+
+        <form class="intake" id="intakeForm" novalidate>
+          <div class="form-title">Request access</div>
+          <div class="form-sub">Five fields · two minutes · no newsletter</div>
+          <div class="field-row">
+            <div class="field"><label for="f-name">Name <span class="req">*</span></label><input id="f-name" name="name" type="text" autocomplete="name" required /></div>
+            <div class="field"><label for="f-role">Role / title <span class="req">*</span></label><input id="f-role" name="role" type="text" autocomplete="organization-title" required /></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="f-company">Company <span class="req">*</span></label><input id="f-company" name="company" type="text" autocomplete="organization" required /></div>
+            <div class="field"><label for="f-email">Work email <span class="req">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
+          </div>
+          <div class="field">
+            <label for="f-diag">Which diagnostic interests you?</label>
+            <select id="f-diag" name="diag">
+              <option value="">Choose one…</option>
+              <option>Growth &amp; Hidden-Opportunity X-Ray</option>
+              <option>Data &amp; Analytics Maturity (flagship)</option>
+              <option>IT / Digital Transformation Readiness</option>
+              <option>Operating Model &amp; Process Maturity</option>
+              <option>Marketing &amp; Demand</option>
+              <option>Sales Effectiveness &amp; Pipeline</option>
+              <option>Financial Health &amp; Value</option>
+              <option>Risk, Continuity &amp; Cyber Readiness</option>
+              <option>Deal &amp; Integration Readiness</option>
+              <option>Not sure yet — help me pick</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-decision">What decision is this feeding? <span class="req">*</span></label>
+            <textarea id="f-decision" name="decision" required placeholder="A few sentences. The company, the call you're making — a raise, a deal, a board review, a strategy reset."></textarea>
+            <div class="hint">This becomes the starting point for the working call.</div>
+          </div>
+          <div class="submit-row">
+            <button type="submit" class="btn btn-primary">Send request <span class="arrow" aria-hidden="true">→</span></button>
+            <span class="privacy">No newsletter. No CRM nurture. Just a reply.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap foot-inner">
+    <div class="foot-tag">
+      Find the seam. <span class="sep">·</span> Hold the line. <span class="sep">|</span> Built to FABRIC.
+    </div>
+    <div class="foot-legal">
+      © 2026 Singh PowerUp Coach LLC · Florida<br />
+      The SEAMline Method™ · FABRIC™ · NSAI™ · USPTO applied-for
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Request-access intake → mailto fallback (replace with Formspree endpoint pre-launch)
+  (function () {
+    var form = document.getElementById('intakeForm');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var data = {
+        name: document.getElementById('f-name').value.trim(),
+        role: document.getElementById('f-role').value.trim(),
+        company: document.getElementById('f-company').value.trim(),
+        email: document.getElementById('f-email').value.trim(),
+        diag: document.getElementById('f-diag').value,
+        decision: document.getElementById('f-decision').value.trim()
+      };
+      var missing = [];
+      if (!data.name) missing.push('Name');
+      if (!data.role) missing.push('Role');
+      if (!data.company) missing.push('Company');
+      if (!data.email) missing.push('Work email');
+      if (!data.decision) missing.push('What decision this is feeding');
+      if (missing.length) { alert('Please complete: ' + missing.join(', ')); return; }
+      var subject = 'Report Factory — access request — ' + data.company + ' (' + data.name + ')';
+      var body =
+        'Report Factory access request\n' +
+        '=============================\n\n' +
+        'Name:      ' + data.name + '\n' +
+        'Role:      ' + data.role + '\n' +
+        'Company:   ' + data.company + '\n' +
+        'Email:     ' + data.email + '\n' +
+        'Diagnostic:' + (data.diag || '—') + '\n\n' +
+        'Decision this is feeding\n' +
+        '------------------------\n' + data.decision + '\n\n' +
+        '— Sent from the Report Factory page.\n';
+      window.location.href = 'mailto:info@singhpowerupcoach.com'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+    });
+  })();
+</script>
+
+</body>
+</html>
