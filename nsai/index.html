@@ -393,9 +393,10 @@
 <!-- ============ CATALOG ============ -->
 <section id="catalog">
   <div class="wrap">
-    <div class="section-eyebrow">What you can commission</div>
-    <h2>Nine diagnostics. One repeatable shape.</h2>
-    <p class="lead">Each is a fixed-scope report that surfaces a costly fracture fast — and opens a clear path to the full plan that fixes it.</p>
+    <div class="section-eyebrow">Other consulting services</div>
+    <h2>Beyond NSAI: how else we help.</h2>
+    <p class="lead"><b>NSAI strategic intelligence is our flagship engagement.</b> Beyond it, we also take on the consulting work that turns a strategy into reality. Two ways to commission us: the NSAI-accelerated diagnostics that surface a costly fracture fast — each opening a clear path to the full plan that fixes it — and hands-on delivery engagements where our team runs the build, the data, and the platform.</p>
+    <p style="font-family: var(--mono); font-size: 12px; letter-spacing:0.4px; color: var(--navy-60); margin:-6px 0 26px;">NSAI-accelerated diagnostics</p>
     <div class="diag-grid">
       <div class="diag">
         <div class="dnum">01</div>
@@ -450,6 +451,25 @@
         <h3>Deal &amp; Integration Readiness</h3>
         <p class="exp">Pre-deal diligence gaps and post-merger integration risk.</p>
         <div class="lad">Ladders into → <b>Diligence / 100-day integration plan</b></div>
+      </div>
+      <div style="grid-column:1 / -1; font-family: var(--mono); font-size:12px; letter-spacing:0.4px; color: var(--navy-60); margin:18px 0 -6px;">Hands-on delivery engagements</div>
+      <div class="diag">
+        <div class="dnum">10</div>
+        <h3>Data Management &amp; Governance</h3>
+        <p class="exp">Data quality, integration, and governance — built and run, not just recommended.</p>
+        <div class="lad">Delivery → <b>Managed data &amp; analytics</b></div>
+      </div>
+      <div class="diag">
+        <div class="dnum">11</div>
+        <h3>Business Process Optimization &amp; BPO</h3>
+        <p class="exp">Redesign the workflow, then own the execution — including outsourced operations.</p>
+        <div class="lad">Delivery → <b>Process redesign + run</b></div>
+      </div>
+      <div class="diag">
+        <div class="dnum">12</div>
+        <h3>Platform Administration &amp; Implementation</h3>
+        <p class="exp">Stand up, configure, and administer the operating platform — with a dedicated delivery team.</p>
+        <div class="lad">Delivery → <b>Build, migrate &amp; administer</b></div>
       </div>
     </div>
     <p style="margin-top:24px; font-family: var(--mono); font-size: 12px; letter-spacing:0.4px; color: var(--navy-60); max-width: 80ch;">Data &amp; Analytics Maturity leads the line — the diagnostic backed by named-client work (GuideWell / Florida Blue). Engagement outcomes are illustrative pending verification.</p>
@@ -632,39 +652,4 @@
     if (!form) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var data = {
-        name: document.getElementById('f-name').value.trim(),
-        role: document.getElementById('f-role').value.trim(),
-        company: document.getElementById('f-company').value.trim(),
-        email: document.getElementById('f-email').value.trim(),
-        diag: document.getElementById('f-diag').value,
-        decision: document.getElementById('f-decision').value.trim()
-      };
-      var missing = [];
-      if (!data.name) missing.push('Name');
-      if (!data.role) missing.push('Role');
-      if (!data.company) missing.push('Company');
-      if (!data.email) missing.push('Work email');
-      if (!data.decision) missing.push('What decision this is feeding');
-      if (missing.length) { alert('Please complete: ' + missing.join(', ')); return; }
-      var subject = 'Report Factory — access request — ' + data.company + ' (' + data.name + ')';
-      var body =
-        'Report Factory access request\n' +
-        '=============================\n\n' +
-        'Name:      ' + data.name + '\n' +
-        'Role:      ' + data.role + '\n' +
-        'Company:   ' + data.company + '\n' +
-        'Email:     ' + data.email + '\n' +
-        'Diagnostic:' + (data.diag || '—') + '\n\n' +
-        'Decision this is feeding\n' +
-        '------------------------\n' + data.decision + '\n\n' +
-        '— Sent from the Report Factory page.\n';
-      window.location.href = 'mailto:info@singhpowerupcoach.com'
-        + '?subject=' + encodeURIComponent(subject)
-        + '&body=' + encodeURIComponent(body);
-    });
-  })();
-</script>
-
-</body>
-</html>
+      var d
