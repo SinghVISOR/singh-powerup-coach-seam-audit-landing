@@ -652,4 +652,39 @@
     if (!form) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var d
+      var data = {
+        name: document.getElementById('f-name').value.trim(),
+        role: document.getElementById('f-role').value.trim(),
+        company: document.getElementById('f-company').value.trim(),
+        email: document.getElementById('f-email').value.trim(),
+        diag: document.getElementById('f-diag').value,
+        decision: document.getElementById('f-decision').value.trim()
+      };
+      var missing = [];
+      if (!data.name) missing.push('Name');
+      if (!data.role) missing.push('Role');
+      if (!data.company) missing.push('Company');
+      if (!data.email) missing.push('Work email');
+      if (!data.decision) missing.push('What decision this is feeding');
+      if (missing.length) { alert('Please complete: ' + missing.join(', ')); return; }
+      var subject = 'Report Factory — access request — ' + data.company + ' (' + data.name + ')';
+      var body =
+        'Report Factory access request\n' +
+        '=============================\n\n' +
+        'Name:      ' + data.name + '\n' +
+        'Role:      ' + data.role + '\n' +
+        'Company:   ' + data.company + '\n' +
+        'Email:     ' + data.email + '\n' +
+        'Diagnostic:' + (data.diag || '—') + '\n\n' +
+        'Decision this is feeding\n' +
+        '------------------------\n' + data.decision + '\n\n' +
+        '— Sent from the Report Factory page.\n';
+      window.location.href = 'mailto:info@singhpowerupcoach.com'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+    });
+  })();
+</script>
+
+</body>
+</html>
