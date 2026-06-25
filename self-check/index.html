@@ -1,1 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The 2-Minute Seam Self-Check | The SEAMline Method · FABRIC</title>
+<meta name="description" content="A free, 2-minute self-check that surfaces where your multi-party value chain may be leaking — eight questions, an instant read, and a clear next step. No email required." />
+<meta property="og:title" content="The 2-Minute Seam Self-Check — where is your value chain leaking?" />
+<meta property="og:description" content="Eight quick questions. An instant read on your seam health. The free de-risk path before any paid work." />
+<meta property="og:type" content="website" />
 
+<!-- Brand fonts: Source Serif 4 (headlines) · Inter (body) · JetBrains Mono (meta) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  /* ---------- Brand tokens (locked May 21, 2026) ---------- */
+  :root {
+    --navy: #0F1E3D;
+    --navy-80: #2B3A5A;
+    --navy-60: #5A6580;
+    --rust: #B8512A;
+    --rust-soft: #D77A52;
+    --bone: #F5F1EB;
+    --bone-deep: #ECE6DC;
+    --paper: #FFFFFF;
+    --rule: rgba(15, 30, 61, 0.14);
+    --rule-strong: rgba(15, 30, 61, 0.28);
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --max: 1120px;
+    --gutter: clamp(20px, 4vw, 56px);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bone); color: var(--navy); font-family: var(--sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  ::selection { background: var(--rust); color: var(--bone); }
+  a { color: var(--navy); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--rust); }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  section { padding: clamp(44px, 7vw, 88px) 0; border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: none; }
+
+  /* ---------- Header ---------- */
+  header.site { position: sticky; top: 0; z-index: 50; background: rgba(245, 241, 235, 0.92); backdrop-filter: saturate(140%) blur(8px); -webkit-backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--rule); }
+  .site-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brandmark { display: inline-flex; flex-direction: column; line-height: 1; text-decoration: none; }
+  .brandmark .wordmark { font-family: var(--serif); font-weight: 600; font-size: 22px; letter-spacing: 0.5px; color: var(--navy); }
+  .brandmark .wordmark .caps { letter-spacing: 1.2px; }
+  .brandmark .wordmark .tail { font-style: italic; font-weight: 400; letter-spacing: 0; }
+  .brandmark .seamline { margin-top: 4px; height: 2px; width: 100%; background: linear-gradient(to right, var(--navy) 0%, var(--navy) 78%, var(--rust) 78%, var(--rust) 100%); }
+  nav.site-nav { display: flex; gap: 28px; align-items: center; }
+  nav.site-nav a { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1.4px; text-decoration: none; color: var(--navy-80); }
+  nav.site-nav a:hover { color: var(--rust); }
+  nav.site-nav .btn-mini { font-family: var(--sans); font-size: 13px; letter-spacing: 0; text-transform: none; padding: 8px 14px; background: var(--navy); color: var(--bone); border-radius: 2px; }
+  nav.site-nav .btn-mini:hover { background: var(--rust); color: var(--bone); }
+  @media (max-width: 980px) { nav.site-nav a:not(.btn-mini) { display: none; } }
+
+  /* ---------- Buttons ---------- */
+  .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--sans); font-weight: 600; font-size: 16px; padding: 16px 26px; border-radius: 2px; text-decoration: none; border: 1px solid transparent; transition: background 120ms ease, color 120ms ease, border-color 120ms ease; cursor: pointer; }
+  .btn-primary { background: var(--navy); color: var(--bone); border-color: var(--navy); }
+  .btn-primary:hover { background: var(--rust); border-color: var(--rust); color: var(--bone); }
+  .btn-ghost { background: transparent; color: var(--navy); border-color: var(--rule-strong); }
+  .btn-ghost:hover { border-color: var(--navy); color: var(--navy); background: var(--bone-deep); }
+  .btn .arrow { transition: transform 120ms ease; }
+  .btn:hover .arrow { transform: translateX(3px); }
+  .btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+  .btn[disabled]:hover { background: var(--navy); border-color: var(--navy); color: var(--bone); }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-top: clamp(48px, 7vw, 84px); padding-bottom: clamp(28px, 4vw, 48px); }
+  .eyebrow { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--rust); margin-bottom: 20px; }
+  h1.hero-title { font-family: var(--serif); font-weight: 600; font-size: clamp(34px, 5vw, 56px); line-height: 1.06; letter-spacing: -0.5px; margin: 0 0 24px; max-width: 20ch; }
+  h1.hero-title .accent { color: var(--rust); font-style: italic; }
+  .hero-deck { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: clamp(18px, 2vw, 23px); line-height: 1.45; color: var(--navy-80); max-width: 60ch; margin: 0 0 26px; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.6px; color: var(--navy-60); }
+  .hero-meta span b { color: var(--navy); font-weight: 500; }
+
+  /* ---------- Quiz ---------- */
+  .quiz-wrap { max-width: 820px; }
+  .progress { font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--navy-60); margin-bottom: 22px; }
+  .progress b { color: var(--rust); }
+  .q { background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; padding: 24px 26px; margin-bottom: 18px; }
+  .q .q-num { font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; color: var(--rust); margin-bottom: 8px; }
+  .q .q-text { font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.3; color: var(--navy); margin-bottom: 16px; }
+  .opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width: 560px) { .opts { grid-template-columns: 1fr; } }
+  .opt { position: relative; }
+  .opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .opt label { display: block; text-align: center; font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--navy-80); padding: 12px 10px; border: 1px solid var(--rule-strong); border-radius: 2px; cursor: pointer; transition: all 120ms ease; }
+  .opt input:hover + label { border-color: var(--navy); }
+  .opt input:checked + label { background: var(--navy); color: var(--bone); border-color: var(--navy); }
+  .opt input:focus-visible + label { box-shadow: 0 0 0 3px rgba(184, 81, 42, 0.3); }
+
+  .actions { margin-top: 28px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .actions .note { font-family: var(--mono); font-size: 11px; color: var(--navy-60); letter-spacing: 0.3px; }
+
+  /* ---------- Result ---------- */
+  .result { display: none; margin-top: 8px; }
+  .result.show { display: block; animation: fade 320ms ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .result-card { background: var(--navy); color: var(--bone); border-radius: 3px; padding: clamp(28px, 4vw, 44px); position: relative; overflow: hidden; }
+  .result-card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: linear-gradient(to right, var(--bone) 0%, var(--bone) 78%, var(--rust) 78%, var(--rust) 100%); }
+  .result-card .r-band { font-family: var(--mono); font-size: 12px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--rust-soft); margin-bottom: 12px; }
+  .result-card .r-score { font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 4vw, 40px); line-height: 1.1; color: var(--bone); margin: 0 0 16px; }
+  .result-card .r-read { font-size: 16px; line-height: 1.6; color: rgba(245,241,235,0.86); max-width: 64ch; margin: 0 0 18px; }
+  .meter { height: 10px; background: rgba(245,241,235,0.16); border-radius: 6px; overflow: hidden; margin: 0 0 26px; max-width: 420px; }
+  .meter > span { display: block; height: 100%; background: var(--rust); border-radius: 6px; transition: width 600ms cubic-bezier(.2,.7,.2,1); }
+  .result-card .r-ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .result-card .btn-primary { background: var(--rust); border-color: var(--rust); }
+  .result-card .btn-primary:hover { background: var(--rust-soft); border-color: var(--rust-soft); }
+  .result-card .btn-ghost { color: var(--bone); border-color: rgba(245,241,235,0.4); }
+  .result-card .btn-ghost:hover { color: var(--bone); border-color: var(--bone); background: rgba(245,241,235,0.08); }
+  .result-foot { margin-top: 22px; font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--navy-80); max-width: 70ch; }
+  .result-foot a { color: var(--navy); }
+  .restart { margin-top: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy-60); background: none; border: none; cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
+  .restart:hover { color: var(--rust); }
+
+  /* ---------- Footer ---------- */
+  footer.site { border-top: 1px solid var(--rule); padding: 36px 0 52px; background: var(--bone-deep); }
+  .foot-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: end; }
+  @media (max-width: 640px) { .foot-inner { grid-template-columns: 1fr; } }
+  .foot-tag { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--navy-80); }
+  .foot-tag .sep { color: var(--rust); padding: 0 8px; font-style: normal; }
+  .foot-legal { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--navy-60); text-align: right; }
+  @media (max-width: 640px) { .foot-legal { text-align: left; } }
+</style>
+</head>
+
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="wrap site-inner">
+    <a href="https://theseamlinemethod.com/" class="brandmark" aria-label="The SEAMline Method">
+      <span class="wordmark"><span class="caps">SEAM</span><span class="tail">line</span></span>
+      <span class="seamline" aria-hidden="true"></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="https://theseamlinemethod.com/">The Seam Audit</a>
+      <a href="/ai-quickstart">AI Quickstart</a>
+      <a href="/nsai">NSAI</a>
+      <a href="https://calendly.com/singhleadership/let-s-just-talk" target="_blank" rel="noopener" class="btn-mini">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Free · No email required · 2 minutes</div>
+    <h1 class="hero-title">Where is your value chain <span class="accent">quietly leaking?</span></h1>
+    <p class="hero-deck">Profitability is a system — but no one owns the system. Eight quick questions surface where the seams between your teams, vendors, and partners may be losing money, context, or time. You get an instant read and a clear next step.</p>
+    <div class="hero-meta">
+      <span><b>8</b> questions</span>
+      <span><b>~2</b> minutes</span>
+      <span><b>Instant</b> result</span>
+      <span><b>No</b> sign-up</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section style="border-top:none; padding-top:0;">
+  <div class="wrap quiz-wrap">
+    <div class="progress" id="progress"><b id="answered">0</b> of 8 answered</div>
+
+    <form id="checkForm">
+      <!-- questions injected by script -->
+    </form>
+
+    <div class="actions" id="actionRow">
+      <button type="button" class="btn btn-primary" id="seeResult" disabled>See my result <span class="arrow" aria-hidden="true">→</span></button>
+      <span class="note">Answer all eight to unlock your read. Nothing is stored or sent.</span>
+    </div>
+
+    <!-- ============ RESULT ============ -->
+    <div class="result" id="result" aria-live="polite">
+      <div class="result-card">
+        <div class="r-band" id="rBand">Your read</div>
+        <p class="r-score" id="rTitle">—</p>
+        <div class="meter" aria-hidden="true"><span id="rMeter" style="width:0%"></span></div>
+        <p class="r-read" id="rRead"></p>
+        <div class="r-ctas">
+          <a class="btn btn-primary" href="https://calendly.com/singhleadership/let-s-just-talk" target="_blank" rel="noopener">Book a working call <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="/ai-quickstart">See the AI Quickstart <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <p class="result-foot">Prefer to start smaller? The <a href="/ai-quickstart">$47 AI Quickstart Playbook</a> and the live workshop are the low-risk first steps — no audit required.</p>
+      <button type="button" class="restart" id="restart">↺ Retake the self-check</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap foot-inner">
+    <div class="foot-tag">
+      Find the seam. <span class="sep">·</span> Hold the line. <span class="sep">|</span> Built to FABRIC.
+    </div>
+    <div class="foot-legal">
+      © 2026 Singh PowerUp Coach LLC · Florida<br />
+      The SEAMline Method™ · FABRIC™ · USPTO applied-for
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Eight statements. Higher agreement = more fracture signal. All in-memory; nothing is stored or sent.
+    var QUESTIONS = [
+      "When something falls between two teams or vendors, it's unclear who owns the fix.",
+      "We can't reliably trace a drop in profitability to the handoff where it starts.",
+      "Work gets redone because context is lost in the handoff between parties.",
+      "Our teams, vendors, or partners optimize their own metrics even when it hurts the whole.",
+      "When a key person is out, the process between teams stalls.",
+      "Status or data gets re-keyed or reconciled by hand as it moves between parties.",
+      "No single person owns the end-to-end value chain across every party.",
+      "We've been surprised by a cost or failure that wasn't anyone's job to catch."
+    ];
+    var OPTS = [
+      { label: "Not really", val: 0 },
+      { label: "Sometimes", val: 1 },
+      { label: "True", val: 2 }
+    ];
+    var TOTAL = QUESTIONS.length;
+
+    var form = document.getElementById('checkForm');
+    var answeredEl = document.getElementById('answered');
+    var seeBtn = document.getElementById('seeResult');
+    var result = document.getElementById('result');
+
+    // Build questions
+    QUESTIONS.forEach(function (text, i) {
+      var card = document.createElement('div');
+      card.className = 'q';
+      var opts = OPTS.map(function (o, j) {
+        var id = 'q' + i + '_' + j;
+        return '<div class="opt">'
+          + '<input type="radio" id="' + id + '" name="q' + i + '" value="' + o.val + '" />'
+          + '<label for="' + id + '">' + o.label + '</label>'
+          + '</div>';
+      }).join('');
+      card.innerHTML = '<div class="q-num">Q' + (i + 1) + ' / ' + TOTAL + '</div>'
+        + '<div class="q-text">' + text + '</div>'
+        + '<div class="opts">' + opts + '</div>';
+      form.appendChild(card);
+    });
+
+    function countAnswered() {
+      var n = 0;
+      for (var i = 0; i < TOTAL; i++) {
+        if (form.querySelector('input[name="q' + i + '"]:checked')) n++;
+      }
+      return n;
+    }
+
+    form.addEventListener('change', function () {
+      var n = countAnswered();
+      answeredEl.textContent = n;
+      seeBtn.disabled = n < TOTAL;
+    });
+
+    function score() {
+      var s = 0;
+      for (var i = 0; i < TOTAL; i++) {
+        var sel = form.querySelector('input[name="q' + i + '"]:checked');
+        if (sel) s += parseInt(sel.value, 10);
+      }
+      return s; // 0..16
+    }
+
+    var BANDS = [
+      {
+        max: 4,
+        band: "Tight seams",
+        title: "Tight seams — low leakage signals.",
+        read: "Your handoffs mostly hold. The value you build in one place tends to survive the trip to the next. Worth a periodic pressure-test as you scale or add partners — small fractures usually appear right after a new handoff is introduced."
+      },
+      {
+        max: 10,
+        band: "Hairline fractures",
+        title: "Hairline fractures — value is slipping at the seams.",
+        read: "Several answers point to handoffs where ownership is fuzzy and context leaks. That's exactly the pattern the Seam Audit is built to name — which seam, what it's costing, and who should own the fix. A short working call is the fastest way to see if it's worth scoping."
+      },
+      {
+        max: 16,
+        band: "Open seams",
+        title: "Open seams — your value chain is leaking across handoffs.",
+        read: "Most answers point to value lost between parties: redone work, manual reconciliation, and no one owning the whole. This is a system problem, not a people problem — and it compounds quietly. A Seam Audit names where it's leaking and what to do, in two weeks, fixed scope."
+      }
+    ];
+
+    function render() {
+      var s = score();
+      var band = BANDS.find(function (b) { return s <= b.max; });
+      document.getElementById('rBand').textContent = "Score " + s + " / 16 · " + band.band;
+      document.getElementById('rTitle').textContent = band.title;
+      document.getElementById('rRead').textContent = band.read;
+      result.classList.add('show');
+      // animate meter after paint
+      window.requestAnimationFrame(function () {
+        document.getElementById('rMeter').style.width = Math.round((s / 16) * 100) + '%';
+      });
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    seeBtn.addEventListener('click', function () {
+      if (countAnswered() < TOTAL) return;
+      render();
+    });
+
+    document.getElementById('restart').addEventListener('click', function () {
+      form.reset();
+      answeredEl.textContent = '0';
+      seeBtn.disabled = true;
+      document.getElementById('rMeter').style.width = '0%';
+      result.classList.remove('show');
+      document.querySelector('.hero').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+</script>
+
+</body>
+</html>
