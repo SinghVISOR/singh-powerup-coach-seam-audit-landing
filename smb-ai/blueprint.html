@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Operations Playbook — Outline Blueprint | SMB.AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F1EB; --paper:#FFFFFF; --sand:#ECE6DC; --ink:#0F1E3D; --ink2:#2B3A5A;
+    --muted:#5A6580; --accent:#B8512A; --accent2:#D77A52; --line:rgba(15,30,61,.14);
+    --f-cust:#B8512A; --f-int:#0F1E3D; --f-prod:#2E7D6B; --f-inv:#7A4FB0;
+    --radius:2px; --maxw:1080px;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box} html,body{margin:0}
+  body{background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 90px}
+  h1,h2,h3,h4{font-family:var(--serif); font-weight:600; letter-spacing:-.01em}
+
+  .topbar{border-bottom:1px solid var(--line); background:var(--bg); position:sticky; top:0; z-index:20}
+  .topbar .in{max-width:var(--maxw); margin:0 auto; padding:15px 22px; display:flex; justify-content:space-between; align-items:center}
+  .brand{font-family:var(--serif); font-weight:700; font-size:20px; color:var(--ink); text-decoration:none}
+  .brand .dot{color:var(--accent)}
+  .tagpill{font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); border:1px solid var(--line); padding:5px 10px; border-radius:var(--radius)}
+
+  header.hero{padding:38px 0 6px}
+  .eyebrow{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); font-weight:700}
+  h1{font-size:clamp(28px,4vw,44px); margin:10px 0 10px; line-height:1.06}
+  .sub{color:var(--ink2); max-width:730px; font-size:17px}
+  .status{display:flex; gap:16px; flex-wrap:wrap; font-size:12.5px; color:var(--muted); margin-top:16px}
+  .status span{display:inline-flex; align-items:center; gap:6px}
+  .sdot{width:9px;height:9px;border-radius:50%}
+
+  .tabs{display:flex; gap:4px; margin:28px 0 26px; flex-wrap:wrap; border-bottom:1px solid var(--line)}
+  .tab{appearance:none; border:0; background:transparent; color:var(--muted); font:inherit; font-weight:600;
+    padding:12px 15px; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px}
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--ink); border-bottom-color:var(--accent)}
+  .panel{display:none} .panel.active{display:block; animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  h2.sec{font-size:24px; margin:6px 0 6px}
+  .lead{color:var(--ink2); max-width:770px; margin:0 0 24px; font-size:16px}
+  h3.grp{font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:34px 0 14px; font-weight:700; border-top:1px solid var(--line); padding-top:20px}
+
+  /* steps */
+  .steps{display:flex; flex-direction:column; gap:14px}
+  .step{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; display:grid; grid-template-columns:44px 1fr; gap:16px; align-items:start}
+  .step .num{width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--bg); font-family:var(--serif); font-weight:700; font-size:18px; display:flex; align-items:center; justify-content:center}
+  .step.done .num{background:var(--f-prod)}
+  .step.now .num{background:var(--accent)}
+  .step h3{margin:0 0 4px; font-size:19px}
+  .step p{margin:0 0 6px; color:var(--ink2); font-size:14.5px}
+  .step .out{font-size:12.5px; color:var(--muted)}
+  .step .out b{color:var(--ink)}
+  .pill{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 8px; border-radius:var(--radius); margin-left:8px; vertical-align:middle}
+  .pill.done{background:rgba(46,125,107,.14); color:var(--f-prod)}
+  .pill.now{background:rgba(184,81,42,.14); color:var(--accent)}
+  .pill.next{background:var(--sand); color:var(--muted)}
+
+  /* core areas */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px}
+  .card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:18px; display:flex; flex-direction:column; gap:9px; border-top:3px solid var(--accent)}
+  .card h3{margin:0; font-size:19px}
+  .card .job{color:var(--ink2); font-size:14px}
+  .card .row{font-size:13px; color:var(--muted)}
+  .card .row b{color:var(--ink); font-weight:600}
+  .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:2px}
+  .t{font-size:11px; font-weight:600; background:var(--sand); border:1px solid var(--line); color:var(--ink2); padding:3px 8px; border-radius:var(--radius)}
+
+  .model{background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:var(--radius); padding:20px 22px; margin-bottom:8px}
+  .model h3{margin:0 0 10px; font-size:19px}
+  .flow{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:12px 0; font-size:13px; font-weight:600}
+  .flow .node{background:var(--sand); border:1px solid var(--line); padding:6px 12px; border-radius:var(--radius)}
+  .flow .arr{color:var(--accent); font-weight:700}
+  ul.tight{margin:8px 0 0; padding-left:20px} ul.tight li{margin-bottom:7px; font-size:14.5px; color:var(--ink2)}
+  ul.tight li b{color:var(--ink)}
+
+  /* HUMAN framework letter list */
+  .human{display:flex; flex-direction:column; gap:10px; margin:16px 0 4px}
+  .hrow{display:grid; grid-template-columns:52px 1fr; gap:16px; align-items:start; background:var(--sand); border:1px solid var(--line); border-radius:var(--radius); padding:14px 16px}
+  .hrow .let{width:44px; height:44px; border-radius:var(--radius); background:var(--ink); color:var(--bg); font-family:var(--serif); font-weight:700; font-size:24px; display:flex; align-items:center; justify-content:center}
+  .hrow.a .let{background:var(--accent)}
+  .hrow h4{margin:0 0 3px; font-size:16px; font-family:var(--sans); font-weight:700}
+  .hrow p{margin:0; font-size:14px; color:var(--ink2)}
+  .hrow .maps{display:block; margin-top:8px; font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em}
+  .hrow .maps b{color:var(--accent)}
+  .hrow .prac{margin-top:8px; font-size:13px; color:var(--ink2); background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:9px 11px}
+  .hrow .prac b{color:var(--ink)}
+
+  /* per-area template */
+  .tmpl{background:var(--sand); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; margin-top:6px}
+  .tmpl h4{margin:0 0 12px; font-size:15px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+  .tmpl ol{margin:0; padding-left:20px} .tmpl li{margin-bottom:8px; font-size:14.5px; color:var(--ink2)}
+  .tmpl li b{color:var(--ink); font-weight:600}
+
+  /* frameworks */
+  .fam{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:8px}
+  @media(max-width:720px){.fam{grid-template-columns:1fr}}
+  .famcard{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; border-top:3px solid var(--ink)}
+  .famcard.op{border-top-color:var(--accent)}
+  .famcard h4{margin:0 0 4px; font-size:18px}
+  .famcard .k{font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+  .famcard.op .k{color:var(--accent)}
+  .famcard p{color:var(--ink2); font-size:14px; margin:8px 0 0}
+  .chips{display:flex; gap:6px; flex-wrap:wrap; margin-top:10px}
+  .chips .t{cursor:default}
+  .promptbox{background:var(--ink); color:#EDEAE3; border-radius:var(--radius); padding:14px 16px; font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace; font-size:13px; line-height:1.5; margin-top:14px; overflow:auto}
+  .promptbox .lbl{display:block; font-family:var(--sans); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent2); margin-bottom:7px}
+
+  /* flavors */
+  .flav{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px; margin-bottom:16px; border-left:4px solid var(--accent)}
+  .flav.cust{border-left-color:var(--f-cust)} .flav.int{border-left-color:var(--f-int)}
+  .flav.prod{border-left-color:var(--f-prod)} .flav.inv{border-left-color:var(--f-inv)}
+  .flav .fhead{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:6px}
+  .flav h3{margin:0; font-size:21px}
+  .flav .who{font-size:12.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase}
+  .flav.cust .who{color:var(--f-cust)} .flav.int .who{color:var(--f-int)}
+  .flav.prod .who{color:var(--f-prod)} .flav.inv .who{color:var(--f-inv)}
+  .flav .job{color:var(--ink2); font-size:15px; margin:0 0 14px}
+  .flav .cols{display:grid; grid-template-columns:1fr 1fr; gap:20px}
+  @media(max-width:640px){.flav .cols{grid-template-columns:1fr}}
+  .flav .col h5{margin:0 0 8px; font-family:var(--sans); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700}
+  .flav .col ul{margin:0; padding-left:18px} .flav .col li{margin-bottom:6px; font-size:14px; color:var(--ink2)}
+  .flav .human-note{margin-top:14px; font-size:13px; color:var(--muted); border-top:1px dashed var(--line); padding-top:10px}
+  .flav .human-note b{color:var(--ink)}
+
+  /* section map table */
+  table{width:100%; border-collapse:collapse; background:var(--paper); border:1px solid var(--line); font-size:14px}
+  th,td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-family:var(--sans); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); background:var(--sand)}
+  td b{color:var(--ink)}
+  .yn{font-weight:700; text-align:center}
+  .yn.y{color:var(--f-prod)} .yn.p{color:var(--accent)} .yn.n{color:var(--muted)}
+  .rowflag td{background:rgba(184,81,42,.06)}
+  .maplegend{font-size:12.5px; color:var(--muted); margin:10px 0 0; display:flex; gap:18px; flex-wrap:wrap}
+
+  .note{background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--f-int); border-radius:var(--radius); padding:16px 18px; margin-top:26px; font-size:14px; color:var(--ink2)}
+  .note.accent{border-left-color:var(--accent)}
+  .note b{color:var(--ink)}
+  footer{margin-top:40px; padding-top:18px; border-top:1px solid var(--line); font-size:12.5px; color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="#">SMB<span class="dot">.</span>AI</a>
+  <span class="tagpill">Outline Blueprint · v0.3 · HUMAN Framework locked</span>
+</div></div>
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">AI-Operations Playbook</div>
+  <h1>Outline blueprint &amp; build plan</h1>
+  <p class="sub">One playbook spine (how a small business runs on AI, with a person approving every consequential action) flexed into <b>four flavors</b>. Now anchored by a signature operating framework: <b>H.U.M.A.N.</b> This is the structure for your sign-off <b>before</b> full content is written.</p>
+  <div class="status">
+    <span><span class="sdot" style="background:var(--f-prod)"></span> Grounded in your Master Handover, Build Roadmap, 31-skill library &amp; Prompt Mastery Playbook</span>
+    <span><span class="sdot" style="background:var(--accent)"></span> Outline stage — awaiting your direction</span>
+  </div>
+</header>
+
+<div class="tabs" role="tablist">
+  <button class="tab active" data-t="plan">The plan</button>
+  <button class="tab" data-t="human">HUMAN Framework</button>
+  <button class="tab" data-t="core">Core structure</button>
+  <button class="tab" data-t="flavors">The 4 flavors</button>
+  <button class="tab" data-t="map">Section map</button>
+</div>
+
+<!-- ============ PLAN ============ -->
+<section class="panel active" id="plan">
+  <h2 class="sec">How we get this done</h2>
+  <p class="lead">Seven steps from here to four finished HTML playbooks. We're at Step 3 — you approve this outline (now including the HUMAN Framework), then I write content one flavor at a time so you can react early and cheaply.</p>
+  <div class="steps">
+    <div class="step done"><div class="num">1</div><div>
+      <h3>Gather context <span class="pill done">Done</span></h3>
+      <p>Read the Master Handover, Build Roadmap, the 31-skill library, business-operations skills, the AI Quickstart Toolkit, and the Prompt Mastery Playbook.</p>
+      <div class="out"><b>Output:</b> shared source of truth + visual system locked to your SMB.AI look.</div>
+    </div></div>
+    <div class="step done"><div class="num">2</div><div>
+      <h3>Define scope <span class="pill done">Done</span></h3>
+      <p>Confirmed target: HTML hub page, all four audiences, outline before full build.</p>
+      <div class="out"><b>Output:</b> this document's brief.</div>
+    </div></div>
+    <div class="step now"><div class="num">3</div><div>
+      <h3>Approve the outline + HUMAN Framework <span class="pill now">You are here</span></h3>
+      <p>Review the HUMAN Framework, the core spine, the four flavors, and the section map. Tune the five letters and tell me what to add, cut, or rename.</p>
+      <div class="out"><b>Output:</b> a locked structure and a signature framework — rework happens here, on an outline.</div>
+    </div></div>
+    <div class="step"><div class="num">4</div><div>
+      <h3>Build the master playbook (Flavor A) <span class="pill next">Next</span></h3>
+      <p>Write the full customer-facing HTML playbook, built around HUMAN. It contains the complete spine, so the others become edits, not rewrites.</p>
+      <div class="out"><b>Output:</b> <code>ai-operations-playbook.html</code> — the canonical version.</div>
+    </div></div>
+    <div class="step"><div class="num">5</div><div>
+      <h3>Fork the other three flavors <span class="pill next">Next</span></h3>
+      <p>Internal-ops, product-embedded, and investor/partner versions — same spine + HUMAN, re-lensed sections and tone.</p>
+      <div class="out"><b>Output:</b> four HTML pages sharing one design system.</div>
+    </div></div>
+    <div class="step"><div class="num">6</div><div>
+      <h3>Wire into the toolkit <span class="pill next">Next</span></h3>
+      <p>Add the HUMAN Framework card + <code>/human</code> shortcut to your AI Quickstart Toolkit, so prompting frameworks and the operating framework live together.</p>
+      <div class="out"><b>Output:</b> toolkit updated; frameworks layer shared across both assets.</div>
+    </div></div>
+    <div class="step"><div class="num">7</div><div>
+      <h3>Polish &amp; deploy <span class="pill next">Next</span></h3>
+      <p>Consistency pass, guardrail-language check, then save to your SMB-AI folder and host on Vercel next to the Quickstart hub.</p>
+      <div class="out"><b>Output:</b> live URLs, or files in your folder — your call.</div>
+    </div></div>
+  </div>
+  <div class="note"><b>What changed in v0.3:</b> locked in your real <b>HUMAN Framework</b> — Halt, Understand the Real Question, Mark the Line, Apply the Leverage, Never Outsource the Core — as the flagship (its own tab), threaded through every flavor, plus Step 6 to wire it into the AI Quickstart Toolkit.</div>
+</section>
+
+<!-- ============ HUMAN ============ -->
+<section class="panel" id="human">
+  <h2 class="sec">The HUMAN Framework — the Conscious Operator's discipline</h2>
+  <p class="lead">Your Prompt Mastery Playbook is full of frameworks for <i>thinking and prompting</i> — SMEAC, OODA, BLUF, SCQA. HUMAN is the missing counterpart: five moves that keep a person <i>conscious and in command</i> while working at machine speed. Not a prompt trick — the discipline of the Conscious Operator versus the Reactive one. Each letter is a practice you can do today.</p>
+
+  <div class="human">
+    <div class="hrow"><div class="let">H</div><div>
+      <h4>Halt</h4>
+      <p>Put a deliberate gap between the impulse and the tool — before you open the tab, before you fire the prompt. A gap just long enough for the human to catch up to the machine. A machine that never has to breathe will happily talk you out of ever breathing again.</p>
+      <div class="prac"><b>Practice:</b> before your next AI tool, take 60 seconds and write one line you'll never show anyone — "Right now I am ______, and what I actually want from this is ______." No line, no tool.</div>
+      <span class="maps">In the platform → <b>the conscious pause before you run a skill</b></span>
+    </div></div>
+    <div class="hrow"><div class="let">U</div><div>
+      <h4>Understand the Real Question</h4>
+      <p>A search-box question gets a search-box answer, no matter how brilliant the machine. Give it who the customer is, what you've tried, and its non-negotiables ("never assume a budget we don't have; if unsure, say so"). First, name the honest decision underneath.</p>
+      <div class="prac"><b>Practice:</b> before your next real prompt, write one sentence — "What I'm actually trying to decide is ______." Then, and only then, give the machine the context and the non-negotiables.</div>
+      <span class="maps">In the platform → <b>a well-framed brief (uses God Mode / SMEAC from your toolkit)</b></span>
+    </div></div>
+    <div class="hrow"><div class="let">M</div><div>
+      <h4>Mark the Line</h4>
+      <p>Every task has a line. On one side, the work for the machine — summarizing, drafting, aggregating, the tireless repetition. On the other, the work that must stay human — the judgment, the relationship, the values call. The Conscious Operator draws it on purpose, every time; the Reactive one lets the machine erase it.</p>
+      <div class="prac"><b>Practice:</b> take one task today and draw the line out loud — "This part goes to the machine. This part stays with me." If you can't find a part that stays with you, look harder; that's usually the part that mattered.</div>
+      <span class="maps">In the platform → <b>read-only runs vs. write/send that queues for approval</b></span>
+    </div></div>
+    <div class="hrow a"><div class="let">A</div><div>
+      <h4>Apply the Leverage</h4>
+      <p>Once the line is drawn, use the machine <i>boldly</i> on its side. The quiet failure is timidly asking a supercomputer to fix a typo. Delegate the machine's work fully so you can invest the human's work deeply — leverage on one side buys presence on the other.</p>
+      <div class="prac"><b>Practice:</b> name one thing you still do by hand that lives entirely on the machine's side of the line — and this week, hand it over completely. Then spend the time it gives back on the one thing only you can do.</div>
+      <span class="maps">In the platform → <b>run the 31 skills fully on the machine's side</b></span>
+    </div></div>
+    <div class="hrow"><div class="let">N</div><div>
+      <h4>Never Outsource the Core</h4>
+      <p>A small, non-negotiable core never goes to a machine: your judgment, your values, the final call, your purpose. It gets outsourced not in one dramatic moment but in a hundred small Tuesdays where the machine's confidence is more convenient than your responsibility. If a machine can generate it, a machine can copy it — what can't be copied is you.</p>
+      <div class="prac"><b>Practice:</b> write your short list — judgment, values, the final call, purpose — the things you'll never outsource no matter how convenient it becomes. Keep it where you'll see it. The day the machine offers to take one off your hands won't feel like a threat; it'll feel like a favor.</div>
+      <span class="maps">In the platform → <b>the approval gate: you hold the final call</b></span>
+    </div></div>
+  </div>
+
+  <div class="promptbox">
+    <span class="lbl">The Operator's Check — 60 seconds before any AI tool (the "H")</span>
+1. What state am I in right now?
+2. What am I actually trying to produce?
+3. If the wisest version of me were sitting here, what would they want me to reach for?
+  </div>
+
+  <div class="note accent"><b>Why it's the center of the playbook:</b> HUMAN reframes AI not as "more tools, faster" but as a discipline of conscious command. It also lands perfectly on the product — SMB.AI's approval queue is <b>Mark the Line</b> and <b>Never Outsource</b> built into software. In the full build, each letter carries a worked story (Priya, Jamal, David, Renata, Marcus) to make it stick.</div>
+</section>
+
+<!-- ============ CORE ============ -->
+<section class="panel" id="core">
+  <h2 class="sec">The core spine — shared by all four flavors</h2>
+  <p class="lead">Every flavor is built on the same backbone: the HUMAN operating framework, six operations areas, and a repeatable per-area template. Only the framing and a few audience-specific sections change between flavors.</p>
+
+  <div class="model">
+    <h3>1 · The HUMAN Framework (the operating model)</h3>
+    <p style="margin:0 0 4px;color:var(--ink2);font-size:14.5px">The Conscious Operator's discipline — the five moves that keep a person in command while the machine does the work. Your Master Handover's approval model is where two of these letters (<b>Mark the Line</b>, <b>Never Outsource</b>) become software. Full detail on the <b>HUMAN Framework</b> tab.</p>
+    <div class="flow">
+      <span class="node">H · Halt</span><span class="arr">→</span>
+      <span class="node">U · Understand</span><span class="arr">→</span>
+      <span class="node">M · Mark the Line</span><span class="arr">→</span>
+      <span class="node">A · Apply Leverage</span><span class="arr">→</span>
+      <span class="node">N · Never Outsource</span>
+    </div>
+    <ul class="tight">
+      <li><b>Read-only tasks run instantly</b> (research, lookups, summaries); <b>write / send tasks always queue</b> for approval.</li>
+      <li><b>The approval card shows exact content</b> that will be sent — never a summary.</li>
+      <li><b>Guardrails carry through:</b> keys server-side only, tokens encrypted, legal/financial disclaimers, human-in-the-loop always.</li>
+    </ul>
+  </div>
+
+  <h3 class="grp">2 · The six operations areas (the spine's ribs)</h3>
+  <p class="lead" style="margin-top:-4px">Your 31 skills regroup into the six areas a real small business actually operates in. Each area is one chapter of the playbook.</p>
+  <div class="grid">
+    <div class="card"><h3>Customers &amp; Sales</h3>
+      <div class="job">Turn leads into booked, prepared conversations and keep the pipeline moving.</div>
+      <div class="row"><b>Skills:</b> Lead triage, CRM lookup, lead enrichment, outreach drafting</div>
+      <div class="tags"><span class="t">HubSpot</span><span class="t">Gmail</span><span class="t">Web / LinkedIn</span></div>
+    </div>
+    <div class="card"><h3>Money &amp; Finance</h3>
+      <div class="job">Get paid faster and keep the books clean without a spreadsheet marathon.</div>
+      <div class="row"><b>Skills:</b> Invoicing &amp; chasing, expense tracking, cash-flow snapshot, month-end</div>
+      <div class="tags"><span class="t">QuickBooks</span><span class="t">Gmail</span><span class="t">Sheets</span></div>
+    </div>
+    <div class="card"><h3>Comms &amp; Inbox</h3>
+      <div class="job">Stay on top of the inbox and calendar; walk into every meeting briefed.</div>
+      <div class="row"><b>Skills:</b> Email triage, reply drafting, meeting summaries, scheduling</div>
+      <div class="tags"><span class="t">Gmail</span><span class="t">Calendar</span><span class="t">Drive</span></div>
+    </div>
+    <div class="card"><h3>Marketing &amp; Content</h3>
+      <div class="job">Show up consistently — content, social, and SEO — without a marketing hire.</div>
+      <div class="row"><b>Skills:</b> Content drafting, social packs, SEO, campaign planning</div>
+      <div class="tags"><span class="t">Drive</span><span class="t">Web</span><span class="t">Social</span></div>
+    </div>
+    <div class="card"><h3>Data &amp; Reporting</h3>
+      <div class="job">Know the numbers and what competitors are doing — on a schedule, automatically.</div>
+      <div class="row"><b>Skills:</b> Analytics, competitor monitoring, monthly reports, dashboards</div>
+      <div class="tags"><span class="t">Cron jobs</span><span class="t">Web</span><span class="t">Sheets</span></div>
+    </div>
+    <div class="card"><h3>Admin &amp; Compliance</h3>
+      <div class="job">Handle contracts, documents, and the paperwork that protects the business.</div>
+      <div class="row"><b>Skills:</b> Contract review, inventory check, doc drafting, filing</div>
+      <div class="tags"><span class="t">Drive</span><span class="t">DocuSign</span><span class="t">Shopify</span></div>
+    </div>
+  </div>
+
+  <h3 class="grp">3 · The per-area template (every area runs the HUMAN loop)</h3>
+  <div class="tmpl">
+    <h4>Each of the six areas follows this exact shape</h4>
+    <ol>
+      <li><b>The job to be done</b> — the outcome an owner actually wants.</li>
+      <li><b>The HUMAN discipline for this task</b> — Halt, Understand the real question, Mark the line, Apply the leverage, Never outsource the core — made concrete for the area.</li>
+      <li><b>Skills &amp; connectors</b> — which SMB.AI skills and integrations power it.</li>
+      <li><b>Where you Mark the Line</b> — what goes to the machine, what stays human, and what to check before the write/send fires.</li>
+      <li><b>Cadence</b> — daily / weekly / monthly rhythm so it becomes habit.</li>
+      <li><b>The metric that proves it works</b> — e.g. days-to-payment, inbox-zero time, leads contacted.</li>
+      <li><b>Copy-paste prompts</b> — 2–3 ready starters, matching your toolkit's template style.</li>
+    </ol>
+  </div>
+
+  <h3 class="grp">4 · Cross-cutting sections (wrap the whole playbook)</h3>
+  <ul class="tight" style="max-width:770px">
+    <li><b>Getting started — crawl / walk / run:</b> a 30-day ramp so an owner isn't overwhelmed.</li>
+    <li><b>The weekly &amp; monthly operating rhythm:</b> one calendar view of every recurring AI task.</li>
+    <li><b>Your operations scoreboard:</b> the handful of metrics that show AI is actually paying off.</li>
+    <li><b>Trust, safety &amp; guardrails:</b> Mark the Line and Never Outsource the Core, plus the security rules, in plain language.</li>
+  </ul>
+</section>
+
+<!-- ============ FLAVORS ============ -->
+<section class="panel" id="flavors">
+  <h2 class="sec">The four flavors</h2>
+  <p class="lead">Same spine, four lenses. Each keeps the six operations areas and the HUMAN Framework, but re-frames the intro, adds audience-specific sections, and shifts tone — including how it teaches HUMAN.</p>
+
+  <div class="flav cust">
+    <div class="fhead"><h3>A · The Owner's Playbook</h3><span class="who">Customer-facing · lead magnet</span></div>
+    <p class="job">"Run your whole operation with AI — and stay in control." A value asset that extends your AI Quickstart Toolkit and drives SMB.AI signups.</p>
+    <div class="cols">
+      <div class="col"><h5>Lens &amp; tone</h5><ul><li>Speaks to "you," the busy owner</li><li>Benefit-led, plain English, zero jargon</li><li>Time saved &amp; money made, not features</li></ul></div>
+      <div class="col"><h5>Adds / emphasizes</h5><ul><li>Before/after "a day in the life" vignettes</li><li>ROI &amp; time-saved framing per area</li><li>Soft CTA to start on SMB.AI</li></ul></div>
+    </div>
+    <div class="human-note"><b>HUMAN here:</b> the five conscious-operator moves that keep you in command of the machine instead of swept along by it — Halt, the 60-second Operator's Check, and "never outsource the core" land hardest.</div>
+  </div>
+
+  <div class="flav int">
+    <div class="fhead"><h3>B · The Operator's Manual</h3><span class="who">Internal · running SMB.AI</span></div>
+    <p class="job">How <b>you</b> run SMB.AI day-to-day with Claude — your own SOPs, cadences, and prompts, so the business runs lean with no early hire (per your Build Roadmap).</p>
+    <div class="cols">
+      <div class="col"><h5>Lens &amp; tone</h5><ul><li>Directive, checklist-driven SOPs</li><li>"No-hire engine" framing</li><li>Assumes Claude is the team</li></ul></div>
+      <div class="col"><h5>Adds / emphasizes</h5><ul><li>Exact Cowork/Claude prompts (God Mode + <code>/human</code>)</li><li>Owner-vs-Claude responsibility split</li><li>Weekly founder operating cadence</li></ul></div>
+    </div>
+    <div class="human-note"><b>HUMAN here:</b> HUMAN governs how you <i>operate</i>; your Prompt Mastery frameworks (SMEAC/BLUF/God Mode) live inside the "Understand the Real Question" step to shape the prompt.</div>
+  </div>
+
+  <div class="flav prod">
+    <div class="fhead"><h3>C · The In-Product Playbook</h3><span class="who">Product-embedded · onboarding</span></div>
+    <p class="job">Ships inside SMB.AI as onboarding &amp; reference, mapping the 31 skills to real workflows so new users know what to do on day one.</p>
+    <div class="cols">
+      <div class="col"><h5>Lens &amp; tone</h5><ul><li>Task-first, "click here / ask this"</li><li>Tied to actual skill cards &amp; the approval queue</li><li>Short, scannable, in-app voice</li></ul></div>
+      <div class="col"><h5>Adds / emphasizes</h5><ul><li>Skill-to-workflow map (all 31)</li><li>Gamification / XP nudges tie-in</li><li>Connector setup pointers</li></ul></div>
+    </div>
+    <div class="human-note"><b>HUMAN here:</b> literally the UI — the approval queue is where you <i>Mark the Line</i> and <i>Never Outsource</i> the final call; onboarding walks a user through one full Halt → Never-Outsource pass.</div>
+  </div>
+
+  <div class="flav inv">
+    <div class="fhead"><h3>D · The Operating Thesis</h3><span class="who">Investor / partner-facing</span></div>
+    <p class="job">The narrative of how SMB.AI operationalizes AI for the underserved SMB market — for pitching, partnerships, and channel deals.</p>
+    <div class="cols">
+      <div class="col"><h5>Lens &amp; tone</h5><ul><li>Strategic, credibility-led</li><li>Market &amp; category framing</li><li>Proof over promise</li></ul></div>
+      <div class="col"><h5>Adds / emphasizes</h5><ul><li>Problem / market size / why now</li><li>HUMAN as the trust moat &amp; category story</li><li>Pricing, unit economics, traction hooks</li></ul></div>
+    </div>
+    <div class="human-note"><b>HUMAN here:</b> "Never Outsource the Core" <i>is</i> the thesis — if a machine can generate it, a machine can copy it, so the moat is the human. Human-in-the-loop by design.</div>
+  </div>
+</section>
+
+<!-- ============ MAP ============ -->
+<section class="panel" id="map">
+  <h2 class="sec">Section map — what appears in which flavor</h2>
+  <p class="lead">The full section list for the master playbook (Flavor A). The other three keep the shared spine and swap the audience-specific rows. The HUMAN Framework is shared across all four.</p>
+  <table>
+    <thead><tr><th style="width:40%">Section</th><th class="yn">A · Owner</th><th class="yn">B · Internal</th><th class="yn">C · Product</th><th class="yn">D · Investor</th></tr></thead>
+    <tbody>
+      <tr><td><b>Hero + promise</b> — what this playbook does</td><td class="yn y">●</td><td class="yn p">◐</td><td class="yn p">◐</td><td class="yn p">◐</td></tr>
+      <tr class="rowflag"><td><b>The HUMAN Framework</b> — Halt · Understand · Mark the Line · Apply Leverage · Never Outsource</td><td class="yn y">●</td><td class="yn y">●</td><td class="yn y">●</td><td class="yn y">●</td></tr>
+      <tr><td><b>Getting started</b> — crawl / walk / run (30 days)</td><td class="yn y">●</td><td class="yn p">◐</td><td class="yn y">●</td><td class="yn n">○</td></tr>
+      <tr><td><b>Area 1 · Customers &amp; Sales</b></td><td class="yn y">●</td><td class="yn y">●</td><td class="yn y">●</td><td class="yn p">◐</td></tr>
+      <tr><td><b>Area 2 · Money &amp; Finance</b></td><td class="yn y">●</td><td class="yn y">●</td><td class="yn y">●</td><td class="yn p">◐</td></tr>
+      <tr><td><b>Area 3 · Comms &amp; Inbox</b></td><td class="yn y">●</td><td class="yn y">●</td><td class="yn y">●</td><td class="yn p">◐</td></tr>
+      <tr><td><b>Area 4 · Marketing &amp; Content</b></td><td class="yn y">●</td><td class="yn y">●</td><td class="yn y">●</td><td class="yn p">◐</td></tr>
+      <tr><td><b>Area 5 · Data &amp; Reporting</b></td><td class="yn y">●</td><td class="yn y">●</td><td class="yn y">●</td><td class="yn p">◐</td></tr>
+      <tr><td><b>Area 6 · Admin &amp; Compliance</b></td><td class="yn y">●</td><td class="yn y">●</td><td class="yn y">●</td><td class="yn p">◐</td></tr>
+      <tr><td><b>Weekly / monthly operating rhythm</b></td><td class="yn y">●</td><td class="yn y">●</td><td class="yn p">◐</td><td class="yn n">○</td></tr>
+      <tr><td><b>Operations scoreboard</b> — metrics that matter</td><td class="yn y">●</td><td class="yn y">●</td><td class="yn p">◐</td><td class="yn y">●</td></tr>
+      <tr><td><b>Trust, safety &amp; guardrails</b></td><td class="yn y">●</td><td class="yn y">●</td><td class="yn y">●</td><td class="yn y">●</td></tr>
+      <tr class="rowflag"><td><b>Frameworks layer</b> — HUMAN + Prompt Mastery (SMEAC/OODA/God Mode)</td><td class="yn p">◐</td><td class="yn y">●</td><td class="yn p">◐</td><td class="yn p">◐</td></tr>
+      <tr><td><b>Exact Claude/Cowork prompts (SOPs)</b></td><td class="yn n">○</td><td class="yn y">●</td><td class="yn n">○</td><td class="yn n">○</td></tr>
+      <tr><td><b>Skill-to-workflow map (all 31)</b></td><td class="yn n">○</td><td class="yn p">◐</td><td class="yn y">●</td><td class="yn n">○</td></tr>
+      <tr><td><b>Market, moat &amp; unit economics</b></td><td class="yn n">○</td><td class="yn n">○</td><td class="yn n">○</td><td class="yn y">●</td></tr>
+      <tr><td><b>Call to action</b></td><td class="yn y">● start free</td><td class="yn p">◐ run it</td><td class="yn p">◐ next skill</td><td class="yn y">● let's talk</td></tr>
+    </tbody>
+  </table>
+  <div class="maplegend">
+    <span><b class="yn y" style="font-size:15px">●</b> Full section</span>
+    <span><b class="yn p" style="font-size:15px">◐</b> Present, re-lensed for this audience</span>
+    <span><b class="yn n" style="font-size:15px">○</b> Omitted</span>
+    <span style="color:var(--accent)"><b>Highlighted rows</b> = the new framework layer</span>
+  </div>
+  <div class="note"><b>Read this as:</b> HUMAN, the six operations areas, and the operating model are the shared spine written once. The frameworks layer connects this playbook to your Prompt Mastery Playbook and the Quickstart Toolkit, so all three assets speak the same language.</div>
+</section>
+
+<footer>
+  AI-Operations Playbook · Outline blueprint v0.3 · HUMAN Framework: Halt · Understand the Real Question · Mark the Line · Apply the Leverage · Never Outsource the Core
+</footer>
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var t = tab.getAttribute('data-t');
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+      document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('active')});
+      tab.classList.add('active');
+      document.getElementById(t).classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>

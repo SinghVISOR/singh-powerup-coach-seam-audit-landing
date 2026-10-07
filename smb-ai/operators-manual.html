@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Operator's Manual — Running SMB.AI Lean | SMB.AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F2EE; --paper:#FFFFFF; --sand:#E9E4DA; --ink:#0F1E3D; --ink2:#2B3A5A;
+    --muted:#5A6580; --accent:#B8512A; --accent2:#D77A52; --line:rgba(15,30,61,.14);
+    --gold:#B07A1E; --teal:#2E7D6B; --code:#12203f;
+    --radius:3px; --maxw:1180px;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box} html,body{margin:0} html{scroll-behavior:smooth}
+  body{background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  .shell{display:grid; grid-template-columns:272px 1fr; max-width:var(--maxw); margin:0 auto; align-items:start}
+  .side{position:sticky; top:0; height:100vh; overflow-y:auto; border-right:1px solid var(--line); padding:26px 20px 40px; background:var(--bg)}
+  .side .brand{font-family:var(--serif); font-weight:700; font-size:22px; color:var(--ink); text-decoration:none; letter-spacing:-.01em}
+  .side .brand .dot{color:var(--accent)}
+  .side .tagline{font-size:11.5px; color:var(--muted); margin:4px 0 6px; line-height:1.4}
+  .side .conf{display:inline-block; font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#8a2f2f; background:#F7E9E7; border:1px solid #e6c9c4; border-radius:20px; padding:3px 9px; margin-bottom:18px}
+  .side nav a{display:block; font-size:13.5px; color:var(--ink2); text-decoration:none; padding:7px 10px; border-radius:var(--radius); border-left:2px solid transparent}
+  .side nav a:hover{background:var(--sand); color:var(--ink)}
+  .side nav .navlbl{font-size:10.5px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:700; margin:18px 0 6px; padding-left:10px}
+  .side .badge{display:inline-block; margin-top:22px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); border:1px solid var(--line); border-radius:20px; padding:5px 11px}
+
+  main{padding:0 clamp(20px,4vw,56px) 90px; min-width:0}
+  section{padding-top:34px; margin-top:12px}
+  section:first-child{padding-top:40px}
+  .eyebrow{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); font-weight:700}
+  h1,h2,h3,h4{font-family:var(--serif); font-weight:600; letter-spacing:-.01em; color:var(--ink)}
+  h1{font-size:clamp(30px,4.4vw,48px); line-height:1.05; margin:12px 0 14px}
+  h2.sec{font-size:clamp(23px,2.6vw,30px); margin:0 0 6px}
+  .kicker{font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:6px}
+  .lead{font-size:18px; color:var(--ink2); max-width:700px}
+  p{max-width:700px}
+  hr.div{border:0; border-top:1px solid var(--line); margin:40px 0 0}
+
+  .hero{border-bottom:1px solid var(--line); padding-bottom:34px}
+  .hero .sub{font-size:19px; color:var(--ink2); max-width:680px; margin-top:2px}
+  .herometa{display:flex; gap:10px; flex-wrap:wrap; margin-top:22px}
+  .chip{font-size:12.5px; font-weight:600; background:var(--paper); border:1px solid var(--line); border-radius:20px; padding:7px 14px; color:var(--ink2)}
+  .chip b{color:var(--accent)}
+  .cta{display:inline-block; margin-top:22px; background:var(--ink); color:var(--bg); text-decoration:none; font-weight:600; font-size:15px; padding:13px 26px; border-radius:var(--radius)}
+  .cta:hover{background:var(--accent)}
+
+  .acro{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:22px 0 6px}
+  @media(max-width:760px){.acro{grid-template-columns:repeat(2,1fr)}}
+  .acro a{background:var(--paper); border:1px solid var(--line); border-top:3px solid var(--accent); border-radius:var(--radius); padding:14px; text-decoration:none; display:block}
+  .acro a:hover{background:var(--sand)}
+  .acro .l{font-family:var(--serif); font-size:30px; font-weight:700; color:var(--accent); line-height:1}
+  .acro .w{font-size:13px; font-weight:700; margin-top:6px; color:var(--ink)}
+  .acro .d{font-size:12px; color:var(--muted); margin-top:2px}
+
+  .letter{display:grid; grid-template-columns:60px 1fr; gap:18px; margin-top:22px; padding-top:22px; border-top:1px solid var(--line)}
+  .letter:first-of-type{border-top:0}
+  .letter .big{width:52px; height:52px; border-radius:var(--radius); background:var(--ink); color:var(--bg); font-family:var(--serif); font-weight:700; font-size:28px; display:flex; align-items:center; justify-content:center}
+  .letter.a .big{background:var(--accent)}
+  .letter h3{font-size:21px; margin:2px 0 2px}
+  .letter .oneline{font-size:12.5px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px}
+  .letter p{font-size:14.5px; margin-bottom:8px}
+  .op{background:var(--sand); border:1px solid var(--line); border-radius:var(--radius); padding:11px 14px; margin-top:8px; font-size:13.5px}
+  .op b{color:var(--ink)}
+  .op .ol{display:block; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:4px}
+
+  /* SOP / build steps */
+  .steps{display:flex; flex-direction:column; gap:12px; margin-top:16px}
+  .step{display:grid; grid-template-columns:38px 1fr; gap:14px; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:15px 18px}
+  .step .n{width:30px; height:30px; border-radius:50%; background:var(--ink); color:var(--bg); font-family:var(--serif); font-weight:700; display:flex; align-items:center; justify-content:center; font-size:15px}
+  .step h4{margin:0 0 3px; font-size:16px}
+  .step p{margin:0; font-size:13.5px; color:var(--ink2)}
+
+  /* split table */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; margin-top:14px}
+  @media(max-width:620px){.split{grid-template-columns:1fr}}
+  .split .h{padding:12px 16px; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:#fff}
+  .split .h.you{background:var(--accent)} .split .h.claude{background:var(--ink)}
+  .split ul{margin:0; padding:14px 16px 16px 34px; background:var(--paper)} .split li{font-size:14px; color:var(--ink2); margin-bottom:8px}
+  .split .col{border-right:1px solid var(--line)} @media(max-width:620px){.split .col{border-right:0; border-bottom:1px solid var(--line)}}
+
+  /* code / prompt blocks */
+  .code{background:var(--code); color:#E7E9F0; border-radius:var(--radius); padding:16px 18px; font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace; font-size:12.5px; line-height:1.65; margin-top:12px; overflow:auto; white-space:pre-wrap}
+  .code .cl{display:block; font-family:var(--sans); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent2); font-weight:700; margin-bottom:9px}
+  .code .cm{color:#8fa0c8}
+
+  .sopcard{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; margin-top:12px}
+  .sopcard h4{margin:0 0 2px; font-size:16px}
+  .sopcard .task{font-size:12.5px; color:var(--muted); margin-bottom:6px}
+
+  .ramp{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px}
+  @media(max-width:760px){.ramp{grid-template-columns:1fr}}
+  .phase{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:18px; border-top:3px solid var(--teal)}
+  .phase .wk{font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--teal)}
+  .phase h4{font-size:17px; margin:4px 0 8px}
+  .phase ul{margin:0; padding-left:18px} .phase li{font-size:13.5px; color:var(--ink2); margin-bottom:6px}
+
+  .area{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:18px 22px; margin-top:14px}
+  .area .ahead{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:10px}
+  .area h3{font-size:19px; margin:0}
+  .area .anum{font-family:var(--serif); font-weight:700; color:var(--accent); font-size:14px}
+  .area .sla{margin-left:auto; font-size:12px; color:var(--muted)}
+  .area .sla b{color:var(--ink)}
+  .area p{margin:0 0 8px; font-size:14px}
+  .area .sop{font-size:13.5px; color:var(--ink2)} .area .sop b{color:var(--ink)}
+
+  table{width:100%; border-collapse:collapse; background:var(--paper); border:1px solid var(--line); font-size:14px; margin-top:14px}
+  th,td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); background:var(--sand); font-family:var(--sans)}
+  td b{color:var(--ink)}
+  .when{font-weight:700; color:var(--accent); white-space:nowrap}
+  td code, .ic{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace; font-size:12px; background:var(--sand); border:1px solid var(--line); border-radius:3px; padding:1px 6px}
+
+  .fw{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px; margin-top:14px}
+  .fwc{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:14px 16px; border-top:3px solid var(--ink)}
+  .fwc.op{border-top-color:var(--accent)}
+  .fwc h4{margin:0 0 3px; font-size:16px} .fwc p{margin:0; font-size:13px; color:var(--ink2)}
+
+  .score{display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; margin-top:14px}
+  .metric{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:15px 17px; border-top:3px solid var(--gold)}
+  .metric h4{font-size:15px; margin:0 0 4px} .metric p{font-size:12.5px; color:var(--muted); margin:0}
+
+  .guards{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px}
+  @media(max-width:620px){.guards{grid-template-columns:1fr}}
+  .guard{background:var(--paper); border:1px solid var(--line); border-left:3px solid #8a2f2f; border-radius:var(--radius); padding:13px 15px; font-size:13.5px; color:var(--ink2)}
+  .guard b{color:var(--ink)}
+  .guard.ok{border-left-color:var(--teal)}
+
+  .cta-band{background:var(--ink); color:#EDEAE3; border-radius:var(--radius); padding:32px; margin-top:32px}
+  .cta-band h2{color:#fff; font-size:25px; margin:0 0 8px}
+  .cta-band p{color:#C9D0DE; max-width:640px}
+  .cta-band .cta{background:var(--accent); margin-top:14px}
+  footer{margin-top:36px; padding-top:18px; border-top:1px solid var(--line); font-size:12.5px; color:var(--muted); max-width:820px}
+
+  /* prompting toolkit */
+  h3.sub2{font-size:17px; margin:26px 0 4px}
+  .fgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px; margin-top:14px}
+  .fcard{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:15px 16px; display:flex; flex-direction:column; border-top:3px solid var(--ink)}
+  .fcard.mil{border-top-color:var(--accent)} .fcard.biz{border-top-color:var(--teal)} .fcard.logic{border-top-color:var(--gold)}
+  .fcard .fb{display:inline-block; font-size:9.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:5px}
+  .fcard h4{margin:0 0 3px; font-size:17px}
+  .fcard .fd{font-size:13px; color:var(--ink2); margin:0 0 6px}
+  .fcard .fuse{font-size:12px; color:var(--muted); margin:0 0 9px} .fcard .fuse b{color:var(--ink)}
+  .pbox{position:relative; background:var(--sand); border:1px solid var(--line); border-radius:var(--radius); padding:10px 12px; padding-right:52px; font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace; font-size:11.5px; line-height:1.55; color:var(--ink); margin-top:auto; white-space:pre-wrap}
+  .copy{position:absolute; top:6px; right:6px; font-size:10px; padding:3px 8px; border-radius:3px; border:1px solid var(--line); background:var(--paper); color:var(--muted); cursor:pointer; font-family:var(--sans)}
+  .copy:hover{color:var(--accent); border-color:var(--accent)}
+  .layers{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px; margin-top:12px}
+  .layer{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:10px 12px; font-size:12.5px; color:var(--ink2)}
+  .layer b{display:block; color:var(--ink); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:3px}
+  .tblwrap{overflow-x:auto} .mini td, .mini th{padding:8px 12px; font-size:13px}
+  .prebuilt{position:relative}
+
+  @media(max-width:860px){
+    .shell{grid-template-columns:1fr}
+    .side{position:static; height:auto; border-right:0; border-bottom:1px solid var(--line); overflow:visible}
+    .side nav{display:flex; flex-wrap:wrap; gap:4px}
+    .side nav .navlbl{width:100%; margin:10px 0 2px}
+    .side nav a{border-left:0}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="side">
+    <a class="brand" href="#top">SMB<span class="dot">.</span>AI</a>
+    <div class="tagline">The Operator's Manual — running the business lean</div>
+    <span class="conf">Behind the scenes</span>
+    <nav>
+      <div class="navlbl">Operate</div>
+      <a href="#top">The mandate</a>
+      <a href="#human">The HUMAN Framework</a>
+      <a href="#engine">The no-hire engine</a>
+      <a href="#split">Owner ↔ Claude split</a>
+      <a href="#ramp">Founder ramp</a>
+      <div class="navlbl">Run the six areas</div>
+      <a href="#areas">Dogfood SOPs</a>
+      <div class="navlbl">The toolkit</div>
+      <a href="#sops">Exact Cowork prompts</a>
+      <a href="#frameworks">Prompting toolkit</a>
+      <a href="/smb-ai/#toolkit" target="_top">↗ Full toolkit page</a>
+      <a href="#cadence">Weekly cadence</a>
+      <div class="navlbl">Hold the line</div>
+      <a href="#scoreboard">Operator scoreboard</a>
+      <a href="#guardrails">Guardrails</a>
+      <a href="#cta">Run today</a>
+    </nav>
+    <span class="badge">HUMAN Framework · Singh Leadership</span>
+  </aside>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="top" class="hero" style="padding-top:40px">
+      <div class="eyebrow">The Operator's Manual · Flavor B</div>
+      <h1>Run SMB.AI lean — with Claude as the team, until revenue earns the first hire.</h1>
+      <p class="sub">This is the internal manual for operating the company day-to-day. You are the product manager and the final call; Claude writes the code, drafts the content, and runs the research. The same HUMAN discipline you sell is the discipline you run on. No hire until it works.</p>
+      <div class="herometa">
+        <span class="chip">You = <b>PM + judgment</b></span>
+        <span class="chip">Claude = <b>the engineering &amp; ops team</b></span>
+        <span class="chip">First hire at <b>~$2k MRR</b></span>
+      </div>
+      <div><a class="cta" href="#human">Start with the discipline</a></div>
+    </section>
+
+    <!-- HUMAN -->
+    <section id="human">
+      <div class="kicker">The operating discipline</div>
+      <h2 class="sec">The HUMAN Framework — how you operate</h2>
+      <p class="lead">You're running at machine speed as a team of one plus Claude. HUMAN is what keeps you deliberate instead of reactive. Same five moves you teach customers; here they're your own standard.</p>
+
+      <div class="acro">
+        <a href="#H"><div class="l">H</div><div class="w">Halt</div><div class="d">Gap before the tool</div></a>
+        <a href="#U"><div class="l">U</div><div class="w">Understand</div><div class="d">The real question</div></a>
+        <a href="#M"><div class="l">M</div><div class="w">Mark the Line</div><div class="d">Machine vs. you</div></a>
+        <a href="#A"><div class="l">A</div><div class="w">Apply Leverage</div><div class="d">Use Claude boldly</div></a>
+        <a href="#N"><div class="l">N</div><div class="w">Never Outsource</div><div class="d">Guard the core</div></a>
+      </div>
+
+      <div class="letter" id="H"><div class="big">H</div><div>
+        <h3>Halt</h3><div class="oneline">Put a deliberate gap between the impulse and the tool</div>
+        <p>A machine that never has to breathe will happily talk you out of ever breathing again. Its readiness is contagious — it pulls you into its tempo until you're making founder decisions at machine speed. The gap is where you stay the operator instead of the operated.</p>
+        <div class="op"><span class="ol">Operator move</span>Run the <b>Operator's Check</b> (60s) at the top of every Cowork session: What state am I in? What am I actually trying to produce? What would the wisest version of me reach for? <b>No session brief, no build.</b></div>
+      </div></div>
+
+      <div class="letter" id="U"><div class="big">U</div><div>
+        <h3>Understand the Real Question</h3><div class="oneline">A search-box question gets a search-box answer</div>
+        <p>The difference between a beige generic slab and something sharp enough to ship is the four minutes you spend framing the real decision and handing Claude its non-negotiables — before the prompt, not after.</p>
+        <div class="op"><span class="ol">Operator move</span>Write "What I'm actually trying to decide is ______," then prime the session with a God Mode block (below) so context and non-negotiables are set once, not rebuilt every time.</div>
+      </div></div>
+
+      <div class="letter" id="M"><div class="big">M</div><div>
+        <h3>Mark the Line</h3><div class="oneline">Draw the line between machine work and human work</div>
+        <p>Give Claude the drafting, the code, the aggregation, the repetition. Keep the judgment, the client relationship, the values call, the final word. Draw it on purpose — the approval queue is this line made into software, and you built it that way for a reason.</p>
+        <div class="op"><span class="ol">Operator move</span>For every build or send, name it: "This goes to Claude / this stays with me." If a task has no human side, look harder — that's usually the part that mattered.</div>
+      </div></div>
+
+      <div class="letter a" id="A"><div class="big">A</div><div>
+        <h3>Apply the Leverage</h3><div class="oneline">Once the line is drawn, use the machine boldly on its side</div>
+        <p>The quiet failure for a solo founder is preciousness — using a supercomputer like a notepad. Hand Claude the whole machine side: every Vercel function, every SQL query, every OAuth handler, every draft. Delegate fully so you can invest deeply in the two things only you can do — the thinking and the relationships.</p>
+        <div class="op"><span class="ol">Operator move</span>This is the whole no-hire engine below. Delegate completely, approve deliberately.</div>
+      </div></div>
+
+      <div class="letter" id="N"><div class="big">N</div><div>
+        <h3>Never Outsource the Core</h3><div class="oneline">If a machine can generate it, a machine can copy it</div>
+        <p>Your judgment, your values, the final call, your purpose. It gets outsourced not in one dramatic moment but in a hundred small Tuesdays where the model's confidence is more convenient than your responsibility. The names and clever solutions a machine generates, you can't own — and neither can anyone else. The moat is you.</p>
+        <div class="op"><span class="ol">Operator move</span>Keep the "never outsource" short list pinned. Any consequential write clears the approval gate with <em>you</em> reading the exact content — never a summary.</div>
+      </div></div>
+    </section>
+
+    <hr class="div">
+
+    <!-- NO-HIRE ENGINE -->
+    <section id="engine">
+      <div class="kicker">Apply the Leverage · in practice</div>
+      <h2 class="sec">The no-hire engine</h2>
+      <p class="lead">You already have your engineering team: Claude, in this Cowork session. You act as product manager; Claude writes every Vercel function, Supabase query, and OAuth handler; you test and approve. Here's exactly how a new skill ships without an engineer.</p>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div><h4>Design the skill</h4><p>Spec, system prompt, example inputs/outputs — iterate in a Claude Project until the output is right. Judgment step; stays with you.</p></div></div>
+        <div class="step"><div class="n">2</div><div><h4>Claude writes the Vercel function</h4><p>Ask Claude to write the serverless function for the skill endpoint. Keys stay server-side, never in the frontend.</p></div></div>
+        <div class="step"><div class="n">3</div><div><h4>Claude writes the React skill card</h4><p>The card calls the endpoint and shows an approve / reject control — the Mark-the-Line UI.</p></div></div>
+        <div class="step"><div class="n">4</div><div><h4>Store as pending_approval</h4><p>Result lands in Supabase with <span class="ic">status = pending_approval</span>; the approval queue polls for pending items.</p></div></div>
+        <div class="step"><div class="n">5</div><div><h4>Approve → the write fires</h4><p>On your approval, Supabase fires the Make.com webhook, which performs the real write action (send, post, invoice).</p></div></div>
+      </div>
+      <p style="margin-top:14px">Keep a Claude Project called <b>"Dev assistant"</b>: paste errors, get fixes, generate boilerplate. Do not hire until ~<b>$2k MRR</b> — and the first hire's only job is to harden what already works.</p>
+    </section>
+
+    <!-- SPLIT -->
+    <section id="split">
+      <div class="kicker">Mark the Line · roles</div>
+      <h2 class="sec">Owner ↔ Claude responsibility split</h2>
+      <p class="lead">The line, drawn once, for the whole company. When in doubt, this table decides who holds the pen.</p>
+      <div class="split">
+        <div class="col">
+          <div class="h you">You — the operator (keep human)</div>
+          <ul>
+            <li>Product judgment: what to build, what to cut</li>
+            <li>The skill spec and the "is this output right?" call</li>
+            <li>Every approval on a consequential write/send</li>
+            <li>Client &amp; investor relationships and communication</li>
+            <li>Pricing, values calls, and the final decision</li>
+            <li>Your "never outsource" short list</li>
+          </ul>
+        </div>
+        <div class="col">
+          <div class="h claude">Claude — the team (give to the machine)</div>
+          <ul>
+            <li>Every Vercel function, SQL query, OAuth handler</li>
+            <li>React skill cards and UI boilerplate</li>
+            <li>Drafts: content, emails, docs, reports</li>
+            <li>Research, enrichment, competitor scans</li>
+            <li>Debugging and error fixes (Dev assistant Project)</li>
+            <li>First-pass anything on the machine's side of the line</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="div">
+
+    <!-- FOUNDER RAMP -->
+    <section id="ramp">
+      <div class="kicker">Stand it up</div>
+      <h2 class="sec">The founder ramp</h2>
+      <p class="lead">Revenue-first, lowest risk. Each phase is independently shippable and nothing early costs money.</p>
+      <div class="ramp">
+        <div class="phase"><div class="wk">Phase 1 · Ship the core</div><h4>Deploy on free tiers</h4>
+          <ul><li>Import the repo into Vercel, deploy on Hobby (free).</li><li>Paste every <span class="ic">env_template</span> value into Vercel.</li><li>Test the four core skill cards end-to-end on the live URL.</li></ul></div>
+        <div class="phase"><div class="wk">Phase 2 · Make it safe for one</div><h4>Auth + isolation</h4>
+          <ul><li>Add Supabase auth + Row-Level Security.</li><li>Confirm the approval queue holds every write.</li><li>Recruit three real testers; watch them run the loop.</li></ul></div>
+        <div class="phase"><div class="wk">Phase 3 · Take the first dollar</div><h4>Upgrade only at revenue</h4>
+          <ul><li>Publish privacy policy + DPA; register with ICO (~$40/yr).</li><li>Upgrade the two paid plans the moment you take the first paying customer.</li><li>Only then consider Stripe billing — after 3 users confirm the flow.</li></ul></div>
+      </div>
+    </section>
+
+    <hr class="div">
+
+    <!-- AREAS / DOGFOOD -->
+    <section id="areas">
+      <div class="kicker">Run the business on the product</div>
+      <h2 class="sec">Dogfood SOPs — the six areas</h2>
+      <p class="lead">You run SMB.AI's own operations on SMB.AI. Same six areas as the Owner's Playbook, here as tight internal SOPs with a service level and the one metric you hold yourself to.</p>
+
+      <div class="area"><div class="ahead"><span class="anum">Area 1</span><h3>Customers &amp; Sales</h3><span class="sla"><b>SLA:</b> every lead touched in 24h</span></div>
+        <p class="sop"><b>SOP:</b> Daily 10-min triage — Claude pulls new signups/leads, enriches, and drafts first-touch. You decide who's worth a call and make it sound like you. <b>Never outsource:</b> the actual relationship.</p></div>
+
+      <div class="area"><div class="ahead"><span class="anum">Area 2</span><h3>Money &amp; Finance</h3><span class="sla"><b>SLA:</b> days-to-payment &lt; 20</span></div>
+        <p class="sop"><b>SOP:</b> Weekly — Claude lists overdue, drafts chases, queues them; you approve and soften the two that matter. Monthly — cash-flow snapshot + close. <b>Never outsource:</b> the numbers you sign off.</p></div>
+
+      <div class="area"><div class="ahead"><span class="anum">Area 3</span><h3>Comms &amp; Inbox</h3><span class="sla"><b>SLA:</b> no reply older than 24h</span></div>
+        <p class="sop"><b>SOP:</b> Twice-daily triage; pre-meeting brief before every external call. <b>Never outsource:</b> any message where the relationship is the point (David's rule).</p></div>
+
+      <div class="area"><div class="ahead"><span class="anum">Area 4</span><h3>Marketing &amp; Content</h3><span class="sla"><b>SLA:</b> ship what you planned</span></div>
+        <p class="sop"><b>SOP:</b> Weekly batch — Claude turns one idea into a week of posts + newsletter in your voice; you pick the two with a real point of view (Renata's leverage). <b>Never outsource:</b> the opinion.</p></div>
+
+      <div class="area"><div class="ahead"><span class="anum">Area 5</span><h3>Data &amp; Reporting</h3><span class="sla"><b>SLA:</b> report acted on, not filed</span></div>
+        <p class="sop"><b>SOP:</b> Automated weekly competitor scan (cron) + monthly report on the 1st. Claude gathers; you interpret and decide. <b>Never outsource:</b> what the numbers mean.</p></div>
+
+      <div class="area"><div class="ahead"><span class="anum">Area 6</span><h3>Admin &amp; Compliance</h3><span class="sla"><b>SLA:</b> nothing slips</span></div>
+        <p class="sop"><b>SOP:</b> Contract review on demand; renewals and RLS/privacy obligations tracked. Claude reads and flags; you sign. <b>Never outsource:</b> the signature and the risk you accept. <em>AI analysis, not legal advice.</em></p></div>
+    </section>
+
+    <hr class="div">
+
+    <!-- SOPS / PROMPTS -->
+    <section id="sops">
+      <div class="kicker">Understand · the toolkit</div>
+      <h2 class="sec">Exact Cowork prompts &amp; God Mode</h2>
+      <p class="lead">Paste these as written — don't paraphrase. Prime the session once with God Mode, then use HUMAN and your shortcuts throughout.</p>
+
+      <div class="code"><span class="cl">Session primer — SMB.AI Operator God Mode (paste at the top of Cowork)</span>You are my product &amp; engineering partner for SMB.AI.
+Treat me as the product manager and final decision-maker — no hedging, lead with the sharpest option.
+If my framing is wrong, correct it first, then answer the better version.
+Default format: BLUF, then the supporting logic. Apply MECE to any breakdown.
+Non-negotiables: never expose API/Supabase keys in the frontend; never store tokens as plaintext;
+every write/send action must queue for my approval; keep model = claude-sonnet-4-6.
+Hold decisions across this session and build on them without being asked.
+
+<span class="cm"># shortcuts</span>
+/human  = run this task through HUMAN: Halt, Understand, Mark the Line, Apply the Leverage, Never Outsource.
+/smeac  = structure as a full SMEAC brief (for any offshore/dev handoff).
+/knox   = VISOR Analytics strategic-analyst persona.
+Acknowledge with "Ready" and wait for the first task.</div>
+
+      <div class="sopcard"><h4>Build a new skill (no-hire engine)</h4><div class="task">Apply the Leverage · steps 2–4</div>
+        <div class="code">Here is the skill spec: [paste]. /smeac the build, then:
+1) write the Vercel serverless function for this endpoint (keys server-side),
+2) write the React skill card with an approve/reject control,
+3) write the Supabase insert setting status = pending_approval.
+Flag anything ambiguous as [OPEN QUESTION]. Do not assume schema — ask.</div></div>
+
+      <div class="sopcard"><h4>Run a consequential send</h4><div class="task">Mark the Line + Never Outsource</div>
+        <div class="code">/human Draft the [invoice chase / client reply] for [context].
+Show me the exact content that will send — not a summary — and STOP.
+Nothing goes out until I approve it in the queue.</div></div>
+
+      <div class="sopcard"><h4>Debug fast</h4><div class="task">Dev assistant Project</div>
+        <div class="code">Here's the error + the function: [paste]. BLUF the root cause,
+give me the minimal fix, and tell me what to test after. /no-hedge</div></div>
+    </section>
+
+    <!-- FRAMEWORKS / PROMPTING TOOLKIT -->
+    <section id="frameworks">
+      <div class="kicker">Understand · the prompting toolkit</div>
+      <h2 class="sec">The prompting toolkit</h2>
+      <p class="lead">HUMAN governs how you <em>operate</em>; these frameworks shape the <em>prompt</em> inside the "Understand the Real Question" step. This is your Prompt Mastery Playbook, folded into operations — each acronym is a complete thinking system, used as a prompt, not a label. Copy any block. For the full interactive version with a God Mode builder, open the <a href="/smb-ai/#toolkit" target="_top" style="color:var(--accent);font-weight:600">SMB.AI Prompting Toolkit ↗</a>.</p>
+
+      <h3 class="sub2">Core frameworks</h3>
+      <div class="fgrid">
+        <div class="fcard mil"><span class="fb">Military · Handoff</span><h4>SMEAC</h4>
+          <p class="fd">Operations order across five dimensions: Situation · Mission · Execution · Admin/Logistics · Command/Signal. Nothing left open.</p>
+          <p class="fuse"><b>In ops:</b> spec any skill build or dev/offshore handoff.</p>
+          <div class="pbox">Structure this build using SMEAC (Situation, Mission, Execution, Admin/Logistics, Command/Signal). Audience: the dev workstream. Flag every open question as [OPEN QUESTION]; list dependencies explicitly.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+
+        <div class="fcard mil"><span class="fb">Military · Decide fast</span><h4>OODA</h4>
+          <p class="fd">Observe → Orient → Decide → Act → repeat. A speed-of-decision cycle, not an analysis format.</p>
+          <p class="fuse"><b>In ops:</b> a competitor moves, an outage hits, a deal wobbles.</p>
+          <div class="pbox">Apply OODA to [scenario]. Move fast — identify the decision I need to make now, not just the data.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+
+        <div class="fcard mil"><span class="fb">Military · Report</span><h4>BLUF</h4>
+          <p class="fd">Bottom Line Up Front. Conclusion first, rationale after. Kills the buried lede.</p>
+          <p class="fuse"><b>In ops:</b> every status update, cash-flow snapshot, investor note.</p>
+          <div class="pbox">Respond in BLUF format. Give me the recommendation in the first sentence, then the supporting logic.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+
+        <div class="fcard biz"><span class="fb">Business · Persuade</span><h4>SCQA</h4>
+          <p class="fd">Situation → Complication → Question → Answer. The backbone of persuasive executive communication.</p>
+          <p class="fuse"><b>In ops:</b> proposals, the pitch, partner &amp; board updates.</p>
+          <div class="pbox">Write this using SCQA (Situation, Complication, Question, Answer). Audience: prospective investors. Tone: authoritative and warm.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+
+        <div class="fcard biz"><span class="fb">Business · Prioritize</span><h4>RICE</h4>
+          <p class="fd">Reach × Impact × Confidence ÷ Effort. Cuts through opinion with a defensible numeric ranking.</p>
+          <p class="fuse"><b>In ops:</b> which skill to build next; rank the roadmap.</p>
+          <div class="pbox">Score these options using RICE (Reach, Impact, Confidence, Effort) and rank them. Show your working.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+
+        <div class="fcard logic"><span class="fb">Logic · Check</span><h4>MECE</h4>
+          <p class="fd">Mutually Exclusive, Collectively Exhaustive. A quality check on any breakdown — no overlaps, no gaps.</p>
+          <p class="fuse"><b>In ops:</b> sanity-check any list or plan before you act.</p>
+          <div class="pbox">Review this breakdown and ensure it is MECE. Flag any overlaps or gaps.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+
+        <div class="fcard logic"><span class="fb">Intel · Analyze</span><h4>PMESII-PT</h4>
+          <p class="fd">Political, Military, Economic, Social, Infrastructure, Information, Physical Terrain. Full-spectrum situational analysis.</p>
+          <p class="fuse"><b>In ops:</b> market entry, competitive landscape, risk assessment.</p>
+          <div class="pbox">Run a PMESII-PT analysis on [market]. Use MECE to structure each dimension. Add confidence ratings.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+      </div>
+
+      <h3 class="sub2">God Mode — prime the session (the "Understand" primer)</h3>
+      <p style="font-size:14px">A system prompt you write yourself: it sets persona, authority, format, and challenge posture before the first task. Your ready-to-paste <a href="#sops" style="color:var(--accent)">SMB.AI Operator God Mode</a> block is above. The six layers:</p>
+      <div class="layers">
+        <div class="layer"><b>Persona</b>You are a [world-class expert] with [X years] in [domain].</div>
+        <div class="layer"><b>Authority</b>Treat me as a peer expert. Skip generic caveats.</div>
+        <div class="layer"><b>Depth</b>Give me second- and third-order implications.</div>
+        <div class="layer"><b>Format</b>Respond in [BLUF / SMEAC / bullets]. No filler.</div>
+        <div class="layer"><b>Challenge</b>If my framing is wrong, tell me first — then answer the better version.</div>
+        <div class="layer"><b>Memory</b>Hold context across the session; build on earlier decisions.</div>
+      </div>
+      <div class="fgrid" style="margin-top:14px">
+        <div class="fcard"><span class="fb">Pre-built</span><h4>VISOR Analytics</h4>
+          <div class="pbox">You are a senior strategy consultant and business architect with 25 years across enterprise transformation, data strategy, and executive leadership.
+
+Treat me as a peer. No hedging, no generic advice. Lead with the sharpest insight. If my framing is wrong, correct it first.
+
+Use BLUF format for all substantive responses. Apply MECE to any breakdown. Give second and third-order implications.
+
+Remember decisions made earlier in this session and build on them without being asked.
+
+/knox — VISOR Analytics strategic analyst persona.
+/clarity — Clarity Gradient (Tactical > Operational > Strategic > Identity).
+/smeac — full SMEAC briefing.  /risks — add a risk section.  /v1 — label Draft v1.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+        <div class="fcard"><span class="fb">Pre-built</span><h4>Singh Leadership</h4>
+          <div class="pbox">You are a master executive coach and leadership architect with 20 years developing C-suite leaders through transformation, purpose alignment, and composure under pressure.
+
+Speak to me as a peer practitioner. No surface coaching. Go to the root pattern.
+
+Use STAR for stories, BREATHE for micro-practices, COMPASS Method for structural framing.
+
+/compass — COMPASS Method (Center / Open / Mirror / Permission / Arrive / See / Soar).
+/breathe — 60-second BREATHE micro-practice.  /seam — SEAMline narrative.  /star — extract a STAR story.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+      </div>
+
+      <h3 class="sub2">Slash shortcuts</h3>
+      <p style="font-size:13.5px;color:var(--muted)">In claude.ai chat there are no built-in slash commands — the slash just signals "this is a modifier." Define your stack once with God Mode and use them all session.</p>
+      <div class="tblwrap"><table class="mini">
+        <thead><tr><th>Your custom stack</th><th>What it activates</th></tr></thead>
+        <tbody>
+          <tr><td><code>/human</code></td><td>Run the task through HUMAN — Halt, Understand, Mark the Line, Apply the Leverage, Never Outsource</td></tr>
+          <tr><td><code>/knox</code></td><td>VISOR Analytics strategic-analyst persona</td></tr>
+          <tr><td><code>/smeac</code></td><td>Full SMEAC briefing (dev / offshore handoff)</td></tr>
+          <tr><td><code>/bluf</code></td><td>Bottom line up front</td></tr>
+          <tr><td><code>/no-hedge</code></td><td>Drop caveats — direct output only</td></tr>
+          <tr><td><code>/risks</code></td><td>Add a risk section after the main answer</td></tr>
+          <tr><td><code>... /critique</code></td><td>Self-critique after answering (suffix)</td></tr>
+          <tr><td><code>... /gaps</code></td><td>What's missing from this? (suffix)</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3 class="sub2">Advanced prompts — mapped to HUMAN</h3>
+      <div class="fgrid">
+        <div class="fcard"><span class="fb">→ Understand</span><h4>Ask me first</h4>
+          <p class="fd">Claude interviews you before answering — kills generic output.</p>
+          <div class="pbox">Before you respond, ask me the 3 questions that would most improve your answer.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+        <div class="fcard"><span class="fb">→ Understand</span><h4>Prompt improver</h4>
+          <p class="fd">Sharpen the question before executing it.</p>
+          <div class="pbox">Before answering, rewrite my prompt to be more precise, then answer the improved version.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+        <div class="fcard"><span class="fb">→ Never Outsource</span><h4>Devil's advocate</h4>
+          <p class="fd">Pressure-test before you commit — keep the judgment yours.</p>
+          <div class="pbox">After your answer, steelman the strongest counterargument.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+        <div class="fcard"><span class="fb">→ Judgment</span><h4>Pre-mortem</h4>
+          <p class="fd">Assume failure, work backwards. Surfaces blind spots.</p>
+          <div class="pbox">It is 12 months from now and this failed. What went wrong?<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+        <div class="fcard"><span class="fb">→ Data &amp; Reporting</span><h4>Confidence rating</h4>
+          <p class="fd">Separate signal from filler in any research output.</p>
+          <div class="pbox">Rate your confidence in each claim (high / medium / low). Flag anything uncertain.<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+        <div class="fcard"><span class="fb">→ Mark the Line</span><h4>Assumption audit</h4>
+          <p class="fd">Surface hidden premises before you build on them.</p>
+          <div class="pbox">List every assumption embedded in this plan. Which are most fragile?<button class="copy" onclick="copyPB(this)">Copy</button></div></div>
+      </div>
+
+      <h3 class="sub2">Constraint stacking — 2–3 per prompt for precision</h3>
+      <div class="pbox" style="padding-right:52px">Act as Knox. SCQA structure. BLUF format. Audience: investors. Max 300 words.<button class="copy" onclick="copyPB(this)">Copy</button></div>
+      <div class="pbox" style="padding-right:52px;margin-top:8px">/smeac the build. ELI-developer level. Flag ambiguities [OPEN QUESTION]. /risks<button class="copy" onclick="copyPB(this)">Copy</button></div>
+      <div class="pbox" style="padding-right:52px;margin-top:8px">/human Draft the client reply. Show exact content, not a summary. Do not send until I approve.<button class="copy" onclick="copyPB(this)">Copy</button></div>
+    </section>
+
+    <hr class="div">
+
+    <!-- CADENCE -->
+    <section id="cadence">
+      <div class="kicker">Make it a rhythm</div>
+      <h2 class="sec">The weekly founder cadence</h2>
+      <table>
+        <thead><tr><th style="width:130px">When</th><th>What you run</th><th>HUMAN move</th></tr></thead>
+        <tbody>
+          <tr><td class="when">Daily AM</td><td>Operator's Check → inbox &amp; lead triage → approve queued drafts</td><td>Halt, then approve</td></tr>
+          <tr><td class="when">Daily build block</td><td>One skill/feature via the no-hire engine (spec → Claude builds → you approve)</td><td>Apply the Leverage</td></tr>
+          <tr><td class="when">Weekly</td><td>Invoice chase · content batch · pipeline review · competitor scan · ship one improvement</td><td>Mark the Line</td></tr>
+          <tr><td class="when">Monthly (1st)</td><td>Close &amp; cash-flow · report · review metrics vs. the hire threshold</td><td>Never Outsource the numbers</td></tr>
+          <tr><td class="when">Always</td><td>Push to GitHub after any meaningful session; test skill runs after any backend change</td><td>Build discipline</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SCOREBOARD -->
+    <section id="scoreboard">
+      <div class="kicker">What you hold yourself to</div>
+      <h2 class="sec">The operator scoreboard</h2>
+      <div class="score">
+        <div class="metric"><h4>MRR</h4><p>The only number that unlocks the first hire (~$2k).</p></div>
+        <div class="metric"><h4>Activation</h4><p>New users who complete one full HUMAN loop.</p></div>
+        <div class="metric"><h4>Approval-queue health</h4><p>Nothing sent un-approved. Ever.</p></div>
+        <div class="metric"><h4>Build velocity</h4><p>Skills shipped per week via the engine.</p></div>
+        <div class="metric"><h4>Your days-to-payment</h4><p>Dogfood: are you getting paid faster?</p></div>
+        <div class="metric"><h4>Hours you keep</h4><p>Leverage returned — spent on thinking &amp; relationships.</p></div>
+      </div>
+    </section>
+
+    <hr class="div">
+
+    <!-- GUARDRAILS -->
+    <section id="guardrails">
+      <div class="kicker">Non-negotiable</div>
+      <h2 class="sec">Guardrails — hold the line</h2>
+      <p class="lead">From the Master Handover. These apply at every stage and don't bend for convenience — that's how the core gets outsourced.</p>
+      <div class="guards">
+        <div class="guard"><b>Never expose keys in the frontend.</b> Claude and Supabase keys route through serverless functions only.</div>
+        <div class="guard"><b>Never store tokens as plaintext.</b> Encrypt OAuth tokens at rest (AES-256); never commit <span class="ic">.env</span>.</div>
+        <div class="guard"><b>Every write/send needs human approval.</b> The card shows exact content, not a summary. If Make.com fails, warn — never silently drop.</div>
+        <div class="guard"><b>Verify <span class="ic">CRON_SECRET</span></b> on every cron endpoint before it runs.</div>
+        <div class="guard"><b>Enable Supabase RLS</b> before more than one customer has access.</div>
+        <div class="guard"><b>Legal/financial outputs carry a disclaimer.</b> Contract review: "AI analysis, not legal advice."</div>
+        <div class="guard ok"><b>Keep <span class="ic">claude-sonnet-4-6</span>.</b> Don't switch models to save money.</div>
+        <div class="guard ok"><b>Don't add Stripe</b> until 3 real users confirm the approval flow works.</div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+      <div class="cta-band">
+        <h2>Open Cowork and run today's cadence.</h2>
+        <p>Operator's Check first. Paste the God Mode primer. Triage, approve, and ship one improvement through the engine. Do less than you think you should — and know exactly what changed.</p>
+        <a class="cta" href="#top">Back to the top</a>
+      </div>
+      <footer>
+        The AI-Operations Playbook · Operator's Manual (Internal) · SMB.AI<br>
+        The HUMAN Framework — Halt · Understand the Real Question · Mark the Line · Apply the Leverage · Never Outsource the Core — by Singh Leadership · VISOR Analytics.<br>
+        Contract review and financial outputs are AI analysis, not legal or financial advice.
+      </footer>
+    </section>
+
+  </main>
+</div>
+<script>
+function copyPB(btn){
+  var box=btn.parentElement;
+  var t=box.innerText.replace(/Copy\s*$/,'').trim();
+  navigator.clipboard.writeText(t).then(function(){
+    btn.textContent='Copied';
+    setTimeout(function(){btn.textContent='Copy';},1500);
+  });
+}
+</script>
+</body>
+</html>

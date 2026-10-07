@@ -36,6 +36,10 @@
   .tab[aria-selected="true"]{border-bottom-color:var(--rust)}.tab[aria-selected="true"] .l{color:var(--navy)}
   .frame{flex:1 1 auto;min-height:0}#v{width:100%;height:100%;border:0;display:block;background:var(--bone)}
   @media(max-width:640px){.divider,.wordmark-wrap{display:none}.tab .s{display:none}.cta{padding:7px 10px;font-size:12px}}
+  .picker{display:none;align-items:center;gap:10px;padding:8px 0 10px}
+  .picker-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--navy-60)}
+  .picker select{flex:1;font:600 15px var(--sans);color:var(--navy);background:var(--paper);border:1px solid var(--rule);border-radius:3px;padding:9px 12px}
+  @media(max-width:900px){.tabs{display:none}.picker{display:flex}}
 </style>
 </head>
 <body>
@@ -53,23 +57,37 @@
     <div class="tabs" role="tablist" aria-label="SMB.AI sections">
       <button class="tab" role="tab" data-doc="bench" data-src="bench.html"><span class="l">The Bench</span><span class="s">12 specialists · free</span></button>
       <button class="tab" role="tab" data-doc="playbook" data-src="owners-playbook.html"><span class="l">Owner's Playbook</span><span class="s">Start here</span></button>
+      <button class="tab" role="tab" data-doc="operator" data-src="operators-manual.html"><span class="l">Operator's Manual</span><span class="s">Run the six areas</span></button>
       <button class="tab" role="tab" data-doc="toolkit" data-src="prompting-toolkit.html"><span class="l">Prompting Toolkit</span><span class="s">Frameworks</span></button>
       <button class="tab" role="tab" data-doc="skills" data-src="skill-builder.html"><span class="l">Skill Builder</span><span class="s">Go further</span></button>
+      <button class="tab" role="tab" data-doc="blueprint" data-src="blueprint.html"><span class="l">Blueprint</span><span class="s">How it's built</span></button>
     </div>
+    <label class="picker"><span class="picker-lbl">Section</span>
+      <select id="picker" aria-label="Choose a section">
+        <option value="bench">The Bench</option>
+        <option value="playbook">Owner's Playbook</option>
+        <option value="operator">Operator's Manual</option>
+        <option value="toolkit">Prompting Toolkit</option>
+        <option value="skills">Skill Builder</option>
+        <option value="blueprint">Blueprint</option>
+      </select>
+    </label>
   </div>
 </header>
 <div class="frame"><iframe id="v" title="SMB.AI"></iframe></div>
 <script>
 (function(){
-  var tabs=[].slice.call(document.querySelectorAll('.tab')), v=document.getElementById('v');
+  var tabs=[].slice.call(document.querySelectorAll('.tab')), v=document.getElementById('v'), picker=document.getElementById('picker');
   function show(key, push){
     var t=tabs.filter(function(b){return b.dataset.doc===key})[0]||tabs[0];
     tabs.forEach(function(b){b.setAttribute('aria-selected', b===t ? 'true':'false')});
     if(v.getAttribute('src')!==t.dataset.src) v.setAttribute('src', t.dataset.src);
     document.title=t.querySelector('.l').textContent+' · SMB.AI Beta | The SEAMline Method';
+    if(picker) picker.value=t.dataset.doc;
     if(push && location.hash!=='#'+t.dataset.doc) history.replaceState(null,'','#'+t.dataset.doc);
   }
   tabs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.doc,true)})});
+  if(picker) picker.addEventListener('change',function(){show(picker.value,true)});
   window.addEventListener('hashchange',function(){show(location.hash.slice(1),false)});
   show(location.hash.slice(1)||'bench',false);
 })();

@@ -557,6 +557,30 @@
     header.site, nav.site-nav, .hero-ctas, form.intake { display: none; }
     body { background: white; color: black; }
   }
+
+  /* ---------- Nav: More dropdown (Oct 2026) ---------- */
+  nav.site-nav { gap: 24px; }
+  nav.site-nav a, .nav-more-btn { white-space: nowrap; }
+  .nav-more { position: relative; }
+  .nav-more-btn { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--navy-80);
+    background: none; border: 0; padding: 6px 0; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .nav-more-btn:hover, .nav-more-btn[aria-expanded="true"] { color: var(--rust); }
+  .nav-more-btn .caret { font-size: 10px; }
+  .nav-more-btn .lbl-mob { display: none; }
+  .nav-more-menu { position: absolute; right: 0; top: calc(100% + 14px); min-width: 220px; background: var(--paper);
+    border: 1px solid var(--rule-strong); border-radius: 3px; box-shadow: 0 12px 30px rgba(15,30,61,.12); padding: 8px 0; z-index: 60; }
+  .nav-more-menu[hidden] { display: none; }
+  nav.site-nav .nav-more-menu a { display: block !important; padding: 10px 18px; font-family: var(--mono); font-size: 12px;
+    letter-spacing: 1.2px; text-transform: uppercase; color: var(--navy-80); text-decoration: none; }
+  nav.site-nav .nav-more-menu a:hover { background: var(--bone); color: var(--rust); }
+  nav.site-nav .nav-more-menu a.m-only { display: none !important; }
+  .tag-new { font-family: var(--sans); font-size: 10px; letter-spacing: .3px; text-transform: none; color: var(--rust);
+    border: 1px solid var(--rust); border-radius: 10px; padding: 1px 6px; margin-left: 6px; }
+  @media (max-width: 1020px) { nav.site-nav { gap: 18px; } }
+  @media (max-width: 860px) {
+    .nav-more-btn .lbl-desk { display: none; } .nav-more-btn .lbl-mob { display: inline; }
+    nav.site-nav .nav-more-menu a.m-only { display: block !important; }
+  }
 </style>
 </head>
 
@@ -574,11 +598,20 @@
       <a href="#audit">The audit</a>
       <a href="#pricing">Pricing</a>
       <a href="#method">SEAMline</a>
-      <a href="#fieldkit">Field Kit</a>
-      <a href="/ai-quickstart">AI Quickstart</a>
-      <a href="/smb-ai/">SMB.AI Beta</a>
-      <a href="/nsai">NSAI</a>
-      <a href="#about">About</a>
+      <div class="nav-more">
+        <button type="button" class="nav-more-btn" aria-expanded="false" aria-controls="nav-more-menu"><span class="lbl-desk">More</span><span class="lbl-mob">Menu</span> <span class="caret" aria-hidden="true">&#9662;</span></button>
+        <div class="nav-more-menu" id="nav-more-menu" hidden>
+          <a class="m-only" href="#pattern">The pattern</a>
+          <a class="m-only" href="#audit">The audit</a>
+          <a class="m-only" href="#pricing">Pricing</a>
+          <a class="m-only" href="#method">SEAMline</a>
+          <a href="#fieldkit">Field Kit</a>
+          <a href="/ai-quickstart">AI Quickstart</a>
+          <a href="/smb-ai/">SMB.AI Beta <span class="tag-new">Free</span></a>
+          <a href="/nsai">NSAI</a>
+          <a href="#about">About</a>
+        </div>
+      </div>
       <a href="#contact" class="btn-mini">Start the audit</a>
     </nav>
   </div>
@@ -1198,19 +1231,21 @@
         'Role:     ' + data.role + '\n' +
         'Consent:  yes\n\n' +
         '— Sent from the Field Kit gate.\n';
-      var mailto = 'mailto:info@singhpowerupcoach.com'
-        + '?subject=' + encodeURIComponent(subject)
-        + '&body=' + encodeURIComponent(body);
-      window.open(mailto, '_blank');
-
-      // 3. Swap form for confirmation panel
-      form.innerHTML =
-        '<div class="form-title">The Field Kit is downloading.</div>' +
-        '<div class="form-sub">Check your downloads folder · PDF · 12 pages</div>' +
-        '<p style="font-family: var(--serif); font-style: italic; color: var(--navy); font-size: 16px; line-height: 1.5;">' +
-          'A draft email also just opened in your mail client so I know you have it. Please hit send. ' +
-          'If your browser blocked the download, ' +
-          '<a href="SEAMline_Field_Kit_v1.pdf" download style="color: var(--navy); text-decoration: underline;">click here to download manually</a>.' +
-        '</p>' +
-        '<p style="font-family: var(--sans); font-size: 14px; color: var(--navy-80); line-height: 1.5;">' +
-       
+      window.open('mailto:info@singhpowerupcoach.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), '_blank');
+    });
+  })();
+</script>
+<script>
+  // Nav "More" dropdown
+  (function(){
+    var btn=document.querySelector('.nav-more-btn'), menu=document.getElementById('nav-more-menu');
+    if(!btn||!menu) return;
+    function set(open){ btn.setAttribute('aria-expanded', open?'true':'false'); menu.hidden=!open; }
+    btn.addEventListener('click',function(e){ e.stopPropagation(); set(menu.hidden); });
+    menu.addEventListener('click',function(e){ if(e.target.closest('a')) set(false); });
+    document.addEventListener('click',function(e){ if(!e.target.closest('.nav-more')) set(false); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !menu.hidden){ set(false); btn.focus(); } });
+  })();
+</script>
+</body>
+</html>
