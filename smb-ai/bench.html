@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>The SMB.AI Bench (free beta) | SMB.AI</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet"><style>
+:root{--bg:#F5F1EB;--paper:#FFFFFF;--sand:#ECE6DC;--ink:#0F1E3D;--ink2:#2B3A5A;--muted:#5A6580;--accent:#B8512A;--accent2:#D77A52;--line:#E2DCD1;--line2:rgba(15,30,61,.12);--teal:#2E7D6B;--teal-l:#E4F1EC;--gold:#B07A1E;--gold-l:#F7EEDB;--blue:#0C447C;--blue-l:#E7F0FA;--code:#12203f;--radius:3px;--serif:"Source Serif 4",Georgia,serif;--sans:Inter,system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:44px 22px 90px}
+.kicker{font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--serif);font-weight:700;font-size:40px;line-height:1.08;margin:8px 0 6px}
+.tag{font-family:var(--serif);font-size:20px;color:var(--ink2);font-weight:600;margin:0 0 14px}
+.lead{font-size:16px;color:var(--ink2);max-width:70ch}
+.sec{font-family:var(--serif);font-weight:700;font-size:26px;margin:0 0 4px}
+section{margin-top:46px;padding-top:26px;border-top:1px solid var(--line)}
+.sub2{font-family:var(--serif);font-weight:700;font-size:17px;margin:22px 0 10px;color:var(--ink)}
+p{max-width:74ch}
+.badge{display:inline-block;font:600 10px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px;vertical-align:middle}
+.b-teal{background:var(--teal-l);color:var(--teal)}.b-gold{background:var(--gold-l);color:var(--gold)}.b-blue{background:var(--blue-l);color:var(--blue)}.b-rust{background:#F4E6DE;color:var(--accent)}
+.verify{display:inline-block;font:600 9px var(--sans);letter-spacing:.06em;color:#9A3B12;background:#FBEDE6;border:1px dashed var(--accent2);padding:1px 5px;border-radius:2px;margin-left:6px;vertical-align:middle}
+.strip{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch;margin:18px 0}
+.strip .s{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.strip .s .n{font:600 11px var(--sans);color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.strip .s h4{margin:4px 0 4px;font-size:15px}.strip .s p{font-size:13px;color:var(--muted);margin:0}
+.strip .arw{align-self:center;color:var(--accent2);font-weight:700;font-size:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--radius);padding:16px 18px}
+.card.tl{border-left-color:var(--teal)}.card.bl{border-left-color:var(--blue)}.card.gd{border-left-color:var(--gold)}
+.card h4{margin:0 0 4px;font-size:16px;font-family:var(--serif)}
+.card .ex{font-size:13px;color:var(--ink2);margin:8px 0 6px}
+.card .hood{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:7px;margin-top:8px}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11.5px;background:#F0ECE3;color:var(--code);padding:1px 5px;border-radius:2px}
+.offer{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
+.offer.a{border-top:4px solid var(--teal)}.offer.b{border-top:4px solid var(--gold)}
+.offer h3{font-family:var(--serif);font-size:20px;margin:6px 0 2px}
+.offer .who{font:600 12px var(--sans);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.offer ul{margin:12px 0 0;padding-left:18px}.offer li{font-size:14px;margin:6px 0;color:var(--ink2)}
+.price{font-family:var(--serif);font-weight:700;font-size:22px;color:var(--accent)}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px;background:var(--paper);border:1px solid var(--line)}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{background:var(--sand);font:600 12px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--ink2)}
+tr.new td{background:#F6EFE7}
+td .price{font-size:14px}
+.guard{background:var(--teal-l);border:1px solid #CFE6DD;border-radius:var(--radius);padding:16px 20px;margin-top:14px}
+.guard h4{margin:0 0 8px;font-family:var(--serif);color:var(--teal)}
+.guard li{font-size:13.5px;margin:6px 0}
+.foot{margin-top:50px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+@media(max-width:720px){.strip{grid-template-columns:1fr}.strip .arw{transform:rotate(90deg);justify-self:center}.grid2,.grid4{grid-template-columns:1fr}h1{font-size:30px}}
+.herometa{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.chip{font-size:12.5px;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:7px 14px;color:var(--ink2)}.chip b{color:var(--accent)}@media(max-width:720px){.grid2{grid-template-columns:1fr}h1{font-size:32px}table{display:block;overflow-x:auto}}.dl{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 10px}.btn{display:inline-block;text-decoration:none;font:600 14px var(--sans);padding:12px 20px;border-radius:3px;border:1px solid var(--ink);color:var(--ink);background:transparent}.btn.solid{background:var(--accent);border-color:var(--accent);color:#fff}.btn:hover{opacity:.9}.small{font-size:12.5px;color:var(--muted)}</style></head><body><div class="wrap">
+<div class="kicker">Free beta · SMB.AI by The SEAMline Method</div>
+<h1>The SMB.AI Bench</h1>
+<div class="tag">12 AI specialists for the six areas that eat your week. You approve every send.</div>
+<p class="lead">Most AI packs hand you 70 personas and a blank box. The Bench gives a small-business owner <b>twelve specialists</b>, two for each operations area: customers and sales, money, inbox, marketing, reporting, and admin. Each one is set up for a single job and ships with a <b>Mark the Line card</b> that says what the AI does and what only you approve. You set it up inside Claude in an afternoon, and you get one real win in your first week.</p>
+<div class="herometa">
+<span class="chip"><b>12</b> specialists</span>
+<span class="chip"><b>6</b> operations areas</span>
+<span class="chip">Built on <b>HUMAN</b></span>
+<span class="chip"><b>Free</b> during beta</span>
+</div>
+<div class="dl">
+<a class="btn solid" href="/smb-ai/download/SMB-AI-Bench-beta.zip" download>Download the Bench (free beta)</a>
+<a class="btn" href="/smb-ai/download/SMB-AI-Bench-Setup-Guide.pdf" target="_blank" rel="noopener">Read the setup guide first</a>
+</div>
+<p class="small">Works with Claude (claude.ai, web or desktop). Free Claude accounts hold up to five Projects; a paid plan runs all twelve.</p>
+<section>
+<div class="kicker">The roster</div>
+<h2 class="sec">Twelve specialists, two per operations area</h2>
+<p>Each card shows the job, the first win to aim for, and where the line sits between the machine and you.</p>
+
+<div class="sub2">1 · Customers &amp; Sales</div>
+<div class="grid2">
+<div class="card"><h4>Lead Qualifier</h4><p class="ex">Scores new enquiries against your ideal customer and drafts the first reply.</p><div class="hood"><b>AI does:</b> score, summarise, draft. <b>You approve:</b> who gets a reply and what it says.<br><b>First win:</b> clear this week's enquiry backlog in one sitting.</div></div>
+<div class="card"><h4>Proposal &amp; Quote Drafter</h4><p class="ex">Turns call notes into a clean proposal or quote in your format.</p><div class="hood"><b>AI does:</b> structure, scope, wording. <b>You approve:</b> every price, discount and promise.<br><b>First win:</b> one proposal out the same day as the call.</div></div>
+</div>
+
+<div class="sub2">2 · Money &amp; Finance</div>
+<div class="grid2">
+<div class="card tl"><h4>Cash-Flow Watch</h4><p class="ex">Reads your receivables, payables and bank export, then flags the next 30 days of risk.</p><div class="hood"><b>AI does:</b> sort, project, flag. <b>You approve:</b> any action on money.<br><b>First win:</b> a one-page 30-day cash picture by Friday.</div></div>
+<div class="card tl"><h4>Invoice Chaser</h4><p class="ex">Drafts polite, firm follow-ups for overdue invoices, escalating by age.</p><div class="hood"><b>AI does:</b> list who's late, draft the reminder. <b>You approve:</b> each send, especially to key clients.<br><b>First win:</b> every invoice over 30 days chased this week.</div></div>
+</div>
+
+<div class="sub2">3 · Comms &amp; Inbox</div>
+<div class="grid2">
+<div class="card bl"><h4>Inbox Triage</h4><p class="ex">Sorts the morning inbox into reply now, delegate, schedule and ignore.</p><div class="hood"><b>AI does:</b> sort and summarise. <b>You approve:</b> anything from your top clients, which always comes to you.<br><b>First win:</b> inbox read and sorted in 15 minutes.</div></div>
+<div class="card bl"><h4>Customer Reply Drafter</h4><p class="ex">Drafts replies in your voice, including the hard ones like complaints and refunds.</p><div class="hood"><b>AI does:</b> draft in your tone. <b>You approve:</b> every send, with no auto-replies on day one.<br><b>First win:</b> five replies drafted, edited lightly, sent.</div></div>
+</div>
+
+<div class="sub2">4 · Marketing &amp; Content</div>
+<div class="grid2">
+<div class="card gd"><h4>Content Planner</h4><p class="ex">Builds a month of posts from what is actually selling, not what's trending.</p><div class="hood"><b>AI does:</b> plan and draft. <b>You approve:</b> the calendar and every post.<br><b>First win:</b> a 4-week calendar from one 30-minute session.</div></div>
+<div class="card gd"><h4>Review Responder</h4><p class="ex">Drafts thoughtful replies to online reviews, good and bad.</p><div class="hood"><b>AI does:</b> draft, match tone. <b>You approve:</b> every public reply.<br><b>First win:</b> every unanswered review answered.</div></div>
+</div>
+
+<div class="sub2">5 · Data &amp; Reporting</div>
+<div class="grid2">
+<div class="card"><h4>Weekly Owner Review</h4><p class="ex">Turns your numbers into a one-page Monday brief: what moved, what's stuck, what needs you.</p><div class="hood"><b>AI does:</b> compile and summarise. <b>You approve:</b> the decisions it surfaces.<br><b>First win:</b> your first Monday brief, ready before 9am.</div></div>
+<div class="card"><h4>KPI Explainer</h4><p class="ex">Answers "why did this number change?" in plain language from your exports.</p><div class="hood"><b>AI does:</b> analyse and explain. <b>You approve:</b> what you act on and what you tell the team.<br><b>First win:</b> one mystery number explained.</div></div>
+</div>
+
+<div class="sub2">6 · Admin &amp; Compliance</div>
+<div class="grid2">
+<div class="card tl"><h4>SOP Builder</h4><p class="ex">Interviews you about a task and writes the standard operating procedure your team follows.</p><div class="hood"><b>AI does:</b> ask, structure, write. <b>You approve:</b> the final process.<br><b>First win:</b> your most-repeated task written down once.</div></div>
+<div class="card tl"><h4>Contract &amp; Policy Checker</h4><p class="ex">Reads a contract or policy and flags the clauses worth a second look.</p><div class="hood"><b>AI does:</b> highlight and explain. <b>You approve:</b> anything you sign. It is not legal advice, and a lawyer still has the final word.<br><b>First win:</b> one vendor contract reviewed before renewal.</div></div>
+</div>
+</section>
+<section>
+<div class="kicker">How every specialist works</div>
+<h2 class="sec">What a Mark the Line card looks like</h2>
+<p>Every specialist ships with one. It puts the HUMAN Framework inside each specialist, so you always know what the AI does and what stays with you.</p>
+<div class="offer a">
+<div class="who">Mark the Line · Invoice Chaser</div>
+<h3>The AI's job, and yours</h3>
+<ul>
+<li><b>H · Halt:</b> before any send, check whether this client is one of your top five. If so, it comes to you first.</li>
+<li><b>U · Understand:</b> the real goal is getting paid <em>and</em> keeping the client, not just sending reminders.</li>
+<li><b>M · Mark the Line:</b> the AI lists overdue invoices and drafts reminders. You approve every send.</li>
+<li><b>A · Apply Leverage:</b> run it every Monday and let it do the chasing you put off.</li>
+<li><b>N · Never Outsource:</b> payment plans, write-offs and hard conversations stay with you.</li>
+</ul>
+</div>
+</section>
+<section>
+<div class="kicker">How it works</div>
+<h2 class="sec">One afternoon to set up, one win in week one</h2>
+<div class="grid4">
+<div class="card"><h4>1 · Set up</h4><p class="ex">Add the twelve specialists to Claude with the short setup guide. Each takes a few minutes.</p></div>
+<div class="card tl"><h4>2 · Pick one</h4><p class="ex">Choose the area that hurts most this week. Don't start all twelve.</p></div>
+<div class="card bl"><h4>3 · Run the First Breakthrough loop</h4><p class="ex">One task, start to finish, with you approving the result. </p></div>
+<div class="card gd"><h4>4 · Add the next</h4><p class="ex">One new specialist a week. By week six you're running a bench, not a pile of tools.</p></div>
+</div>
+</section>
+<section id="get">
+<div class="kicker">Get it</div>
+<h2 class="sec">What's in the download</h2>
+<div class="grid2">
+<div class="card tl"><h4>Setup Guide (PDF)</h4><p class="ex">Step-by-step install, your first-win loop, a six-week plan, and a page on each specialist.</p></div>
+<div class="card"><h4>Business Profile</h4><p class="ex">A 15-minute template every specialist reads, plus a filled-in example. This is where you set your VIPs and approval rules.</p></div>
+<div class="card bl"><h4>12 Project files</h4><p class="ex">Paste one into a Claude Project's instructions, upload your Profile, and type <b>start</b>.</p></div>
+<div class="card gd"><h4>12 Skill files</h4><p class="ex">The same specialists as one-click Claude Skills, if you'd rather they load automatically.</p></div>
+</div>
+<div class="dl"><a class="btn solid" href="/smb-ai/download/SMB-AI-Bench-beta.zip" download>Download the Bench (free beta)</a>
+<a class="btn" href="mailto:info@singhpowerupcoach.com?subject=SMB.AI%20Bench%20beta%20feedback">Send beta feedback</a></div>
+</section>
+<section>
+<div class="kicker">Beta terms</div>
+<h2 class="sec">What "beta" means here</h2>
+<div class="guard"><ul>
+<li><b>Free while we test.</b> No card, no checkout. When paid plans launch, beta owners hear first.</li>
+<li><b>We want your feedback.</b> Tell us what your first loop got done and where you got stuck: info@singhpowerupcoach.com.</li>
+<li><b>Best-effort support.</b> We answer beta emails as fast as we can, usually within a couple of business days.</li>
+<li><b>You stay in charge.</b> Specialists draft and organise. You review and approve everything you send or decide.</li>
+<li><b>Not advice.</b> Nothing here is legal, tax, financial or debt-collection advice. Have a qualified lawyer review anything you sign.</li>
+<li><b>For your own business.</b> Use it with your team (up to five people). Please don't resell or redistribute it.</li>
+<li>Built for use with Claude. Not affiliated with or endorsed by Anthropic.</li>
+</ul></div>
+</section>
+<div class="foot">SMB.AI · The Bench (beta) · Singh Leadership · VISOR · Built on the HUMAN Framework. © 2026 Singh PowerUp Coach LLC.</div>
+</div></body></html>

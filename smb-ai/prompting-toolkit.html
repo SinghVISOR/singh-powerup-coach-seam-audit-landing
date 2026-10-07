@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMB.AI Prompting Toolkit — Operate AI Consciously | Singh Leadership · VISOR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F1EB; --paper:#FFFFFF; --sand:#ECE6DC; --ink:#0F1E3D; --ink2:#2B3A5A;
+    --muted:#5A6580; --accent:#B8512A; --accent2:#D77A52; --line:#E2DCD1; --line2:rgba(15,30,61,.12);
+    --teal:#2E7D6B; --teal-l:#E4F1EC; --gold:#B07A1E; --gold-l:#F7EEDB; --blue:#0C447C; --blue-l:#E7F0FA; --code:#12203f;
+    --radius:3px;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{font-family:var(--sans); background:var(--bg); color:var(--ink); font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased}
+  .shell{display:flex; min-height:100vh}
+  a{color:inherit}
+
+  /* sidebar */
+  .sidebar{width:264px; background:var(--paper); border-right:1px solid var(--line); position:fixed; top:0; left:0; height:100vh; overflow-y:auto; padding:0 0 2rem; flex-shrink:0}
+  .sidebar-header{padding:1.25rem 1.25rem 1rem; border-bottom:1px solid var(--line)}
+  .sidebar-header .logo{font-family:var(--serif); font-weight:700; font-size:20px; color:var(--ink)}
+  .sidebar-header .logo .dot{color:var(--accent)}
+  .sidebar-header .sub{font-size:11px; color:var(--muted); margin-top:3px}
+  .nav-section{padding:1rem 1rem .3rem; font-size:10px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.09em}
+  .nav-item{display:block; padding:8px 1.25rem; font-size:13px; color:var(--ink2); cursor:pointer; border-left:3px solid transparent; text-decoration:none}
+  .nav-item:hover{background:var(--bg); color:var(--ink)}
+  .nav-item.active{border-left-color:var(--accent); color:var(--accent); background:var(--sand); font-weight:600}
+  .side-badge{margin:16px 1.25rem 0; display:inline-block; font-size:10px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--accent); border:1px solid var(--line); border-radius:20px; padding:5px 10px}
+
+  /* main */
+  .main{margin-left:264px; flex:1; min-width:0}
+  .topbar{background:var(--paper); border-bottom:1px solid var(--line); padding:.8rem 2rem; display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:10}
+  .topbar .crumbs{font-size:13px; color:var(--muted)} .topbar .crumbs b{color:var(--ink)}
+  .topbar-right{margin-left:auto; display:flex; gap:8px}
+  .btn{font-size:12px; padding:7px 14px; border-radius:var(--radius); border:1px solid var(--line); cursor:pointer; background:var(--paper); color:var(--ink); font-weight:600; text-decoration:none; display:inline-block}
+  .btn:hover{background:var(--bg)}
+  .btn-primary{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+  .btn-primary:hover{background:var(--accent); border-color:var(--accent)}
+
+  .content{max-width:880px; margin:0 auto; padding:2.4rem 2rem 5rem}
+  .page{display:none} .page.active{display:block; animation:fade .2s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  h1{font-family:var(--serif); font-size:30px; font-weight:600; margin-bottom:.4rem; letter-spacing:-.01em}
+  h2{font-family:var(--serif); font-size:21px; font-weight:600; color:var(--ink); margin:2rem 0 .75rem}
+  h3{font-size:16px; font-weight:700; margin:1.1rem 0 .5rem}
+  p{margin-bottom:.75rem; color:var(--ink2)}
+  .page-sub{color:var(--muted); font-size:14px; margin-bottom:1.6rem; padding-bottom:1.1rem; border-bottom:1px solid var(--line)}
+  .eyebrow{font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:6px}
+
+  .card{background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:1.2rem 1.4rem; margin-bottom:1rem}
+  .card-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; margin-bottom:1.4rem}
+  .badge{display:inline-block; font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:20px; text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px}
+  .b-accent{background:#F6E7DF; color:var(--accent)} .b-teal{background:var(--teal-l); color:var(--teal)}
+  .b-gold{background:var(--gold-l); color:var(--gold)} .b-blue{background:var(--blue-l); color:var(--blue)}
+  .b-ink{background:var(--sand); color:var(--ink)}
+
+  .stat-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:1rem 0 1.4rem}
+  .stat{background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:.85rem 1rem}
+  .stat-label{font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px}
+  .stat-val{font-family:var(--serif); font-size:24px; font-weight:700; color:var(--ink)}
+
+  .code-box{position:relative; background:var(--code); color:#E7E9F0; border:1px solid #0c1730; border-radius:8px; padding:1rem 1.2rem; padding-right:66px; font-family:"SF Mono","Fira Code",Menlo,Consolas,monospace; font-size:12.5px; line-height:1.7; margin:.75rem 0; white-space:pre-wrap; word-break:break-word}
+  .code-box.light{background:var(--sand); color:var(--ink); border-color:var(--line)}
+  .code-box .cm{color:#8fa0c8}
+  .copy-btn{position:absolute; top:8px; right:8px; font-size:11px; padding:3px 9px; border-radius:4px; border:1px solid rgba(255,255,255,.25); cursor:pointer; background:rgba(255,255,255,.08); color:#cdd4e6; font-family:var(--sans)}
+  .code-box.light .copy-btn{border-color:var(--line); background:var(--paper); color:var(--muted)}
+  .copy-btn:hover{color:#fff} .code-box.light .copy-btn:hover{color:var(--accent); border-color:var(--accent)}
+
+  .bluf-box{border-left:4px solid var(--accent); background:#F7ECE5; border-radius:0 8px 8px 0; padding:1rem 1.2rem; margin:1rem 0}
+  .bluf-label{font-size:10.5px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px}
+  .bluf-text{font-size:13.5px; color:var(--ink); line-height:1.65}
+
+  .smeac-row{display:flex; gap:14px; align-items:flex-start; padding:11px 0; border-bottom:1px solid var(--line)}
+  .smeac-row:last-child{border-bottom:none}
+  .smeac-letter{display:inline-flex; width:36px; height:36px; border-radius:var(--radius); align-items:center; justify-content:center; font-family:var(--serif); font-size:17px; font-weight:700; flex-shrink:0; color:#fff}
+  .smeac-label{font-weight:700; font-size:14px; margin-bottom:2px} .smeac-desc{font-size:13px; color:var(--muted)}
+
+  .fuse{font-size:12px; color:var(--muted); margin:2px 0 8px} .fuse b{color:var(--ink)}
+
+  table{width:100%; border-collapse:collapse; margin:1rem 0; font-size:13px; background:var(--paper); border:1px solid var(--line); border-radius:8px; overflow:hidden}
+  th{background:var(--ink); color:#EDEAE3; padding:10px 14px; text-align:left; font-weight:600; font-size:12px; letter-spacing:.03em}
+  td{padding:9px 14px; border-bottom:1px solid var(--line); color:var(--ink2)}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:var(--bg)}
+  code{font-family:"SF Mono",Menlo,Consolas,monospace; font-size:12px; color:var(--accent); background:#F6E7DF; padding:2px 6px; border-radius:4px}
+
+  .divider{border:none; border-top:1px solid var(--line); margin:2rem 0}
+
+  /* HUMAN row */
+  .hrow{display:flex; gap:14px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--line)}
+  .hrow:last-child{border-bottom:none}
+  .hl{width:38px; height:38px; border-radius:var(--radius); background:var(--ink); color:#fff; font-family:var(--serif); font-weight:700; font-size:20px; display:flex; align-items:center; justify-content:center; flex-shrink:0}
+  .hrow.a .hl{background:var(--accent)}
+  .hrow .ht{font-weight:700; font-size:15px} .hrow .hd{font-size:13px; color:var(--ink2)}
+  .hrow .htie{font-size:11.5px; color:var(--muted); margin-top:3px} .hrow .htie b{color:var(--accent)}
+
+  /* GOD MODE builder */
+  .gm-builder{background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:1.4rem}
+  .gm-row{margin-bottom:1rem}
+  .gm-row label{display:block; font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px}
+  .gm-row select{width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:6px; font-size:13px; background:var(--bg); color:var(--ink); outline:none; font-family:var(--sans)}
+  .gm-row select:focus{border-color:var(--accent)}
+  .gm-output{background:var(--code); color:#E7E9F0; border-radius:8px; padding:1rem 1.2rem; font-family:"SF Mono",Menlo,Consolas,monospace; font-size:12px; line-height:1.7; min-height:170px; white-space:pre-wrap; margin-top:1rem}
+
+  @media (max-width:760px){
+    .sidebar{display:none}
+    .main{margin-left:0}
+    .content{padding:1.5rem 1.1rem 3rem}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">SMB<span class="dot">.</span>AI · Prompting Toolkit</div>
+      <div class="sub">The "Understand" toolkit · Singh Leadership · VISOR</div>
+    </div>
+    <div class="nav-section">Start</div>
+    <a class="nav-item active" onclick="showPage('overview',this)">Overview</a>
+    <a class="nav-item" onclick="showPage('human',this)">HUMAN Framework</a>
+    <div class="nav-section">Prompting</div>
+    <a class="nav-item" onclick="showPage('frameworks',this)">Core frameworks</a>
+    <a class="nav-item" onclick="showPage('godmode',this)">God Mode + builder</a>
+    <a class="nav-item" onclick="showPage('slash',this)">Slash &amp; shortcuts</a>
+    <a class="nav-item" onclick="showPage('advanced',this)">Advanced prompts</a>
+    <div class="nav-section">Reference</div>
+    <a class="nav-item" onclick="showPage('quickref',this)">Quick reference</a>
+    <span class="side-badge">Pairs with the AI-Operations Playbook</span>
+  </nav>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="crumbs">SMB.AI Prompting Toolkit · <b>the toolkit for the "Understand the Real Question" step</b></div>
+      <div class="topbar-right">
+        <a class="btn" onclick="window.print()">Print / PDF</a>
+        <a class="btn btn-primary" onclick="showPage('godmode',document.querySelectorAll('.nav-item')[3])">Build a God Mode prompt</a>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- OVERVIEW -->
+      <div id="page-overview" class="page active">
+        <div class="eyebrow">The prompting half of the operating system</div>
+        <h1>SMB.AI Prompting Toolkit</h1>
+        <p class="page-sub">The operations-flavored companion to the AI-Operations Playbook. HUMAN governs how you <b>operate</b> AI; these frameworks shape the <b>prompt</b> — they're the toolkit for the "Understand the Real Question" step. Singh Leadership · VISOR Analytics.</p>
+
+        <div class="stat-grid">
+          <div class="stat"><div class="stat-label">Core frameworks</div><div class="stat-val">7</div></div>
+          <div class="stat"><div class="stat-label">God Mode presets</div><div class="stat-val">4</div></div>
+          <div class="stat"><div class="stat-label">Slash shortcuts</div><div class="stat-val">20+</div></div>
+          <div class="stat"><div class="stat-label">HUMAN letters</div><div class="stat-val">5</div></div>
+        </div>
+
+        <div class="card-grid">
+          <div class="card" style="cursor:pointer" onclick="showPage('human',document.querySelectorAll('.nav-item')[1])"><span class="badge b-accent">Operate</span><h3>The HUMAN Framework</h3><p style="font-size:13px;color:var(--muted)">Halt · Understand · Mark the Line · Apply the Leverage · Never Outsource — the discipline the whole toolkit serves.</p></div>
+          <div class="card" style="cursor:pointer" onclick="showPage('frameworks',document.querySelectorAll('.nav-item')[2])"><span class="badge b-ink">Prompt</span><h3>Core frameworks</h3><p style="font-size:13px;color:var(--muted)">SMEAC, OODA, BLUF, SCQA, RICE, MECE, PMESII-PT — each with an operations use and a copy-ready prompt.</p></div>
+          <div class="card" style="cursor:pointer" onclick="showPage('godmode',document.querySelectorAll('.nav-item')[3])"><span class="badge b-gold">Prime</span><h3>God Mode + builder</h3><p style="font-size:13px;color:var(--muted)">Set persona, format, non-negotiables and challenge posture in one block. Interactive builder inside.</p></div>
+          <div class="card" style="cursor:pointer" onclick="showPage('slash',document.querySelectorAll('.nav-item')[4])"><span class="badge b-teal">Shortcut</span><h3>Slash &amp; shortcuts</h3><p style="font-size:13px;color:var(--muted)">Your custom stack — <code>/human</code>, <code>/knox</code>, <code>/smeac</code> — plus conventions and suffixes.</p></div>
+        </div>
+
+        <h2>Paste this to open a Cowork session</h2>
+        <p>The SMB.AI Operator God Mode primer — sets your non-negotiables and shortcuts before the first task:</p>
+        <div class="code-box">You are my product &amp; engineering partner for SMB.AI.
+Treat me as the product manager and final decision-maker — no hedging, lead with the sharpest option.
+If my framing is wrong, correct it first, then answer the better version.
+Default format: BLUF, then the supporting logic. Apply MECE to any breakdown.
+Non-negotiables: never expose API/Supabase keys in the frontend; never store tokens as plaintext;
+every write/send action must queue for my approval; keep model = claude-sonnet-4-6.
+Hold decisions across this session and build on them without being asked.
+
+<span class="cm"># shortcuts</span>
+/human  = run this task through HUMAN: Halt, Understand, Mark the Line, Apply the Leverage, Never Outsource.
+/smeac  = structure as a full SMEAC brief (for any dev/offshore handoff).
+/knox   = VISOR Analytics strategic-analyst persona.
+Acknowledge with "Ready" and wait for the first task.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+
+        <div class="bluf-box">
+          <div class="bluf-label">The core principle</div>
+          <div class="bluf-text">In claude.ai chat there are no built-in slash commands — everything is read as natural language. The slash just signals "this is a modifier." The frameworks work because Claude understands intent, and God Mode is a prompt pattern you write yourself — not a feature toggle. The quality of your answer never exceeds the quality of the question you were brave enough to ask.</div>
+        </div>
+      </div>
+
+      <!-- HUMAN -->
+      <div id="page-human" class="page">
+        <div class="eyebrow">The discipline the toolkit serves</div>
+        <h1>The HUMAN Framework</h1>
+        <p class="page-sub">Five moves that keep a person conscious and in command while operating at machine speed. The prompting frameworks live inside the second letter — <b>Understand the Real Question</b>. By Singh Leadership · VISOR Analytics.</p>
+        <div class="card">
+          <div class="hrow"><div class="hl">H</div><div><div class="ht">Halt</div><div class="hd">Put a deliberate gap between the impulse and the tool — a gap just long enough for the human to catch up to the machine.</div><div class="htie">Toolkit tie → <b>the Operator's Check, before you prompt</b></div></div></div>
+          <div class="hrow a"><div class="hl">U</div><div><div class="ht">Understand the Real Question</div><div class="hd">A search-box question gets a search-box answer. Name the real decision, then hand the machine context and its non-negotiables.</div><div class="htie">Toolkit tie → <b>every framework on this page</b></div></div></div>
+          <div class="hrow"><div class="hl">M</div><div><div class="ht">Mark the Line</div><div class="hd">Give the machine the drafting and repetition; keep the judgment, the relationship, the values call.</div><div class="htie">Toolkit tie → <b>the approval queue; the assumption audit</b></div></div></div>
+          <div class="hrow"><div class="hl">A</div><div><div class="ht">Apply the Leverage</div><div class="hd">Once the line is drawn, use the machine boldly on its side — delegate fully so you can invest deeply.</div><div class="htie">Toolkit tie → <b>God Mode + the constraint stack</b></div></div></div>
+          <div class="hrow"><div class="hl">N</div><div><div class="ht">Never Outsource the Core</div><div class="hd">Judgment, values, the final call, purpose. If a machine can generate it, a machine can copy it — what can't be copied is you.</div><div class="htie">Toolkit tie → <b>devil's advocate &amp; pre-mortem, then your call</b></div></div></div>
+        </div>
+        <p style="font-size:13px;color:var(--muted)">Full framework, with the stories and practices, lives in the AI-Operations Playbook. This page is the toolkit for its "Understand" step.</p>
+      </div>
+
+      <!-- FRAMEWORKS -->
+      <div id="page-frameworks" class="page">
+        <div class="eyebrow">Understand · shape the prompt</div>
+        <h1>Core frameworks</h1>
+        <p class="page-sub">Military and business scaffolds adapted for SMB operations. Each acronym is a complete thinking system — use it as a prompt, not a label.</p>
+
+        <h2>SMEAC — operations briefing</h2>
+        <p>Five dimensions, nothing left open. Best for scoping a skill build or any dev/offshore handoff.</p>
+        <div class="card">
+          <div class="smeac-row"><div class="smeac-letter" style="background:var(--accent)">S</div><div><div class="smeac-label">Situation</div><div class="smeac-desc">Context and constraints — what everyone must understand before acting</div></div></div>
+          <div class="smeac-row"><div class="smeac-letter" style="background:var(--teal)">M</div><div><div class="smeac-label">Mission</div><div class="smeac-desc">The objective in one sentence — what success looks like, by when</div></div></div>
+          <div class="smeac-row"><div class="smeac-letter" style="background:var(--blue)">E</div><div><div class="smeac-label">Execution</div><div class="smeac-desc">Phases, who does what — no ambiguity left open</div></div></div>
+          <div class="smeac-row"><div class="smeac-letter" style="background:var(--gold)">A</div><div><div class="smeac-label">Admin / Logistics</div><div class="smeac-desc">Tools, resources, scope boundaries</div></div></div>
+          <div class="smeac-row"><div class="smeac-letter" style="background:#8a3f22">C</div><div><div class="smeac-label">Command / Signal</div><div class="smeac-desc">Escalation, decision authority, go/no-go gates</div></div></div>
+        </div>
+        <div class="code-box">Structure this build using SMEAC (Situation, Mission, Execution, Admin/Logistics, Command/Signal). Audience: the dev workstream. Flag every open question as [OPEN QUESTION]; list dependencies explicitly.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+
+        <hr class="divider">
+
+        <div class="card-grid">
+          <div class="card"><span class="badge b-accent">Decide fast</span><h3>OODA</h3><p style="font-size:13px">Observe → Orient → Decide → Act → repeat. A speed-of-decision cycle.</p><div class="fuse"><b>In ops:</b> a competitor moves, an outage hits.</div><div class="code-box light" style="font-size:11.5px">Apply OODA to [scenario]. Move fast — identify the decision I need now, not just the data.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+          <div class="card"><span class="badge b-accent">Report</span><h3>BLUF</h3><p style="font-size:13px">Bottom Line Up Front — conclusion first, rationale after.</p><div class="fuse"><b>In ops:</b> status updates, cash-flow snapshots.</div><div class="code-box light" style="font-size:11.5px">Respond in BLUF format. Recommendation in the first sentence, then the supporting logic.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+          <div class="card"><span class="badge b-teal">Persuade</span><h3>SCQA</h3><p style="font-size:13px">Situation → Complication → Question → Answer.</p><div class="fuse"><b>In ops:</b> proposals, the pitch, board updates.</div><div class="code-box light" style="font-size:11.5px">Write this using SCQA. Audience: investors. Tone: authoritative and warm.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+          <div class="card"><span class="badge b-teal">Prioritize</span><h3>RICE</h3><p style="font-size:13px">Reach × Impact × Confidence ÷ Effort — a defensible ranking.</p><div class="fuse"><b>In ops:</b> which skill to build next.</div><div class="code-box light" style="font-size:11.5px">Score these options using RICE and rank them. Show your working.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+          <div class="card"><span class="badge b-gold">Check</span><h3>MECE</h3><p style="font-size:13px">Mutually Exclusive, Collectively Exhaustive — no overlaps, no gaps.</p><div class="fuse"><b>In ops:</b> sanity-check any list before acting.</div><div class="code-box light" style="font-size:11.5px">Review this breakdown and ensure it is MECE. Flag any overlaps or gaps.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+          <div class="card"><span class="badge b-blue">Analyze</span><h3>PMESII-PT</h3><p style="font-size:13px">Full-spectrum situational analysis across seven dimensions.</p><div class="fuse"><b>In ops:</b> market entry, risk assessment.</div><div class="code-box light" style="font-size:11.5px">Run a PMESII-PT analysis on [market]. Use MECE to structure. Add confidence ratings.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+        </div>
+      </div>
+
+      <!-- GOD MODE -->
+      <div id="page-godmode" class="page">
+        <div class="eyebrow">Apply the Leverage · prime the session</div>
+        <h1>God Mode</h1>
+        <p class="page-sub">A system prompt you write yourself — it sets the relationship, authority, format, and challenge posture before the first task. No toggle, no secret command. Pure prompt engineering.</p>
+
+        <h2>The six layers</h2>
+        <div class="card-grid">
+          <div class="card"><span class="badge b-accent">Persona</span><p style="font-size:13px">You are a [world-class expert] with [X years] in [domain].</p></div>
+          <div class="card"><span class="badge b-teal">Authority</span><p style="font-size:13px">Treat me as a peer expert. Skip generic caveats.</p></div>
+          <div class="card"><span class="badge b-blue">Depth</span><p style="font-size:13px">Give me second- and third-order implications.</p></div>
+          <div class="card"><span class="badge b-gold">Format</span><p style="font-size:13px">Respond in [BLUF / SMEAC / bullets]. No filler.</p></div>
+          <div class="card"><span class="badge b-accent">Challenge</span><p style="font-size:13px">If my framing is wrong, tell me first — then answer better.</p></div>
+          <div class="card"><span class="badge b-ink">Memory</span><p style="font-size:13px">Hold context; build on earlier decisions unprompted.</p></div>
+        </div>
+
+        <h2>Interactive God Mode builder</h2>
+        <div class="gm-builder">
+          <div class="card-grid" style="margin-bottom:0">
+            <div class="gm-row"><label>Mode</label>
+              <select id="gm-mode" onchange="buildGodMode()">
+                <option value="smbai">SMB.AI Operator</option>
+                <option value="visor">VISOR Analytics / Knox</option>
+                <option value="singh">Singh Leadership</option>
+                <option value="custom">Custom expert</option>
+              </select></div>
+            <div class="gm-row"><label>Default format</label>
+              <select id="gm-format" onchange="buildGodMode()">
+                <option value="BLUF">BLUF first</option>
+                <option value="SMEAC">SMEAC structure</option>
+                <option value="SCQA">SCQA narrative</option>
+                <option value="bullets">Bullet points</option>
+              </select></div>
+            <div class="gm-row"><label>Audience</label>
+              <select id="gm-audience" onchange="buildGodMode()">
+                <option value="peer operator">Peer operator (me)</option>
+                <option value="the dev workstream">Dev / offshore workstream</option>
+                <option value="investors">Investors / partners</option>
+                <option value="a small-business owner">A small-business owner</option>
+              </select></div>
+            <div class="gm-row"><label>Challenge posture</label>
+              <select id="gm-challenge" onchange="buildGodMode()">
+                <option value="on">On — correct my framing first</option>
+                <option value="off">Off — answer as asked</option>
+              </select></div>
+          </div>
+          <div id="gm-output" class="gm-output"></div>
+          <button class="btn btn-primary" style="margin-top:12px" onclick="copyGodMode(this)">Copy prompt</button>
+        </div>
+
+        <h2>Pre-built blocks</h2>
+        <div class="code-box"><span class="cm"># VISOR Analytics</span>
+You are a senior strategy consultant and business architect with 25 years across enterprise transformation, data strategy, and executive leadership. Treat me as a peer. No hedging. If my framing is wrong, correct it first.
+Use BLUF; apply MECE; give second and third-order implications. Remember decisions this session.
+/knox — VISOR analyst persona.  /clarity — Clarity Gradient.  /smeac — full SMEAC.  /risks — add risks.  /v1 — Draft v1.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <div class="code-box"><span class="cm"># Singh Leadership</span>
+You are a master executive coach and leadership architect with 20 years developing C-suite leaders through transformation, purpose alignment, and composure under pressure. Speak as a peer practitioner. Go to the root pattern.
+Use STAR for stories, BREATHE for micro-practices, COMPASS for framing.
+/compass — COMPASS Method.  /breathe — 60-second BREATHE.  /seam — SEAMline narrative.  /star — extract a STAR story.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      </div>
+
+      <!-- SLASH -->
+      <div id="page-slash" class="page">
+        <div class="eyebrow">Shortcuts</div>
+        <h1>Slash &amp; shortcuts</h1>
+        <p class="page-sub">In claude.ai chat the slash is a visual convention, not a command system. Define your stack once with God Mode, then use them all session.</p>
+
+        <div class="bluf-box"><div class="bluf-label">Bottom line</div><div class="bluf-text">You can invent your own shortcuts and they work immediately — Claude reads <code>/human</code> and the full instruction the same way. Native commands (<code>/clear</code>, <code>/compact</code>) only exist in Claude Code.</div></div>
+
+        <h2>Your custom stack</h2>
+        <table>
+          <tr><th>Command</th><th>What it activates</th></tr>
+          <tr><td><code>/human</code></td><td>Run the task through HUMAN — Halt, Understand, Mark the Line, Apply the Leverage, Never Outsource</td></tr>
+          <tr><td><code>/knox</code></td><td>VISOR Analytics strategic-analyst persona</td></tr>
+          <tr><td><code>/smeac</code></td><td>Full SMEAC briefing (dev / offshore handoff)</td></tr>
+          <tr><td><code>/clarity</code></td><td>Clarity Gradient (Tactical &gt; Operational &gt; Strategic &gt; Identity)</td></tr>
+          <tr><td><code>/compass</code></td><td>COMPASS Method (leadership framing)</td></tr>
+          <tr><td><code>/breathe</code></td><td>60-second BREATHE micro-practice</td></tr>
+        </table>
+
+        <h2>Community conventions (prefix) &amp; suffixes</h2>
+        <table>
+          <tr><th>Shortcut</th><th>Effect</th></tr>
+          <tr><td><code>/bluf</code></td><td>Bottom line up front</td></tr>
+          <tr><td><code>/no-hedge</code></td><td>Drop caveats — direct output only</td></tr>
+          <tr><td><code>/step-by-step</code></td><td>Show the reasoning chain first</td></tr>
+          <tr><td><code>... /risks</code></td><td>Add a risk section after the answer</td></tr>
+          <tr><td><code>... /critique</code></td><td>Self-critique after answering</td></tr>
+          <tr><td><code>... /gaps</code></td><td>What's missing from this?</td></tr>
+          <tr><td><code>... /compare</code></td><td>Give 2–3 variations</td></tr>
+          <tr><td><code>... /v1</code></td><td>Label output as Draft v1</td></tr>
+        </table>
+      </div>
+
+      <!-- ADVANCED -->
+      <div id="page-advanced" class="page">
+        <div class="eyebrow">Advanced · mapped to HUMAN</div>
+        <h1>Advanced prompts</h1>
+        <p class="page-sub">Meta-prompts and reasoning tools, each tied to the HUMAN move it serves.</p>
+        <div class="card-grid">
+          <div class="card"><span class="badge b-accent">→ Understand</span><h3>Ask me first</h3><p style="font-size:13px">Interviews you before answering — kills generic output.</p><div class="code-box light" style="font-size:11.5px">Before you respond, ask me the 3 questions that would most improve your answer.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+          <div class="card"><span class="badge b-accent">→ Understand</span><h3>Prompt improver</h3><p style="font-size:13px">Sharpen the question before executing it.</p><div class="code-box light" style="font-size:11.5px">Before answering, rewrite my prompt to be more precise, then answer the improved version.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+          <div class="card"><span class="badge b-ink">→ Never Outsource</span><h3>Devil's advocate</h3><p style="font-size:13px">Pressure-test before you commit — the judgment stays yours.</p><div class="code-box light" style="font-size:11.5px">After your answer, steelman the strongest counterargument.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+          <div class="card"><span class="badge b-ink">→ Judgment</span><h3>Pre-mortem</h3><p style="font-size:13px">Assume failure, work backwards. Surfaces blind spots.</p><div class="code-box light" style="font-size:11.5px">It is 12 months from now and this failed. What went wrong?<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+          <div class="card"><span class="badge b-teal">→ Data &amp; Reporting</span><h3>Confidence rating</h3><p style="font-size:13px">Separate signal from filler in any output.</p><div class="code-box light" style="font-size:11.5px">Rate your confidence in each claim (high / medium / low). Flag anything uncertain.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+          <div class="card"><span class="badge b-gold">→ Mark the Line</span><h3>Assumption audit</h3><p style="font-size:13px">Surface hidden premises before you build on them.</p><div class="code-box light" style="font-size:11.5px">List every assumption embedded in this plan. Which are most fragile?<button class="copy-btn" onclick="copyCode(this)">Copy</button></div></div>
+        </div>
+
+        <h2>Output controls &amp; locking</h2>
+        <table>
+          <tr><th>Modifier</th><th>Example</th></tr>
+          <tr><td>Density</td><td>"One sentence only" / "Three bullets max"</td></tr>
+          <tr><td>Tone</td><td>"Authoritative" / "Warm" / "Board-ready"</td></tr>
+          <tr><td>Audience</td><td>"For an owner who'll read this in 90 seconds"</td></tr>
+          <tr><td>Locking</td><td>"Mark assumptions [ASSUMPTION]; flag [VERIFY]; label LOCKED"</td></tr>
+        </table>
+      </div>
+
+      <!-- QUICK REF -->
+      <div id="page-quickref" class="page">
+        <div class="eyebrow">Reference</div>
+        <h1>Quick reference</h1>
+        <p class="page-sub">Stack 2–3 constraints in one prompt for the highest-precision output.</p>
+        <table>
+          <tr><th>Shorthand</th><th>What it does</th><th>Best with</th></tr>
+          <tr><td><code>/human</code></td><td>Run the task through the HUMAN discipline</td><td>Anything ending in a real action</td></tr>
+          <tr><td><code>/smeac</code></td><td>Full SMEAC briefing</td><td>Skill builds, dev handoffs</td></tr>
+          <tr><td><code>/bluf</code></td><td>Bottom line up front</td><td>Updates, snapshots, emails</td></tr>
+          <tr><td><code>/no-hedge</code></td><td>Direct output, no caveats</td><td>When you need a straight answer</td></tr>
+          <tr><td><code>/risks</code></td><td>Risk section after the answer</td><td>Plans, proposals</td></tr>
+          <tr><td><code>... /critique</code></td><td>Self-critique after answering</td><td>High-stakes deliverables</td></tr>
+          <tr><td><code>... /gaps</code></td><td>What's missing?</td><td>Docs, plans, frameworks</td></tr>
+        </table>
+        <h2>Constraint-stacking examples</h2>
+        <div class="code-box light">Act as Knox. SCQA structure. BLUF format. Audience: investors. Max 300 words.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <div class="code-box light">/smeac the build. ELI-developer level. Flag ambiguities [OPEN QUESTION]. /risks<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <div class="code-box light">/human Draft the client reply. Show exact content, not a summary. Do not send until I approve.<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <div class="code-box light">PMESII-PT analysis. MECE structure. Confidence ratings. Pre-mortem after. /v1<button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <p style="margin-top:1.4rem;font-size:13px;color:var(--muted)">SMB.AI Prompting Toolkit · pairs with the AI-Operations Playbook (Owner's, Operator's, In-Product, Operating Thesis) · Singh Leadership · VISOR Analytics.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(id, el){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});
+  var pg=document.getElementById('page-'+id); if(pg) pg.classList.add('active');
+  if(el) el.classList.add('active');
+  window.scrollTo(0,0);
+}
+function copyCode(btn){
+  var box=btn.parentElement;
+  var t=box.innerText.replace(/Copy\s*$/,'').trim();
+  navigator.clipboard.writeText(t).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy';},1500)});
+}
+var godModeData={
+  smbai:{persona:"You are my product & engineering partner for SMB.AI. Non-negotiables: never expose API/Supabase keys in the frontend; never store tokens as plaintext; every write/send queues for my approval; keep model = claude-sonnet-4-6.",
+    commands:"/human — run the task through HUMAN (Halt, Understand, Mark the Line, Apply the Leverage, Never Outsource).\n/smeac — structure as a full SMEAC brief for a dev handoff."},
+  visor:{persona:"You are a senior strategy consultant and business architect with 25 years across enterprise transformation, data strategy, and executive leadership.",
+    commands:"/knox — VISOR Analytics strategic-analyst persona.\n/clarity — Clarity Gradient (Tactical > Operational > Strategic > Identity).\n/smeac — full SMEAC briefing."},
+  singh:{persona:"You are a master executive coach and leadership architect with 20 years developing C-suite leaders through transformation, purpose alignment, and composure under pressure.",
+    commands:"/compass — COMPASS Method (Center / Open / Mirror / Permission / Arrive / See / Soar).\n/breathe — 60-second BREATHE micro-practice.\n/seam — SEAMline narrative."},
+  custom:{persona:"You are a world-class expert with deep domain expertise relevant to my request.",
+    commands:"/human — run the task through the HUMAN discipline before any consequential action."}
+};
+function buildGodMode(){
+  var mode=document.getElementById('gm-mode').value;
+  var format=document.getElementById('gm-format').value;
+  var audience=document.getElementById('gm-audience').value;
+  var challenge=document.getElementById('gm-challenge').value;
+  var d=godModeData[mode];
+  var out=d.persona+"\n\n";
+  out+="Treat me as a peer. No hedging, no generic advice. Lead with the sharpest insight.\n";
+  if(challenge==='on') out+="If my framing is wrong, correct it first — then answer the better version.\n";
+  out+="\nDefault format: "+format+". Default audience: "+audience+".\n";
+  out+="Apply MECE to any breakdown. Give second- and third-order implications.\n";
+  out+="Hold decisions across this session and build on them without being asked.\n\n";
+  out+=d.commands+"\nAcknowledge with \"Ready\" and wait for my first task.";
+  document.getElementById('gm-output').textContent=out;
+}
+function copyGodMode(btn){
+  var t=document.getElementById('gm-output').innerText;
+  navigator.clipboard.writeText(t).then(function(){btn.textContent='Copied!';setTimeout(function(){btn.textContent='Copy prompt';},1600)});
+}
+buildGodMode();
+</script>
+</body>
+</html>
